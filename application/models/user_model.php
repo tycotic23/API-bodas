@@ -79,6 +79,33 @@ Class user_model extends CI_Model {
         $this->db->update("usuarios");
         return $this->db->affected_rows();    
     }
+    public function update_password_user($user_id,$password){
+        $this->db->set("password",$password);
+        $this->db->where("usuario_id",$user_id);
+        $this->db->update("usuarios");
+        return $this->db->affected_rows();
+    }
+
+    public function update_user($user_id,$user){
+        $this->db->set("usuario",$user);
+        $this->db->where("usuario_id",$usuario_id);
+        $this->db->update("usuarios");
+        return $this->db->affected_rows();
+    }
+
+    public function update_client_user($client_id,$user_id){
+        $this->db->set("cliente_id",$client_id);
+        $this->db->where("usuario_id",$user_id);
+        $this->db->update("usuarios");
+        return $this->db->affected_rows();
+    }
+
+    public function delete_user($user_id=false){
+        $this->db->where("usuario_id",$user_id);
+        $this->db->limit(1);
+        $this->db->delete("usuarios");
+        return $this->db->affected_rows();
+    }
     
 }
 

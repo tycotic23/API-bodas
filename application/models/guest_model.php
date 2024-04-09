@@ -22,6 +22,41 @@ Class Guest_model extends CI_Model {
         $this->db->set("pareja_id",$couple_id);
         $this->db->insert("invitados");
     }
+
+    public function update_name_guest($guest_id,$name){
+        $this->db->set("nombre",$name);
+        $this->db->where("invitado_id",$guest_id);
+        $this->db->update("invitados");
+        return $this->db->affected_rows();
+    }
+
+    public function update_extra_guest($guest_id,$extra){
+        $this->db->set("extras",$extra);
+        $this->db->where("invitado_id",$guest_id);
+        $this->db->update("invitados");
+        return $this->db->affected_rows();
+    }
+
+    public function update_surname_guest($guest_id,$surname){
+        $this->db->set("apellido",$surname);
+        $this->db->where("invitado_id",$guest_id);
+        $this->db->update("invitados");
+        return $this->db->affected_rows();
+    }
+
+    public function update_attached_guest($guest_id,$attached_id){
+        $this->db->set("pareja_id",$attached_id);
+        $this->db->where("invitado_id",$guest_id);
+        $this->db->update("invitados");
+        return $this->db->affected_rows();
+    }
+
+    public function delete_guest($guest_id=false){
+        $this->db->where("guest_id",$guest_id);
+        $this->db->limit(1);
+        $this->db->delete("invitados");
+        return $this->db->affected_rows();
+    }
     
 }
 ?>

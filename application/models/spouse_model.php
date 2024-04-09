@@ -15,12 +15,42 @@ Class Spouse_model extends CI_Model {
     }
 
     public function create_spouse ($name="",$surname="",$birthdate=""){
-
         $this->db->set("nombre",$name);
         $this->db->set("apellido",$surname);
         $this->db->set("fecha_nacimiento",$birthday);
         $this->db->insert("conyugues");
     }
+
+    public function update_spouse_name($spouse_id,$name){
+        $this->db->set("nombre",$name);
+        $this->db->where("conyugue_id",$spouse_id);
+        $this->db->update("conyugues");
+        return $this->db->affected_rows();
+    }
+
+    public function update_spouse_surname($spouse_id,$surname){
+        $this->db->set("apellido",$surname);
+        $this->db->where("conyugue_id",$spouse_id);
+        $this->db->update("conyugues");
+        return $this->db->affected_rows();
+    }
+
+    public function update_spouse_birthdate($spouse_id,$birthdate){
+        $this->db->set("fecha_nacimiento",$birthdate);
+        $this->db->where("conyugue_id",$spouse_id);
+        $this->db->update("conyugues");
+        return $this->db->affected_rows();
+    }
+
+
+    
+    public function delete_spouse($spouse_id=false){
+        $this->db->where("conyugue_id",$spouse_id);
+        $this->db->limit(1);
+        $this->db->delete("conyugues");
+        return $this->db->affected_rows();
+    }
+    
     
 }
 ?>
