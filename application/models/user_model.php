@@ -1,5 +1,5 @@
 <?php 
-Class Usuarios_model extends CI_Model {
+Class user_model extends CI_Model {
     
     
     function list_users (){
