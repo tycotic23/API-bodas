@@ -48,12 +48,17 @@ class user extends CI_controller {
     }*/
 
     public function admin (){
-        $datos=array();
-		$this->load->model("user_model"); 
-		$datos["users"]=$this->user_model->list_users();
-		$datos["total"]=count($datos["users"]);
+            if(!$this->session->userdata('usuario_id')){
+                $this->session->set_flashdata('OP','PROHIBIDO');
+                redirect('user/index');
+                }else{
+                $datos=array();
+                $this->load->model("user_model"); 
+                $datos["users"]=$this->user_model->list_users();
+                $datos["total"]=count($datos["users"]);
 
-        $this->load->view("list_users",$datos); 
+                $this->load->view("list_users",$datos); 
+        }
     }
 
    public function create_user(){
@@ -77,7 +82,10 @@ class user extends CI_controller {
 	}
 
 
-    
+    public function salir(){
+		$this->session->sess_destroy();
+		redirect("user/index");
+	}
     
     
 }
