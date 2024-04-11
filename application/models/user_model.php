@@ -49,7 +49,7 @@ Class user_model extends CI_Model {
         $this->db->where("usuario_id",$id);
         $this->db->limit(1);
         $this->db->delete("usuarios");
-        return $this->db->affected_rows(); //cuantas filas fueron afectadas por la consulta que acabo de efectuar
+        return $this->db->affected_rows(); 
     }
         
     public function check_rol($usuario_id=""){
@@ -100,12 +100,6 @@ Class user_model extends CI_Model {
         return $this->db->affected_rows();
     }
 
-    public function delete_user($user_id=false){
-        $this->db->where("usuario_id",$user_id);
-        $this->db->limit(1);
-        $this->db->delete("usuarios");
-        return $this->db->affected_rows();
-    }
     
 }
 

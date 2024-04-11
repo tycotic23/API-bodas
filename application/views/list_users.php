@@ -17,7 +17,7 @@
                         <div class="card">
                             <div class="card-body">
 
-                                        <?php if($usuarios){?>
+                                        <?php if($users){?>
                                             
                                         <ul class="list-group" id="lista" name="lista">
                                         <li class="list-group-item">
@@ -38,14 +38,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <?php foreach($usuarios as $t){ ?>
+                                            <?php foreach($users as $t){ ?>
 
                                                 <tr>
                                                     <td><?php echo $t["usuario"]; ?></td>
                                                     <td><?php echo $t["password"]; ?></td>
                                                     <td> &nbsp;</td>
                                                     <td>
-                                                        <a href="<?php echo site_url("auth/eliminar_usuario/".$t["usuario_id"]); ?>" class="btn btn-danger btn-sm borrar">
+                                                        <a href="<?php echo site_url("user/delete_user/".$t["usuario_id"]); ?>" class="btn btn-danger btn-sm borrar">
                                                             <i class="bi bi-trash-fill"></i>
                                                         </a>
                                                     </td>

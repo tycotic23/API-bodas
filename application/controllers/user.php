@@ -1,12 +1,44 @@
 <?php
 defined ('BASEPATH') OR exit('No direct script access allowed');
 
-class user extends CI_controller { //mismo nombre que el archivo
+class user extends CI_controller {
 
     public function index(){
-        redirect("user/admin");
-    }
+        
+        {
+            $datos=array();
+            $this->load->model('user_model');
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('usuario', 'Usuario', 'trim|strtolower|required');
+            $this->form_validation->set_rules('password', 'Password', 'required');
+            if($this->form_validation->run()===false){
     
+                $this->load->view('login',$datos);
+                
+            }else{
+                $user=set_value("usuario");
+                $pass=set_value("password");
+                $id=$this->user_model->check_login($user,$pass);
+                if($id){
+                    $u=$this->user_model->get_by_id($id);
+                    if($u["estado"]==1){
+                        $this->session->set_userdata("usuario",$u["usuario"]);
+                        $this->session->set_userdata("usuario_id",$u["usuario_id"]);
+                        redirect("user/admin");
+                    }else{
+                        $this->session->set_flashdata("OP","INACTIVO");
+                        redirect("user/index");
+                    }
+                }else{
+                    $this->session->set_flashdata("OP","INEXISTENTE");
+                    redirect("user/index");
+                }
+            }
+            
+        
+        }
+
+    }
     public function ingresar(){
         $this->load->view("list_users");
     }
@@ -17,11 +49,11 @@ class user extends CI_controller { //mismo nombre que el archivo
 
     public function admin (){
         $datos=array();
-		$this->load->model("user_model"); //loader componente del model auth
-		$datos["usuarios"]=$this->user_model->list_users();
-		$datos["total"]=count($datos["usuarios"]);
+		$this->load->model("user_model"); 
+		$datos["users"]=$this->user_model->list_users();
+		$datos["total"]=count($datos["users"]);
 
-        $this->load->view("list_users",$datos); //loader compronente de CI_controller
+        $this->load->view("list_users",$datos); 
     }
 
    public function create_user(){
@@ -38,7 +70,7 @@ class user extends CI_controller { //mismo nombre que el archivo
     public function delete_user($id=null){
 		$usuario_id=intval($id);
 		if($usuario_id>0){
-			$this->load->model('user_model'); //loader componente del model auth
+			$this->load->model('user_model'); 
             $this->user_model->delete_user($usuario_id);
 		}
 		redirect("user/index");
