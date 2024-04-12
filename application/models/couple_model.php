@@ -13,6 +13,11 @@ Class Parejas_model extends CI_Model {
         $this->db->limit(1);
         return $this->db->get("parejas")->row_array();
     }
+    function get_by_url($url=null){
+        $this->db->where("url",$url);
+        $this->db->limit(1);
+        return $this->db->get("parejas")->row_array();
+    }
 
     public function create_couple ($spouse_1="",$spouse_2="",$cvu=""){
 
