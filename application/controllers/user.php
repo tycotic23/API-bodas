@@ -82,7 +82,7 @@ class user extends CI_controller {
 	}
 
 
-    public function salir(){
+    public function log_out(){
 		$this->session->sess_destroy();
 		redirect("user/index");
 	}
