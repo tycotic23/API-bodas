@@ -13,6 +13,17 @@ Class localities_model extends CI_Model {
         $this->db->limit(1);
         return $this->db->get("localidades")->row_array();
     }
+    function check_postal_code($postal_code=""){
+        $this->db->select("localitie_id");
+        $this->db->where("postal_code",$postal_code);
+        $this->db->limit(1);
+        $res=$this->db->get("localidades");
+        if($res->num_rows()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     public function create_localities ($localitie,$postal_code){
         $this->db->set("localidad",$localitie);
@@ -28,12 +39,19 @@ Class localities_model extends CI_Model {
         return $this->db->affected_rows();
     }
 
-    public function update_name_guest($localitie_id,$postal_code){
+    public function update_postal_code($localitie_id,$postal_code){
         $this->db->set("codigo_postal",$postal_code);
         $this->db->where("localidad_id",$localitie_id);
         $this->db->update("localidades");
         return $this->db->affected_rows();
     }
 
+    public function delete_localitie($localitie_id=""){
+        $this->db->where("localidad_id",$localitie_id);
+        $this->db->limit(1);
+        $this->db->delete("localidades");
+        return $this->db->affected_rows();
+    }
+    
 }
     ?>

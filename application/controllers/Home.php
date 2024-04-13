@@ -30,7 +30,10 @@ class Home extends CI_Controller {
 					$datos["cvu_regalos"]=$u["cvu_regalos"];
 					$this->load->view('home',$datos);
 			}
+			
 		}
+
 	}
+
 }
 ?>

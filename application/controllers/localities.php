@@ -9,8 +9,35 @@ class Localities extends CI_Controller {
 			redirect('user/index');
 		}
 	}
-    
+
+	public function create_localitie($localitie,$postal_code){
+		$this->load->model('localities_model');
+			if(!($this->localities_model->check_postal_code($postal_code))){
+			$this->localitie_model->create_localitie($localitie,$postal_code);
+			}
+				redirect("home");
+	}
+
+	public function delete_localitie($localitie_id=null){
+		$localitie_id=intval($localitie_id);
+		if($localitie_id>0){
+			$this->load->model("localitie_model");
+			$this->couple_model->delete_localitie($localitie_id);
+		}
+		redirect("home/index");
+	}
+
+	public function update_localitie_localitie($localitie_id,$localitie){
+        $this->load->model("localitie_model");
+		$this->localitie_model->update_localitie_localitie($localitie_id,$localitie);
+		redirect("home/index")
+    }
+
+	public function update_localitie_postal_code($localitie_id,$postal_code){
+        $this->load->model("localitie_model");
+		$this->localitie_model->update_localitie_postal_code($localitie_id,$postal_code);
+		redirect("home/index")
+    }
+
 }
-
-
-    ?>
+?>

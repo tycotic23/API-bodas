@@ -58,7 +58,7 @@ class user extends CI_controller {
         }
     }
 
-   public function create_user(){
+    public function create_user(){
         $this->load->model('user_model');
         $usuario=$this->input->post("usuario");
         $password=$this->input->post("password");
@@ -77,6 +77,21 @@ class user extends CI_controller {
 		}
 		redirect("user/index");
 	}
+
+    public function change_password(){
+        $this->load->model('user_model');
+        $passwordnew=$this->input->post("passwordnew");
+        $passwordold=$this->input->post("passwordold");
+        $usuario=$this->input->post("usuario");
+
+        if($this->user_model->return_password($usuario)==$passwordold){
+            $this->user_model->change_password($usuario, $passwordnew);
+            redirect("user/logout");
+        }    
+        else{
+        redirect("user/logout");
+        }
+    }
 
 
     public function log_out(){

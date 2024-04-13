@@ -12,6 +12,15 @@ Class user_model extends CI_Model {
         $this->db->limit(1);
         return $this->db->get("usuarios")->row_array();
     }
+
+    public function get_password($usuario=""){
+        $this->db->select("password");
+        $this->db->where("usuario",$usuario);
+        $this->db->limit(1);
+        $res=$this->db->get("usuarios");
+        $array=$res->row_array();
+        return $array["password"];
+}   
     
     function check_login($user=false,$password=false){
         $this->db->select("usuario_id");
@@ -78,12 +87,6 @@ Class user_model extends CI_Model {
         $this->db->limit(1);
         $this->db->update("usuarios");
         return $this->db->affected_rows();    
-    }
-    public function update_password_user($user_id,$password){
-        $this->db->set("password",$password);
-        $this->db->where("usuario_id",$user_id);
-        $this->db->update("usuarios");
-        return $this->db->affected_rows();
     }
 
     public function update_user($user_id,$user){
