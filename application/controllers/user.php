@@ -34,10 +34,7 @@ class user extends CI_controller {
                     redirect("user/index");
                 }
             }
-            
-        
         }
-
     }
     public function ingresar(){
         $this->load->view("list_users");
