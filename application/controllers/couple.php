@@ -10,24 +10,33 @@ class Couple extends CI_Controller {
 		}
 	}
 
-	public function create_couple($usuario_id,$conyugue_1,$conyugue_2,$cvu_regalos,$url){
+	public function create_couple($usuario_id,$conyugue_1_id,$conyugue_2_id,$cvu_regalos,$url){
         $this->load->model('couple_model');
-        $usuario=$this->input->post("usuario");
-        $password=$this->input->post("password");
-
-        if(!($this->user_model->check_user($usuario))){
-        $this->user_model->create_user($usuario,$password);
-        }
-        redirect("user/registrarse");
+			if(!($this->couple_model->check_couple_url($url))){
+			$this->couple_model->create_couple($usuario_id,$conyugue_1_id,$conyugue_2_id,$cvu_regalos,$url);
+			}
+				redirect("home");
     }
 
-    public function delete_user($id=null){
-		$usuario_id=intval($id);
-		if($usuario_id>0){
-			$this->load->model('user_model');
-            $this->user_model->delete_user($usuario_id);
+	function check_couple_url($url=""){
+        $this->db->select("couple_id");
+        $this->db->where("url",$url);
+        $this->db->limit(1);
+        $res=$this->db->get("parejas");
+        if($res->num_rows()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+	public function delete_couple($id=null){
+		$couple_id=intval($id);
+		if($couple_id>0){
+			$this->load->model("couple_model");
+			$this->couple_model->delete_couple($couple_id);
 		}
-		redirect("user/index");
+		redirect("home/index");
 	}
 
 }

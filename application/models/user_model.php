@@ -13,7 +13,7 @@ Class user_model extends CI_Model {
         return $this->db->get("usuarios")->row_array();
     }
     
-    function check_login($user,$password){
+    function check_login($user=false,$password=false){
         $this->db->select("usuario_id");
         $this->db->where("usuario",$user);
         $this->db->where("password",$password);
