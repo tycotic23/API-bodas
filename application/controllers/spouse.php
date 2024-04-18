@@ -46,6 +46,4 @@ class Spouse extends CI_Controller {
 
     
 }
-
-
     ?>

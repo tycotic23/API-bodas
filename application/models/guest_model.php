@@ -14,6 +14,12 @@ Class Guest_model extends CI_Model {
         return $this->db->get("invitados")->row_array();
     }
 
+    function get_by_email($email=null){
+        $this->db->where("email",$email);
+        $this->db->limit(1);
+        return $this->db->get("invitados")->row_array();
+    }
+
     public function create_guest ($name="",$surname="",$attached="",$couple_id=""){
 
         $this->db->set("nombre",$name);
