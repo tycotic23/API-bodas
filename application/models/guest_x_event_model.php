@@ -1,5 +1,5 @@
 <?php 
-Class Guest_x_event extends CI_Model {
+Class Guest_x_event_model extends CI_Model {
 
 
 
@@ -37,7 +37,8 @@ Class Guest_x_event extends CI_Model {
         return $this->db->affected_rows();
     }
 
-    public function update_asist_guest_x_event($guest_x_event_id,$asist){
+    public function update_asist_guest_x_event_confirm($guest_x_event_id){
+        $asist="1";
         $this->db->set("asistencia",$asist);
         $this->db->where("invitado__evento_id",$guest_x_event_id);
         $this->db->update("invitado_x_evento");
