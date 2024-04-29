@@ -69,15 +69,6 @@ class user extends CI_controller {
         redirect("user/registrarse");
     }
 
-    public function delete_user($id=null){
-		$usuario_id=intval($id);
-		if($usuario_id>0){
-			$this->load->model('user_model'); 
-            $this->user_model->delete_user($usuario_id);
-		}
-		redirect("user/index");
-	}
-
     public function change_password(){
         $this->load->model('user_model');
         $passwordnew=$this->input->post("passwordnew");
@@ -92,6 +83,15 @@ class user extends CI_controller {
         redirect("user/logout");
         }
     }
+
+    public function delete_user($id=null){
+		$usuario_id=intval($id);
+		if($usuario_id>0){
+			$this->load->model('user_model'); 
+            $this->user_model->delete_user($usuario_id);
+		}
+		redirect("user/index");
+	}
 
 
     public function log_out(){

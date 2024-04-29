@@ -10,12 +10,61 @@ class Couple extends CI_Controller {
 		}
 	}
 
-	public function create_couple($usuario_id,$conyugue_1_id,$conyugue_2_id,$cvu_regalos,$url){
+	public function create_couple(){
         $this->load->model('couple_model');
+		$user_id=$this->input->post("user_id");
+		$spouse_1_id=$this->input->post("spouse_1_id");
+		$spouse_2_id=$this->input->post("spouse_2_id");
+		$cvu_gift=$this->input->post("cvu_gift");
+		$url=$this->input->post("url");
 			if(!($this->couple_model->check_couple_url($url))){
-			$this->couple_model->create_couple($usuario_id,$conyugue_1_id,$conyugue_2_id,$cvu_regalos,$url);
+			$this->couple_model->create_couple($user_id,$spouse_1_id,$spouse_2_id,$cvu_gift,$url);
 			}
 				redirect("home");
+    }
+
+	public function update_couple_user(){
+        $this->load->model("couple_model");
+		$couple_id=$this->input->post("couple_id");
+		$user_id=$this->input->post("user_id");
+		$this->couple_model->update_couple_user($couple_id,$user_id);
+		redirect("home/index")
+    }
+
+	
+	public function update_couple_spouse_1(){
+        $this->load->model("couple_model");
+		$couple_id=$this->input->post("couple_id");
+		$spouse_1_id=$this->input->post("spouse_1_id");
+		$this->couple_model->update_couple_spouse_1($couple_id,$spouse_1_id);
+		redirect("home/index")
+    }
+
+	
+	public function update_couple_spouse_2(){
+        $this->load->model("couple_model");
+		$couple_id=$this->input->post("couple_id");
+		$spouse_2_id=$this->input->post("spouse_2");
+		$this->couple_model->update_couple_spouse_2($couple_id,$spouse_2_id);
+		redirect("home/index")
+    }
+	
+	public function update_couple_cvu_gift(){
+        $this->load->model("couple_model");
+		$couple_id=$this->input->post("couple_id");
+		$cvu_gift=$this->input->post("cvu_gift");
+		$this->couple_model->update_couple_cvu_gift($couple_id,$cvu_gift);
+		redirect("home/index")
+    }
+	
+	public function update_couple_url(){
+        $this->load->model("couple_model");
+		$couple_id=$this->input->post("couple_id");
+		$url=$this->input->post("url");
+		if(!($this->couple_model->check_couple_url($url))){
+			$this->couple_model->update_couple_url($couple_id,$url);
+		}
+		redirect("home/index")
     }
 
 	function check_couple_url($url=""){

@@ -11,26 +11,35 @@ class Spouse extends CI_Controller {
 		}
 	}
 
-	public function create_spouse($name="",$surname="",$birthdate=""){
+	public function create_spouse(){
+		$name=$this->input->post("name");
+		$surname=$this->input->post("surname");
+		$birthdate=$this->input->post("birthdate");
 		$this->load->model('spouse_model');
         $this->spouse_model->create_spouse($name,$surname,$birthdate);
         redirect("home/index");
 	}
 
-	public function update_spouse_name($spouse_id,$name){
+	public function update_spouse_name(){
         $this->load->model("spouse_model");
+		$spouse_id=$this->input->post("spouse_id");
+		$name=$this->input->post("name");
 		$this->spouse_model->update_spouse_name($spouse_id,$name);
 		redirect("home/index")
     }
 
-	public function update_spouse_surname($spouse_id,$surname){
+	public function update_spouse_surname(){
 		$this->load->model("spouse_model");
+		$spouse_id=$this->input->post("spouse_id");
+		$surname=$this->input->post("surname");
 		$this->spouse_model->update_spouse_surname($spouse_id,$surname);
 		redirect("home/index")
 	}        
 
-	public function update_spouse_birthdate($spouse_id,$birthdate){
+	public function update_spouse_birthdate(){
         $this->load->model("spouse_model");
+		$spouse_id=$this->input->post("spouse_id");
+		$birthdate=$this->input->post("birthdate");
 		$this->spouse_model->update_spouse_birthdate($spouse_id,$birthdate);
 		redirect("home/index")
     }
