@@ -20,7 +20,7 @@ Class Guest_model extends CI_Model {
         return $this->db->get("invitados")->row_array();
     }
 
-    function check_mail($email=""){
+    function check_mail($email=null){
         $this->db->select("invitado_id");
         $this->db->where("mail",$email);
         $this->db->limit(1);
@@ -36,7 +36,7 @@ Class Guest_model extends CI_Model {
 
         $this->db->set("nombre",$name);
         $this->db->set("apellido",$surname);
-        $this->db->set("mail"$email)
+        $this->db->set("mail"$email);
         $this->db->set("telefono",$phone_number);
         $this->db->set("extras",$attached);
         $this->db->set("pareja_id",$couple_id);

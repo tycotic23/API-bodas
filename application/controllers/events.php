@@ -29,7 +29,7 @@ class Events extends CI_Controller {
 		$event_id=$this->input->post("event_id");
 		$couple_id=$this->input->post("pareja_id");
 		$this->event_model->update_event_couple($event_id,$couple_id);
-		redirect("home/index")
+		redirect("home/index");
     }
 
 	public function update_event_location(){
@@ -37,7 +37,7 @@ class Events extends CI_Controller {
 		$event_id=$this->input->post("event_id");
 		$location=$this->input->post("location");
 		$this->event_model->update_event_location($event_id,$location);
-		redirect("home/index")
+		redirect("home/index");
     }
 
 	public function update_event_direction_street(){
@@ -45,7 +45,7 @@ class Events extends CI_Controller {
 		$event_id=$this->input->post("event_id");
 		$direction_street=$this->input->post("direction_street");
 		$this->event_model->update_event_direction_street($event_id,$direction_street);
-		redirect("home/index")
+		redirect("home/index");
     }
 
 	public function update_event_direction_number(){
@@ -53,7 +53,7 @@ class Events extends CI_Controller {
 		$event_id=$this->input->post("event_id");
 		$direction_number=$this->input->post("direction_number");
 		$this->event_model->update_event_direction_number($event_id,$direction_number);
-		redirect("home/index")
+		redirect("home/index");
     }
 
 	public function update_event_localities(){
@@ -61,7 +61,7 @@ class Events extends CI_Controller {
 		$event_id=$this->input->post("event_id");
 		$location_id=$this->input->post("location_id");
 		$this->event_model->update_event_location($event_id,$location_id);
-		redirect("home/index")
+		redirect("home/index");
     }
 
 	public function update_event_name(){
@@ -69,7 +69,7 @@ class Events extends CI_Controller {
 		$event_id=$this->input->post("event_id");
 		$name=$this->input->post("name");
 		$this->event_model->update_event_location($event_id,$name);
-		redirect("home/index")
+		redirect("home/index");
     }
 
 	public function update_event_date_time(){
@@ -77,7 +77,7 @@ class Events extends CI_Controller {
 		$event_id=$this->input->post("event_id");
 		$date_time=$this->input->post("date_time");
 		$this->event_model->update_event_location($event_id,$date_time);
-		redirect("home/index")
+		redirect("home/index");
     }
 
 	public function delete_event($event_id=null){

@@ -65,7 +65,7 @@ Class user_model extends CI_Model {
         $this->db->select("rol_id");
         $this->db->where("usuario_id",$usuario_id);
             $this->db->limit(1);
-            $res=$this->db->get("usuarios")->row_array();;
+            $res=$this->db->get("usuarios")->row_array();
             if($res["usuario_id"]=="1"){
                 return true;
             }else{

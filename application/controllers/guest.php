@@ -29,7 +29,7 @@ class Guest extends CI_Controller {
 		$guest_id=$this->input->post("guest_id");
 		$name=$this->input->post("name");
 		$this->guest_model->update_name_guest($guest_id,$name);
-		redirect("home/index")
+		redirect("home/index");
     }
 
 	public function update_guest_surname(){
@@ -37,7 +37,7 @@ class Guest extends CI_Controller {
 		$couple_id=$this->input->post("guest_id");
 		$surname=$this->input->post("surname");
 		$this->guest_model->update_surname_guest($guest_id,$surname);
-		redirect("home/index")
+		redirect("home/index");
     }
 
 	public function update_guest_phone_number(){
@@ -45,7 +45,7 @@ class Guest extends CI_Controller {
 		$couple_id=$this->input->post("guest_id");
 		$phone_number=$this->input->post("phone_number");
 		$this->guest_model->update_phone_number_guest($guest_id,$phone_number);
-		redirect("home/index")
+		redirect("home/index");
     }
 
 	public function update_guest_attached(){
@@ -53,7 +53,7 @@ class Guest extends CI_Controller {
 		$couple_id=$this->input->post("guest_id");
 		$attached=$this->input->post("attached");
 		$this->guest_model->update_attached_guest($guest_id,$attached);
-		redirect("home/index")
+		redirect("home/index");
     }
 
 	public function update_guest_couple_id(){
@@ -61,7 +61,7 @@ class Guest extends CI_Controller {
 		$couple_id=$this->input->post("guest_id");
 		$couple_id=$this->input->post("couple_id");
 		$this->guest_model->update_phone_number_guest($guest_id,$couple_id);
-		redirect("home/index")
+		redirect("home/index");
     }
 
 

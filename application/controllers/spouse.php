@@ -25,7 +25,7 @@ class Spouse extends CI_Controller {
 		$spouse_id=$this->input->post("spouse_id");
 		$name=$this->input->post("name");
 		$this->spouse_model->update_spouse_name($spouse_id,$name);
-		redirect("home/index")
+		redirect("home/index");
     }
 
 	public function update_spouse_surname(){
@@ -33,7 +33,7 @@ class Spouse extends CI_Controller {
 		$spouse_id=$this->input->post("spouse_id");
 		$surname=$this->input->post("surname");
 		$this->spouse_model->update_spouse_surname($spouse_id,$surname);
-		redirect("home/index")
+		redirect("home/index");
 	}        
 
 	public function update_spouse_birthdate(){
@@ -41,7 +41,7 @@ class Spouse extends CI_Controller {
 		$spouse_id=$this->input->post("spouse_id");
 		$birthdate=$this->input->post("birthdate");
 		$this->spouse_model->update_spouse_birthdate($spouse_id,$birthdate);
-		redirect("home/index")
+		redirect("home/index");
     }
 
 	public function delete_spouse($spouse_id=null){

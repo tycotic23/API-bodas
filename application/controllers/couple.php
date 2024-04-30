@@ -28,7 +28,7 @@ class Couple extends CI_Controller {
 		$couple_id=$this->input->post("couple_id");
 		$user_id=$this->input->post("user_id");
 		$this->couple_model->update_couple_user($couple_id,$user_id);
-		redirect("home/index")
+		redirect("home/index");
     }
 
 	
@@ -37,7 +37,7 @@ class Couple extends CI_Controller {
 		$couple_id=$this->input->post("couple_id");
 		$spouse_1_id=$this->input->post("spouse_1_id");
 		$this->couple_model->update_couple_spouse_1($couple_id,$spouse_1_id);
-		redirect("home/index")
+		redirect("home/index");
     }
 
 	
@@ -46,7 +46,7 @@ class Couple extends CI_Controller {
 		$couple_id=$this->input->post("couple_id");
 		$spouse_2_id=$this->input->post("spouse_2");
 		$this->couple_model->update_couple_spouse_2($couple_id,$spouse_2_id);
-		redirect("home/index")
+		redirect("home/index");
     }
 	
 	public function update_couple_cvu_gift(){
@@ -54,7 +54,7 @@ class Couple extends CI_Controller {
 		$couple_id=$this->input->post("couple_id");
 		$cvu_gift=$this->input->post("cvu_gift");
 		$this->couple_model->update_couple_cvu_gift($couple_id,$cvu_gift);
-		redirect("home/index")
+		redirect("home/index");
     }
 	
 	public function update_couple_url(){
@@ -64,7 +64,7 @@ class Couple extends CI_Controller {
 		if(!($this->couple_model->check_couple_url($url))){
 			$this->couple_model->update_couple_url($couple_id,$url);
 		}
-		redirect("home/index")
+		redirect("home/index");
     }
 
 	function check_couple_url($url=""){
