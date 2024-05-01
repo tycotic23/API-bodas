@@ -12,9 +12,10 @@ class Home extends CI_Controller {
 			redirect('user/index');
 		}
 	}*/
-	public function index($url=false){
+	public function index ($url=false){
+		$this->load->view("home",$url="1", TRUE);
 		if(!$url){
-			$this->load->view("Home");
+			$this->load->view("home",$url="1", TRUE);
 		}
 		else{
 				$this->load->model('couple_model');
@@ -22,18 +23,16 @@ class Home extends CI_Controller {
 				if(!$u){
 					redirect("home/index");
 				}
-				else(){
+				else{
 					$datos=array();
 					/*$datos["usuario_id"]=$u["usuario_id"];*/
-					$datos["conyugue_1"]=$u["conyugue_1"];
-					$datos["conyugue_2"]=$u["conyugue_2"];
+					$datos["conyugue_1"]=$u["conyugue_1_id"];
+					$datos["conyugue_2"]=$u["conyugue_2_id"];
 					$datos["cvu_regalos"]=$u["cvu_regalos"];
+					$datos["url"]=$url;
 					$this->load->view('home',$datos);
 			}
-			
 		}
-
 	}
-
 }
 ?>

@@ -42,7 +42,14 @@ class guest_x_events extends CI_Controller {
         }
     }
 
-    public function event_x_guest_confirm($guest_x_event_id,$asist){
+    public function event_x_guest_confirm($guest_x_event_id,$asist){// 0=no dijo nada 1=asiste 2=no asiste
+        $this->load_model("guest_x_event");
+        $guest_x_event_id=$this->input->post("guest_x_event_id");
+        $this->guest_x_event_model->update_asist_guest_x_event_confirm($guest_x_event_id);
+        redirect("home/index");
+    }
+
+    public function event_x_guest_disconfirm($guest_x_event_id,$asist){// 0=no dijo nada 1=asiste 2=no asiste
         $this->load_model("guest_x_event");
         $guest_x_event_id=$this->input->post("guest_x_event_id");
         $this->guest_x_event_model->update_asist_guest_x_event_confirm($guest_x_event_id);
