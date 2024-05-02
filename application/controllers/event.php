@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Events extends CI_Controller {
+class Event extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
@@ -10,6 +10,8 @@ class Events extends CI_Controller {
 			redirect('user/index');
 		}
 	}
+
+	
 
 	public function create_event(){
 		$this->load->model('event_model');
@@ -24,8 +26,21 @@ class Events extends CI_Controller {
 		redirect("home");
 	}
 
+	public function list_event (){
+		if(!$this->session->userdata('usuario_id')){
+			$this->session->set_flashdata('OP','PROHIBIDO');
+			redirect('user/index');
+			}else{
+			$this->load->model("event_model"); 
+			$datos=array();
+			$datos["events"]=$this->event_model->list_event();
+			$datos["total"]=count($datos["events"]);
+			$this->load->view("list_event",$datos); 
+    }
+}
+
 	public function update_event_couple(){
-        $this->load->model("events_model");
+        $this->load->model("event_model");
 		$event_id=$this->input->post("event_id");
 		$couple_id=$this->input->post("pareja_id");
 		$this->event_model->update_event_couple($event_id,$couple_id);
@@ -41,7 +56,7 @@ class Events extends CI_Controller {
     }
 
 	public function update_event_direction_street(){
-        $this->load->model("events_model");
+        $this->load->model("event_model");
 		$event_id=$this->input->post("event_id");
 		$direction_street=$this->input->post("direction_street");
 		$this->event_model->update_event_direction_street($event_id,$direction_street);
@@ -65,7 +80,7 @@ class Events extends CI_Controller {
     }
 
 	public function update_event_name(){
-        $this->load->model("events_model");
+        $this->load->model("even_model");
 		$event_id=$this->input->post("event_id");
 		$name=$this->input->post("name");
 		$this->event_model->update_event_location($event_id,$name);
@@ -73,7 +88,7 @@ class Events extends CI_Controller {
     }
 
 	public function update_event_date_time(){
-        $this->load->model("events_model");
+        $this->load->model("event_model");
 		$event_id=$this->input->post("event_id");
 		$date_time=$this->input->post("date_time");
 		$this->event_model->update_event_location($event_id,$date_time);
