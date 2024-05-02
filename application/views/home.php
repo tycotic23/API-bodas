@@ -23,7 +23,6 @@
     <br>
     <?php echo $url; ?>
     <br>
-    por que no me aparece el echo?    
 </p>
     
 

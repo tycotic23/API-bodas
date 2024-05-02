@@ -1,23 +1,27 @@
 <?php 
 Class Couple_model extends CI_Model {
 
+    protected $database="parejas";
 
+    public function default_select (){
+        $this->db->select($this->table.".*");
+    }
 
     function list_couple (){
         $this->db->order_by("pareja_id");
-        return $this->db->get("parejas")->result_array();
+        return $this->db->get($this->database)->result_array();
     }
 
     function get_by_id($id=null){
         $this->db->where("couple_id",$id);
         $this->db->limit(1);
-        return $this->db->get("parejas")->row_array();
+        return $this->db->get($this->database)->row_array();
     }
 
     function get_by_url($url=null){
         $this->db->where("url",$url);
         $this->db->limit(1);
-        return $this->db->get("parejas")->row_array();
+        return $this->db->get($this->database)->row_array();
     }
 
     public function create_couple ($spouse_1="",$spouse_2="",$cvu=""){
@@ -25,14 +29,14 @@ Class Couple_model extends CI_Model {
         $this->db->set("conyugue_1",$spouse_1);
         $this->db->set("conyugue_2",$spouse_2);
         $this->db->set("cvu_regalos",$cvu);
-        $this->db->insert("parejas");
+        $this->db->insert($this->database);
     }
 
     public function update_couple_user($cuple_id="",$user_id=""){
         $this->db->set("usuario_id",$user_id);
         $this->db->where("pareja_id",$couple_id);
         $this->db->limit(1);
-        $this->db->update("parejas");
+        $this->db->update($this->database);
         return $this->db->affected_rows();
     }
 
@@ -40,7 +44,7 @@ Class Couple_model extends CI_Model {
         $this->db->set("conyugue_1",$spouse_1);
         $this->db->where("pareja_id",$couple_id);
         $this->db->limit(1);
-        $this->db->update("parejas");
+        $this->db->update($this->database);
         return $this->db->affected_rows();
     }
 
@@ -48,7 +52,7 @@ Class Couple_model extends CI_Model {
         $this->db->set("conyugue_2",$spouse_2);
         $this->db->where("pareja_id",$couple_id);
         $this->db->limit(1);
-        $this->db->update("parejas");
+        $this->db->update($this->database);
         return $this->db->affected_rows();
     }
 
@@ -56,7 +60,7 @@ Class Couple_model extends CI_Model {
         $this->db->set("cvu_regalo",$cvu_gift);
         $this->db->where("pareja_id",$couple_id);
         $this->db->limit(1);
-        $this->db->update("parejas");
+        $this->db->update($this->database);
         return $this->db->affected_rows();
     }
 
@@ -64,7 +68,7 @@ Class Couple_model extends CI_Model {
         $this->db->set("url",$url);
         $this->db->where("pareja_id",$couple_id);
         $this->db->limit(1);
-        $this->db->update("parejas");
+        $this->db->update($this->database);
         return $this->db->affected_rows();
     }
 
@@ -72,7 +76,7 @@ Class Couple_model extends CI_Model {
     public function delete_couple($couple_id=""){
         $this->db->where("pareja_id",$couple_id);
         $this->db->limit(1);
-        $this->db->delete("parejas");
+        $this->db->delete($this->database);
         return $this->db->affected_rows();
     }
     

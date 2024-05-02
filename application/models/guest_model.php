@@ -1,30 +1,34 @@
 <?php 
 Class Guest_model extends CI_Model {
 
+    protected $database="invitados";
 
+    public function default_select (){
+        $this->db->select($this->table.".*");
+    }
 
     function list_guest (){
         $this->db->order_by("invitado_id");
-        return $this->db->get("invitados")->result_array();
+        return $this->db->get($this->database)->result_array();
     }
 
     function get_by_id($id=null){
         $this->db->where("invitado_id",$id);
         $this->db->limit(1);
-        return $this->db->get("invitados")->row_array();
+        return $this->db->get($this->database)->row_array();
     }
 
     function get_by_email($email=null){
         $this->db->where("mail",$email);
         $this->db->limit(1);
-        return $this->db->get("invitados")->row_array();
+        return $this->db->get($this->database)->row_array();
     }
 
     function check_mail($email=null){
         $this->db->select("invitado_id");
         $this->db->where("mail",$email);
         $this->db->limit(1);
-        $res=$this->db->get("invitados");
+        $res=$this->db->get($this->database);
         if($res->num_rows()){
             return true;
         }else{
@@ -40,55 +44,55 @@ Class Guest_model extends CI_Model {
         $this->db->set("telefono",$phone_number);
         $this->db->set("extras",$attached);
         $this->db->set("pareja_id",$couple_id);
-        $this->db->insert("invitados");
+        $this->db->insert($this->database);
     }
 
     public function update_name_guest($guest_id,$name){
         $this->db->set("nombre",$name);
         $this->db->where("invitado_id",$guest_id);
-        $this->db->update("invitados");
+        $this->db->update($this->database);
         return $this->db->affected_rows();
     }
 
     public function update_surname_guest($guest_id,$surname){
         $this->db->set("apellido",$surname);
         $this->db->where("invitado_id",$guest_id);
-        $this->db->update("invitados");
+        $this->db->update($this->database);
         return $this->db->affected_rows();
     }
 
     public function update_email_guest($guest_id,$email){
         $this->db->set("mail",$email);
         $this->db->where("invitado_id",$guest_id);
-        $this->db->update("invitados");
+        $this->db->update($this->database);
         return $this->db->affected_rows();
     }
 
     public function update_phone_number_guest($guest_id,$phone_number){
         $this->db->set("telefono",$phone_number);
         $this->db->where("invitado_id",$guest_id);
-        $this->db->update("invitados");
+        $this->db->update($this->database);
         return $this->db->affected_rows();
     }
 
     public function update_attached_guest($guest_id,$attached){
         $this->db->set("extras",$attached);
         $this->db->where("invitado_id",$guest_id);
-        $this->db->update("invitados");
+        $this->db->update($this->database);
         return $this->db->affected_rows();
     }
 
     public function update_couple_id_guest($guest_id,$couple_id){
         $this->db->set("pareja_id",$couple_id);
         $this->db->where("invitado_id",$guest_id);
-        $this->db->update("invitados");
+        $this->db->update($this->database);
         return $this->db->affected_rows();
     }
 
     public function delete_guest($guest_id=false){
         $this->db->where("guest_id",$guest_id);
         $this->db->limit(1);
-        $this->db->delete("invitados");
+        $this->db->delete($this->database);
         return $this->db->affected_rows();
     }
     
