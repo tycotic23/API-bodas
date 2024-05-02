@@ -20,6 +20,19 @@ class Spouse extends CI_Controller {
         redirect("home/index");
 	}
 
+	public function list_spouse (){
+		if(!$this->session->userdata('usuario_id')){
+			$this->session->set_flashdata('OP','PROHIBIDO');
+			redirect('user/index');
+			}else{
+			$this->load->model("spouse_model"); 
+			$datos=array();
+			$datos["spouse"]=$this->spouse_model->list_spouse();
+			$datos["total"]=count($datos["spouse"]);
+			$this->load->view("list_spouse",$datos); 
+    }
+}
+
 	public function update_spouse_name(){
         $this->load->model("spouse_model");
 		$spouse_id=$this->input->post("spouse_id");

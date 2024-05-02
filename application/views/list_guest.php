@@ -18,11 +18,11 @@
                         <div class="card">
                             <div class="card-body">
 
-                                        <?php if($events){?>
+                                        <?php if($guests){?>
                                             
                                         <ul class="list-group" id="lista" name="lista">
                                         <li class="list-group-item">
-                                            <p> total de eventos: <b> <?php echo $total; ?> </b>
+                                            <p> total de invitados: <b> <?php echo $total; ?> </b>
                                           
                                             </p>
                                         </li>    
@@ -32,34 +32,29 @@
                                         
                                             <thead>
                                                 <tr>
-                                                <th scope="col">evento_id:</th>
-                                                <th scope="col">pareja_id:</th>
-                                                <th scope="col">locacion:</th>
-                                                <th scope="col">direccion_calle:</th>
-                                                <th scope="col">direccion_numero:</th>
-                                                <th scope="col">localidad_id:</th>
+                                                <th scope="col">invitado_id:</th>
                                                 <th scope="col">nombre:</th>
-                                                <th scope="col">horario:</th>
-                                                <th scope="col">estado:</th>
+                                                <th scope="col">apellido:</th>
+                                                <th scope="col">mail:</th>
+                                                <th scope="col">telefono:</th>
+                                                <th scope="col">extras:</th>
+                                                <th scope="col">pareja_id:</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <?php foreach($events as $t){ ?>
+                                            <?php foreach($guests as $t){ ?>
 
                                                 <tr>
-                                                    <td><?php echo $t["evento_id"]; ?></td>
-                                                    <td><?php echo $t["pareja_id"]; ?></td>
-                                                    <td><?php echo $t["locacion"]; ?></td>
-                                                    <td><?php echo $t["direccion_calle"]; ?></td>
-                                                    <td><?php echo $t["direccion_numero"]; ?></td>
-                                                    <td><?php echo $t["localidad_id"]; ?></td>
+                                                    <td><?php echo $t["invitado_id"]; ?></td>
                                                     <td><?php echo $t["nombre"]; ?></td>
-                                                    <td><?php echo $t["horario"]; ?></td>
-                                                    <td><?php echo $t["estado"]; ?></td>
-
+                                                    <td><?php echo $t["apellido"]; ?></td>
+                                                    <td><?php echo $t["mail"]; ?></td>
+                                                    <td><?php echo $t["telefono"]; ?></td>
+                                                    <td><?php echo $t["extras"]; ?></td>
+                                                    <td><?php echo $t["pareja_id"]; ?></td>
                                                     <td> &nbsp;</td>
                                                     <td>
-                                                        <a href="<?php echo site_url("event/delete_event/".$t["evento_id"]); ?>" class="btn btn-danger btn-sm borrar">
+                                                        <a href="<?php echo site_url("guest/delete_guest/".$t["invitado_id"]); ?>" class="btn btn-danger btn-sm borrar">
                                                             <i class="bi bi-trash-fill"></i>
                                                         </a>
                                                     </td>
@@ -72,7 +67,7 @@
                                             <!-- fin del table -->
                                         <?php }else{?>
                                                 <div class="alert alert-success" role="alert">
-                                                    NO SE EVENTOS!
+                                                    NO SE ENCONTRARON INVITADOS!
                                                 </div>
                                         <?php }?>
                         </div>

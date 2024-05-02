@@ -17,12 +17,25 @@ class Guest extends CI_Controller {
 		$email=$this->input->post("mail");
 		$phone_number=$this->input->post("phone_number");
 		$attached=$this->input->post("attached");
-		$couple_id=$this->input->post("couple_id")
-			if(!($this->guest_model->check_mail($email))){
+		$couple_id=$this->input->post("couple_id");
+			if (!($this->guest_model->check_mail($email))) {
 			$this->guest_model->create_guest($name,$surname,$email,$phone_number,$attached,$couple_id);
 			}
 				redirect("home/index");
     }
+
+	public function list_guest (){
+		if(!$this->session->userdata('usuario_id')){
+			$this->session->set_flashdata('OP','PROHIBIDO');
+			redirect('user/index');
+			}else{
+			$this->load->model("guest_model"); 
+			$datos=array();
+			$datos["guests"]=$this->guest_model->list_guest();
+			$datos["total"]=count($datos["guests"]);
+			$this->load->view("list_guest",$datos); 
+    }
+}
 
 	public function update_guest_name(){
         $this->load->model("guest_model");

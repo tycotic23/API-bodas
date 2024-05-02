@@ -3,9 +3,9 @@ Class Event_model extends CI_Model {
 
     protected $database="eventos";
 
-    /*public function default_select (){
+    public function default_select (){
         $this->db->select($this->table.".*");
-    }*/
+    }
     
     function get_by_id($id=null){
         $this->db->where("evento_id",$id);
