@@ -35,7 +35,7 @@ class Event extends CI_Controller {
 			$datos=array();
 			$datos["events"]=$this->event_model->list_event();
 			$datos["total"]=count($datos["events"]);
-			$this->load->view("list_event",$datos); 
+			$this->load->view("lists/list_event",$datos); 
     }
 }
 

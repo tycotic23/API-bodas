@@ -29,7 +29,7 @@ class Spouse extends CI_Controller {
 			$datos=array();
 			$datos["spouse"]=$this->spouse_model->list_spouse();
 			$datos["total"]=count($datos["spouse"]);
-			$this->load->view("list_spouse",$datos); 
+			$this->load->view("lists/list_spouse",$datos); 
     }
 }
 

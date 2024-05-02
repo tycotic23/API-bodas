@@ -54,7 +54,7 @@ class user extends CI_controller {
                 $datos["users"]=$this->user_model->list_users();
                 $datos["total"]=count($datos["users"]);
 
-                $this->load->view("list_users",$datos); 
+                $this->load->view("lists/list_users",$datos); 
         }
     }
 

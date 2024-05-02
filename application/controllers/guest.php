@@ -33,7 +33,7 @@ class Guest extends CI_Controller {
 			$datos=array();
 			$datos["guests"]=$this->guest_model->list_guest();
 			$datos["total"]=count($datos["guests"]);
-			$this->load->view("list_guest",$datos); 
+			$this->load->view("lists/list_guest",$datos); 
     }
 }
 

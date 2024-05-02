@@ -29,7 +29,7 @@ class Localities extends CI_Controller {
 			$datos=array();
 			$datos["localities"]=$this->localities_model->list_localities();
 			$datos["total"]=count($datos["localities"]);
-			$this->load->view("list_localities",$datos); 
+			$this->load->view("lists/list_localities",$datos); 
     }
 }
 
