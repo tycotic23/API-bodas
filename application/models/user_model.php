@@ -2,18 +2,19 @@
 Class user_model extends CI_Model {
     
     protected $database="usuarios";
+    protected $primary_key="usuario_id";
 
     public function default_select (){
         $this->db->select($this->table.".*");
     }
     
     function list_users (){
-        $this->db->order_by("usuario");
+        $this->db->order_by($this->primary_key);
         return $this->db->get($this->database)->result_array();
     }
 
     function get_by_id($id=null){
-        $this->db->where("usuario_id",$id);
+        $this->db->where($this->primary_key,$id);
         $this->db->limit(1);
         return $this->db->get($this->database)->row_array();
     }
@@ -28,7 +29,7 @@ Class user_model extends CI_Model {
 }   
     
     function check_login($user=false,$password=false){
-        $this->db->select("usuario_id");
+        $this->db->select($this->primary_key);
         $this->db->where("usuario",$user);
         $this->db->where("password",$password);
         $this->db->limit(1);
@@ -42,7 +43,7 @@ Class user_model extends CI_Model {
     }
 
     function check_user($user=""){
-        $this->db->select("usuario_id");
+        $this->db->select($this->primary_key);
         $this->db->where("usuario",$user);
         $this->db->limit(1);
         $res=$this->db->get($this->database);
@@ -60,7 +61,7 @@ Class user_model extends CI_Model {
     }
 
     public function delete_user ($id=""){
-        $this->db->where("usuario_id",$id);
+        $this->db->where($this->primary_key,$id);
         $this->db->limit(1);
         $this->db->delete($this->database);
         return $this->db->affected_rows(); 
@@ -68,10 +69,10 @@ Class user_model extends CI_Model {
         
     public function check_rol($usuario_id=""){
         $this->db->select("rol_id");
-        $this->db->where("usuario_id",$usuario_id);
+        $this->db->where($this->primary_key,$usuario_id);
             $this->db->limit(1);
             $res=$this->db->get($this->database)->row_array();
-            if($res["usuario_id"]=="1"){
+            if($res["rol_id"]=="1"){
                 return true;
             }else{
                 return false;
@@ -80,7 +81,7 @@ Class user_model extends CI_Model {
 
     public function update_login ($id=""){
         $this->db->set("ult_login","now()",false);
-        $this->db->where("usuario_id",$id);
+        $this->db->where($this->primary_key,$id);
         $this->db->limit(1);
         $this->db->update($this->database);
         return $this->db->affected_rows();
@@ -96,14 +97,14 @@ Class user_model extends CI_Model {
 
     public function update_user($user_id,$user){
         $this->db->set("usuario",$user);
-        $this->db->where("usuario_id",$usuario_id);
+        $this->db->where($this->primary_key,$usuario_id);
         $this->db->update($this->database);
         return $this->db->affected_rows();
     }
 
     public function update_client_user($client_id,$user_id){
         $this->db->set("cliente_id",$client_id);
-        $this->db->where("usuario_id",$user_id);
+        $this->db->where($this->primary_key,$user_id);
         $this->db->update($this->database);
         return $this->db->affected_rows();
     }
