@@ -23,6 +23,19 @@ class Couple extends CI_Controller {
 				redirect("home");
     }
 
+	public function list_couple (){
+		if(!$this->session->userdata('usuario_id')){
+			$this->session->set_flashdata('OP','PROHIBIDO');
+			redirect('user/index');
+			}else{
+			$this->load->model("couple_model"); 
+			$datos=array();
+			$datos["couples"]=$this->couple_model->list_couple();
+			$datos["total"]=count($datos["couples"]);
+			$this->load->view("list_couples",$datos); 
+    }
+}
+
 	public function update_couple_user(){
         $this->load->model("couple_model");
 		$couple_id=$this->input->post("couple_id");

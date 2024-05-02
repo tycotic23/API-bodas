@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <title>list users</title>
+    <title>list couples</title>
   </head>
 
   <body>
@@ -18,11 +18,11 @@
                         <div class="card">
                             <div class="card-body">
 
-                                        <?php if($users){?>
+                                        <?php if($couples){?>
                                             
                                         <ul class="list-group" id="lista" name="lista">
                                         <li class="list-group-item">
-                                            <p> total de usuarios: <b> <?php echo $total; ?> </b>
+                                            <p> total de parejas: <b> <?php echo $total; ?> </b>
                                           
                                             </p>
                                         </li>    
@@ -32,21 +32,27 @@
                                         
                                             <thead>
                                                 <tr>
-                                                <th scope="col">Usuarios:</th>
-                                                <th scope="col">Contraseña:</th>
-                                                <th scope="col">&nbsp;</th>
-                                                <th scope="col">eliminar usuarios</th>
+                                                <th scope="col">pareja_id:</th>
+                                                <th scope="col">usuario_id:</th>
+                                                <th scope="col">conyugue_1_id:</th>
+                                                <th scope="col">conyugue_2_id:</th>
+                                                <th scope="col">cvu_regalos:</th>
+                                                <th scope="col">url:</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <?php foreach($users as $t){ ?>
+                                            <?php foreach($couples as $t){ ?>
 
                                                 <tr>
-                                                    <td><?php echo $t["usuario"]; ?></td>
-                                                    <td><?php echo $t["password"]; ?></td>
+                                                    <td><?php echo $t["pareja_id"]; ?></td>
+                                                    <td><?php echo $t["usuario_id"]; ?></td>
+                                                    <td><?php echo $t["conyugue_1_id"]; ?></td>
+                                                    <td><?php echo $t["conyugue_2_id"]; ?></td>
+                                                    <td><?php echo $t["cvu_regalos"]; ?></td>
+                                                    <td><?php echo $t["url"]; ?></td>
                                                     <td> &nbsp;</td>
                                                     <td>
-                                                        <a href="<?php echo site_url("user/delete_user/".$t["usuario_id"]); ?>" class="btn btn-danger btn-sm borrar">
+                                                        <a href="<?php echo site_url("couple/delete_couple/".$t["pareja_id"]); ?>" class="btn btn-danger btn-sm borrar">
                                                             <i class="bi bi-trash-fill"></i>
                                                         </a>
                                                     </td>
