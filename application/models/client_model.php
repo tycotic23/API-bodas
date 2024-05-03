@@ -19,6 +19,18 @@ Class Client_model extends CI_Model {
         return $this->db->get($this->database)->row_array();
     }
 
+    function check_mail($email=null){
+        $this->db->select($this->primary_key);
+        $this->db->where("mail",$email);
+        $this->db->limit(1);
+        $res=$this->db->get($this->database);
+        if($res->num_rows()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function create_client ($couple_id="",$name="",$surname="",$direction_street="",$direction_number="",$localitie_id="",$email=""){
 
         $this->db->set("pareja_id",$couple_id);
