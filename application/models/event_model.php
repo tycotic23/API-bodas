@@ -22,14 +22,16 @@ Class Event_model extends CI_Model {
 
 
     public function create_event ($couple_id="",$location="",$direction_street="",$direction_number="",$location_id="",$event_name="",$date_time=""){
-
+        $this->load->helper('date');
         $this->db->set("pareja_id",$couple_id);
         $this->db->set("locacion",$location);
         $this->db->set("direccion_calle",$direction_street);
         $this->db->set("direccion_numero",$direction_number);
         $this->db->set("localidad_id",$location_id);
         $this->db->set("nombre",$event_name);
+        $date_time = date('Y-m-d', strtotime($date_time));
         $this->db->set("horario",$date_time);
+
         $this->db->insert($this->database);
     }
 
@@ -91,5 +93,16 @@ Class Event_model extends CI_Model {
         $this->db->delete($this->database);
         return $this->db->affected_rows();
     }
+
+
+
+    public function ingresar_fecha($fecha) {
+        // Convertir la fecha al formato de MySQL (Y-m-d)
+        $fecha_mysql = date('Y-m-d', strtotime($fecha));
+        // Insertar la fecha en la base de datos
+        $this->db->insert('mi_tabla', $data);
+    }
+
+
 }
 ?>

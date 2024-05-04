@@ -19,6 +19,16 @@ Class Guest_x_event_model extends CI_Model {
         return $this->db->get($this->database)->row_array();
     }
 
+    function get_by_guest($guest_id=null){
+        $this->db->where("invitado_id",$guest_id);
+        return $this->db->get($this->database)->row_array();
+    }
+
+    function get_by_event($event_id=null){
+        $this->db->where("evento_id",$event_id);
+        return $this->db->get($this->database)->row_array();
+    }
+
     public function create_guest_x_event ($event_id="",$guest_id="",$asist="",$coments=""){
 
         $this->db->set("evento_id",$name);
@@ -63,6 +73,29 @@ Class Guest_x_event_model extends CI_Model {
         $this->db->delete($this->database);
         return $this->db->affected_rows();
     }
-    
+
 }
+
+
+/*
+
+
+    // Actualizar un registro existente en la tabla intermedia
+    public function update($id, $asistencia, $comentario) {
+        $data = array(
+            'asistencia' => $asistencia,
+            'comentario' => $comentario
+        );
+
+        $this->db->where('id', $id);
+        $this->db->update('guest_x_event', $data);
+    }
+
+    // Eliminar un registro de la tabla intermedia
+    public function delete($id) {
+        $this->db->where('id', $id);
+        $this->db->delete('guest_x_event');
+    }
+
+*/
 ?>

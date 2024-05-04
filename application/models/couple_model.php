@@ -25,6 +25,18 @@ Class Couple_model extends CI_Model {
         return $this->db->get($this->database)->row_array();
     }
 
+    function check_url($url=""){
+        $this->db->select($this->primary_key);
+        $this->db->where("url",$url);
+        $this->db->limit(1);
+        $res=$this->db->get($this->database);
+        if($res->num_rows()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function create_couple ($spouse_1="",$spouse_2="",$cvu=""){
 
         $this->db->set("conyugue_1",$spouse_1);

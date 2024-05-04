@@ -33,7 +33,7 @@
                             </div>
                             <?php
                             break;
-                            case "PROHIBIDO":
+                        case "PROHIBIDO":
                                 ?>
                                 <div class="alert alert-danger" role="alert">
                                     logueate primero!

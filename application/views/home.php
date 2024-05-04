@@ -14,7 +14,8 @@
   <body>
 <h1> hola </h1>
 
-  <p>
+  
+    <br>
     <?php echo $cvu_regalos; ?>
     <br>
     <?php echo $conyugue_1; ?>
@@ -23,7 +24,7 @@
     <br>
     <?php echo $url; ?>
     <br>
-</p>
+
     
 
     <!-- Optional JavaScript; choose one of the two! -->
