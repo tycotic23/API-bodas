@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <title>list couples</title>
+    <title>list clients</title>
   </head>
 
   <body>
@@ -19,11 +19,11 @@
                         <div class="card">
                             <div class="card-body">
 
-                                        <?php if($localities){?>
+                                        <?php if($clients){?>
                                             
                                         <ul class="list-group" id="lista" name="lista">
                                         <li class="list-group-item">
-                                            <p> total de localidades: <b> <?php echo $total; ?> </b>
+                                            <p> total de parejas: <b> <?php echo $total; ?> </b>
                                           
                                             </p>
                                         </li>    
@@ -33,21 +33,32 @@
                                         
                                             <thead>
                                                 <tr>
+                                                <th scope="col">cliente_id:</th>
+                                                <th scope="col">pareja_id:</th>
+                                                <th scope="col">nombre:</th>
+                                                <th scope="col">apellido:</th>
+                                                <th scope="col">direccion_calle:</th>
+                                                <th scope="col">direccion_numero:</th>
                                                 <th scope="col">localidad_id:</th>
-                                                <th scope="col">localidad:</th>
-                                                <th scope="col">codigo postal:</th>
+                                                <th scope="col">mail:</th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <?php foreach($localities as $t){ ?>
+                                            <?php foreach($clients as $t){ ?>
 
                                                 <tr>
+                                                    <td><?php echo $t["cliente_id"]; ?></td>
+                                                    <td><?php echo $t["pareja_id"]; ?></td>
+                                                    <td><?php echo $t["nombre"]; ?></td>
+                                                    <td><?php echo $t["apellido"]; ?></td>
+                                                    <td><?php echo $t["direccion_calle"]; ?></td>
+                                                    <td><?php echo $t["direccion_numero"]; ?></td>
                                                     <td><?php echo $t["localidad_id"]; ?></td>
-                                                    <td><?php echo $t["localidad"]; ?></td>
-                                                    <td><?php echo $t["codigo_postal"]; ?></td>
+                                                    <td><?php echo $t["mail"]; ?></td>
                                                     <td> &nbsp;</td>
                                                     <td>
-                                                        <a href="<?php echo site_url("localities/delete_localitie/".$t["localidad_id"]); ?>" class="btn btn-danger btn-sm borrar">
+                                                        <a href="<?php echo site_url("couple/delete_couple/".$t["cliente_id"]); ?>" class="btn btn-danger btn-sm borrar">
                                                             <i class="bi bi-trash-fill"></i>
                                                         </a>
                                                     </td>
@@ -60,7 +71,7 @@
                                             <!-- fin del table -->
                                         <?php }else{?>
                                                 <div class="alert alert-success" role="alert">
-                                                    NO SE ENCONTRARON LOCALIDADES!
+                                                    NO SE ENCONTRARON CLIENTES!
                                                 </div>
                                         <?php }?>
                         </div>

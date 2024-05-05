@@ -8,7 +8,7 @@ Class Client_model extends CI_Model {
         $this->db->select($this->table.".*");
     }
 
-    function list_couple (){
+    function list_client (){
         $this->db->order_by($this->primary_key);
         return $this->db->get($this->database)->result_array();
     }

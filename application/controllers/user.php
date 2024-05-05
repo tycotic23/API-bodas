@@ -36,6 +36,19 @@ class user extends CI_controller {
             }
         }
     }
+
+    public function list_user (){
+		if(!$this->session->userdata('usuario_id')){
+			$this->session->set_flashdata('OP','PROHIBIDO');
+			redirect('user/index');
+			}else{
+			$this->load->model("user_model"); 
+			$datos=array();
+			$datos["users"]=$this->user_model->list_user();
+			$datos["total"]=count($datos["users"]);
+			$this->load->view("lists/list_users",$datos); 
+        }
+    }
     public function ingresar(){
         $this->load->view("list_users");
     }
@@ -54,7 +67,7 @@ class user extends CI_controller {
                 $datos["users"]=$this->user_model->list_users();
                 $datos["total"]=count($datos["users"]);
 
-                $this->load->view("lists/list_users",$datos); 
+                redirect("home");
         }
     }
 
@@ -77,7 +90,7 @@ class user extends CI_controller {
 
         if($this->user_model->return_password($usuario)==$passwordold){
             $this->user_model->change_password($usuario, $passwordnew);
-            redirect("user/logout");
+            redirect("user/log_out");
         }    
         else{
         redirect("user/logout");

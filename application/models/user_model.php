@@ -8,7 +8,7 @@ Class user_model extends CI_Model {
         $this->db->select($this->table.".*");
     }
     
-    function list_users (){
+    function list_user (){
         $this->db->order_by($this->primary_key);
         return $this->db->get($this->database)->result_array();
     }

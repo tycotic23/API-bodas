@@ -3,6 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
 	
+
+	public function __construct(){
+		parent::__construct();
+		$this->datos["usuario"]= $this->session->userdata("usuario");
+		$this->datos["usuario_id"]= $this->session->userdata("usuario_id");
+	}
 	/*public function __construct(){
 		parent::__construct();
 		$this->load->model('couple_model');
@@ -12,14 +18,14 @@ class Home extends CI_Controller {
 			redirect('user/index');
 		}
 	}*/
-
+	protected $datos=array();
 
 	public function index ($url=false){
 
 		if(!$url){
-			$datos=array();
-			$datos["couple_id"]=FALSE;
-			$this->load->view('home',$datos);
+			
+			$this->datos["couple_id"]=FALSE;
+			$this->load->view('home',$this->datos);
 		}
 		else{
 				$this->load->model('couple_model');
@@ -28,13 +34,16 @@ class Home extends CI_Controller {
 					redirect("home/index");
 				}
 				else{
-					$datos=array();
+					
 					/*$datos["usuario_id"]=$u["usuario_id"];*/
-					$datos["conyugue_1"]=$u["conyugue_1_id"];
-					$datos["conyugue_2"]=$u["conyugue_2_id"];
-					$datos["cvu_regalos"]=$u["cvu_regalos"];
-					$datos["url"]=$url;
-					$this->load->view('home',$datos);
+					$this->datos["conyugue_1"]=$u["conyugue_1_id"];
+					$this->datos["conyugue_2"]=$u["conyugue_2_id"];
+					$this->datos["cvu_regalos"]=$u["cvu_regalos"];
+					$this->datos["url"]=$url;
+					$tmp["usuario_id"]=$this->datos["usuario_id"];
+					$tmp["usuario"]=$this->datos["usuario"];
+					$this->datos["navbar"] =$this->load->view("navbar", $tmp, TRUE);
+					$this->load->view('home',$this->datos);
 			}
 		}
 	}
@@ -44,9 +53,9 @@ class Home extends CI_Controller {
 
 		//esto sucede cuando la variable url esta vacia
 		if(!$url){
-			$datos=array();
-			$datos["couple_id"]=FALSE;
-			$this->load->view('home',$datos);
+			
+			$this->datos["couple_id"]=FALSE;
+			$this->load->view('home',$this->datos);
 		}
 		else{
 				$this->load->model('couple_model');
@@ -61,14 +70,14 @@ class Home extends CI_Controller {
 					redirect("home/index");
 				}
 				else{
-					$datos=array();
+					
 					/*$datos["usuario_id"]=$u["usuario_id"];*/
-					$datos["couple_id"]=$u["pareja_id"];
-					$datos["conyugue_1"]=$u["conyugue_1_id"];
-					$datos["conyugue_2"]=$u["conyugue_2_id"];
-					$datos["cvu_regalos"]=$u["cvu_regalos"];
-					$datos["url"]=$url;
-					$this->load->view('home',$datos);
+					$this->datos["couple_id"]=$u["pareja_id"];
+					$this->datos["conyugue_1"]=$u["conyugue_1_id"];
+					$this->datos["conyugue_2"]=$u["conyugue_2_id"];
+					$this->datos["cvu_regalos"]=$u["cvu_regalos"];
+					$this->datos["url"]=$url;
+					$this->load->view('home',$this->datos);
 			}
 		}
 	}

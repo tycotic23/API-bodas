@@ -17,27 +17,56 @@
         <a class="nav-link disabled">Disabled</a>
       </li>
     </ul>
-
-
-    
+  
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          lists
+        </a>
+        <div class="dropdown-menu">
+        <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="<?php echo site_url("client/list_client") ?>">clients list</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="<?php echo site_url("event/list_event") ?>">list events</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="<?php echo site_url("couple/list_couple") ?>">list couples</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="<?php echo site_url("guest/list_guest") ?>">list guests</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="<?php echo site_url("localities/list_localities") ?>">list localities</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="<?php echo site_url("spouse/list_spouse") ?>">list spouses</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="<?php echo site_url("user/list_user") ?>">list users</a>
+        </div>
+      </li>
+    </ul>
 
     <ul class="nav navbar-nav vanbar-rigth">
+      <?php if($usuario){ ?>
 
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-            Dropdown
-            </a>
-            <div class="dropdown-menu">
-            <a class="dropdown-item" href="<?php echo site_url ("user"); ?>">Ingresar</a>
+
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-person"></i> <?php echo ucfirst ($usuario); ?>
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="#">Action</a>
             <a class="dropdown-item" href="#">Another action</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="<?php echo site_url("user/log_out"); ?>">Log out</a>
-            </div>
+            <a class="dropdown-item" href="<?php echo site_url ("user/log_out"); ?> ">Salir</a>
+          </div>
         </li>
 
+      <?php }else{ ?>
+      
         <li class="nav-item">
           <a class="nav-link" href="<?php echo site_url ("user"); ?>"><i class="bi bi-box-arrow-in-right"></i> Ingresar</a>
         </li>
+      
+
+      <?php } ?>
       
     </ul>
     

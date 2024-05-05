@@ -1,7 +1,7 @@
 <?php 
 Class localities_model extends CI_Model {
 
-    protected $database="lalidades";
+    protected $database="localidades";
     protected $primary_key="localidad_id";
 
     public function default_select (){
