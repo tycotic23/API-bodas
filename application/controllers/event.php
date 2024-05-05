@@ -11,6 +11,29 @@ class Event extends CI_Controller {
 		}
 	}
 
+	public function list_event (){
+		if(!$this->session->userdata('usuario_id')){
+			$this->session->set_flashdata('OP','PROHIBIDO');
+			redirect('user/index');
+			}else{
+			$this->load->model("event_model"); 
+			$datos=array();
+			$datos["events"]=$this->event_model->list_event();
+			$datos["total"]=count($datos["events"]);
+			$this->load->view("lists/list_event",$datos); 
+    	}
+	}
+
+	public function get_by_couple($couple_id=false){
+		
+		if(!$couple_id){
+			redirect('home');
+		}else{
+			$this->load->model("event_model");
+			$datos["event_x_couple"]=$this->event_model->get_by_couple($couple_id);
+			$this->load->view('event_x_couple',$datos);
+		}
+	}
 	
 
 	public function create_event(){
@@ -26,18 +49,7 @@ class Event extends CI_Controller {
 		redirect("home");
 	}
 
-	public function list_event (){
-		if(!$this->session->userdata('usuario_id')){
-			$this->session->set_flashdata('OP','PROHIBIDO');
-			redirect('user/index');
-			}else{
-			$this->load->model("event_model"); 
-			$datos=array();
-			$datos["events"]=$this->event_model->list_event();
-			$datos["total"]=count($datos["events"]);
-			$this->load->view("lists/list_event",$datos); 
-    }
-}
+	
 
 	public function update_event_couple(){
         $this->load->model("event_model");

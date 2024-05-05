@@ -20,6 +20,13 @@ Class Event_model extends CI_Model {
         return $res->result_array();
     }
 
+    function get_by_couple($couple_id){
+        $this->db->order_by($this->primary_key);
+        $this->db->where("pareja_id",$couple_id);
+        $res=$this->db->get($this->database);
+        return $res->result_array();
+    }
+
 
     public function create_event ($couple_id="",$location="",$direction_street="",$direction_number="",$location_id="",$event_name="",$date_time=""){
         $this->load->helper('date');

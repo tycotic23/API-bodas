@@ -23,6 +23,9 @@
     <?php echo $conyugue_2; ?>
     <br>
     <?php echo $url; ?>
+
+    <a href="<?php echo site_url("event/get_by_couple/".$couple_id); ?>" class="btn btn-danger btn-sm borrar">ver evento</a>
+
     <br>
 
     

@@ -12,6 +12,8 @@ class Home extends CI_Controller {
 			redirect('user/index');
 		}
 	}*/
+
+
 	public function index ($url=false){
 
 		if(!$url){
@@ -57,6 +59,7 @@ class Home extends CI_Controller {
 				else{
 					$datos=array();
 					/*$datos["usuario_id"]=$u["usuario_id"];*/
+					$datos["couple_id"]=$u["pareja_id"];
 					$datos["conyugue_1"]=$u["conyugue_1_id"];
 					$datos["conyugue_2"]=$u["conyugue_2_id"];
 					$datos["cvu_regalos"]=$u["cvu_regalos"];
