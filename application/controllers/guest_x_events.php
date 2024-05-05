@@ -42,6 +42,17 @@ class guest_x_events extends CI_Controller {
         }
     }
 
+    public function get_by_guest($guest_id=false){
+		
+		if(!$guest_id){
+			redirect('home');
+		}else{
+			$this->load->model("event_x_model");
+			$datos["event_x_guest"]=$this->event_x_model->get_by_guest($guest_id);
+			$this->load->view('event_x_guest',$datos);
+		}
+	}
+
     public function event_x_guest_confirm($guest_x_event_id,$asist){// 0=no dijo nada 1=asiste 2=no asiste
         $this->load_model("guest_x_event");
         $guest_x_event_id=$this->input->post("guest_x_event_id");

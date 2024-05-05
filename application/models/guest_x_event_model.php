@@ -20,6 +20,7 @@ Class Guest_x_event_model extends CI_Model {
     }
 
     function get_by_guest($guest_id=null){
+        $this->db->order_by($this->primary_key);
         $this->db->where("invitado_id",$guest_id);
         return $this->db->get($this->database)->row_array();
     }
