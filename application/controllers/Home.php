@@ -17,7 +17,9 @@ class Home extends CI_Controller {
 	public function index ($url=false){
 
 		if(!$url){
-			$this->load->view("home", TRUE);
+			$datos=array();
+			$datos["couple_id"]=FALSE;
+			$this->load->view('home',$datos);
 		}
 		else{
 				$this->load->model('couple_model');
@@ -42,7 +44,9 @@ class Home extends CI_Controller {
 
 		//esto sucede cuando la variable url esta vacia
 		if(!$url){
-			$this->load->view("home"); 
+			$datos=array();
+			$datos["couple_id"]=FALSE;
+			$this->load->view('home',$datos);
 		}
 		else{
 				$this->load->model('couple_model');

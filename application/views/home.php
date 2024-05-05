@@ -12,23 +12,43 @@
   </head>
 
   <body>
-<h1> hola </h1>
+
+  <?php $this->load->view("navbar"); ?>
+  
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          
+            <br>
+            <?php if(!$couple_id){ ?>
+
+              <div class="alert alert-success" role="alert">
+                NO SE ENCONTRO PAREJA!
+            </div>
+            
+              <?php }else{ ?>
+
+                <?php echo $cvu_regalos; ?>
+            <br>
+            <?php echo $conyugue_1; ?>
+            <br>
+            <?php echo $conyugue_2; ?>
+            <br>
+            <?php echo $url; ?>
+            <br>
+            <a href="<?php echo site_url("event/get_by_couple/".$couple_id); ?>" class="btn btn-danger btn-sm borrar">ver evento</a>
+
+            <br>
+            
+            <?php } ?>
+
+
+        </div>
+      </div>
+    </div>
+
 
   
-    <br>
-    <?php echo $cvu_regalos; ?>
-    <br>
-    <?php echo $conyugue_1; ?>
-    <br>
-    <?php echo $conyugue_2; ?>
-    <br>
-    <?php echo $url; ?>
-
-    <a href="<?php echo site_url("event/get_by_couple/".$couple_id); ?>" class="btn btn-danger btn-sm borrar">ver evento</a>
-
-    <br>
-
-    
 
     <!-- Optional JavaScript; choose one of the two! -->
 
