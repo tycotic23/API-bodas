@@ -11,15 +11,14 @@ class Guest extends CI_Controller {
 	}
 
 	public function get_by_mail($email=false){
-
 		if(!$email){
 			redirect('home');
 		}else{
 			$this->load->model("guest_model");
 			if($this->guest_model->check_mail($email)){
-				$guest_id=$this->guest_model->get_id_by_email($email);
-
-				redirect("guest_x_events/get_by_guest/".$guest_id);
+				$datos=array();
+				$datos=$this->guest_model->get_id_by_email($email);
+				redirect("guest_x_events/get_by_guest/".$datos["invitado_id"]);
 			}else{
 				redirect('home');
 			}

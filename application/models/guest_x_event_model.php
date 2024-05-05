@@ -20,14 +20,18 @@ Class Guest_x_event_model extends CI_Model {
     }
 
     function get_by_guest($guest_id=null){
-        $this->db->order_by($this->primary_key);
         $this->db->where("invitado_id",$guest_id);
+        $this->db->limit(1);
         return $this->db->get($this->database)->row_array();
     }
 
-    function get_by_event($event_id=null){
-        $this->db->where("evento_id",$event_id);
-        return $this->db->get($this->database)->row_array();
+        // nueva funcion a avergiuar como funciona.
+    public function get_eventos_por_usuario($guest_id) {
+        $this->db->select('eventos.*');
+        $this->db->from('eventos');
+        $this->db->join('invitado_x_evento', 'invitado_x_evento.evento_id = eventos.id');
+        $this->db->where('invitados_x_eventos.invitado_id', $guest_id);
+        return $this->db->get()->result();
     }
 
     public function create_guest_x_event ($event_id="",$guest_id="",$asist="",$coments=""){

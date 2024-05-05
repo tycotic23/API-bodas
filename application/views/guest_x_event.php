@@ -18,13 +18,13 @@
                         <div class="card">
                             <div class="card-body">
 
-                                        <?php if($guest_x_event) { ?>
+                                        <?php if($invitados_x_evento) { ?>
                                             
                                         <ul class="list-group" id="lista" name="lista">
                                         <li class="list-group-item">
-                                            <!--<p> total de eventos: <b> <?php// echo $total; ?> </b> 
+                                            <p> total de eventos: <b> <?php echo $total; ?> </b> 
                                           
-                                            </p>-->
+                                            </p>
                                         </li>    
                                             <!-- comienzo del table -->
 
@@ -36,11 +36,12 @@
                                                 <th scope="col">evento_id:</th>
                                                 <th scope="col">invitado_id:</th>
                                                 <th scope="col">asistencia:</th>
-                                                <th scope="col">comentario:</th>                                            
+                                                <th scope="col">comentario:</th>
+                                                <th scope="col">&nbsp;</th>                                               
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <?php foreach($event_x_couple as $t){ ?>
+                                            <?php foreach ($invitados_x_evento as $t){ ?>
 
                                                 <tr>
                                                     <td><?php echo $t["invitado_x_evento_id"]; ?></td>
@@ -50,7 +51,7 @@
                                                     <td><?php echo $t["comentario"]; ?></td>
                                                     <td> &nbsp;</td>
                                                     <td>
-                                                        <a href="<?php echo site_url("event/delete_event/".$t["evento_id"]); ?>" class="btn btn-danger btn-sm borrar">
+                                                        <a href="<?php //echo site_url("event/delete_event/".$t["evento_id"]); ?>" class="btn btn-danger btn-sm borrar">
                                                             <i class="bi bi-trash-fill"></i>
                                                         </a>
                                                     </td>
@@ -61,11 +62,12 @@
                                         
                                         </table>
                                             <!-- fin del table -->
-                                        <?php }else{?>
-                                                <div class="alert alert-success" role="alert">
-                                                    NO SE EVENTOS!
-                                                </div>
-                                        <?php }?>
+                                            <?php }else{?>
+                                                    <div class="alert alert-success" role="alert">
+                                                        NO HAY EVENTOS!
+                                                    </div>
+                                            <?php }?>
+                                        </ul>
                         </div>
                     </div>
                 </div>

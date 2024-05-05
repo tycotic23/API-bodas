@@ -47,9 +47,11 @@ class guest_x_events extends CI_Controller {
 		if(!$guest_id){
 			redirect('home');
 		}else{
-			$this->load->model("event_x_model");
-			$datos["event_x_guest"]=$this->event_x_model->get_by_guest($guest_id);
-			$this->load->view('event_x_guest',$datos);
+            $datos=array();
+			$this->load->model("guest_x_event_model");
+			$datos["invitados_x_evento"]=$this->guest_x_event_model->get_by_guest($guest_id);
+            $datos["total"]=count($datos["invitados_x_evento"]);
+			$this->load->view('guest_x_event',$datos);
 		}
 	}
 

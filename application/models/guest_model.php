@@ -26,10 +26,10 @@ Class Guest_model extends CI_Model {
     }
 
     function get_id_by_email($email=null){
-        $this->db->select($this->$primary_key);
+        $this->db->select($this->primary_key);
         $this->db->where("mail",$email);
         $this->db->limit(1);
-        return $this->db->get($this->database);
+        return $this->db->get($this->database)->row_array();
     }
 
     function check_mail($email=null){
