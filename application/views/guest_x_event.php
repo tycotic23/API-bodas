@@ -49,13 +49,20 @@
                                                     <td><?php echo $t["invitado_id"]; ?></td>
                                                     <td><?php echo $t["asistencia"]; ?></td>
                                                     <td><?php echo $t["comentario"]; ?></td>
-                                                    <td> &nbsp;</td>
+                                                
+                                                    
+
                                                     <td>
-                                                        <a href="<?php //echo site_url("event/delete_event/".$t["evento_id"]); ?>" class="btn btn-danger btn-sm borrar">
-                                                            <i class="bi bi-trash-fill"></i>
-                                                        </a>
+                                                            <a href="<?php echo site_url("guest_x_events/event_confirm/".$t["invitado_x_evento_id"]); ?>" class="btn btn-danger btn-sm borrar">
+                                                                confirmar asistencia
+                                                            </a>
+                                                            o
+                                                            <br>
+                                                            <a href="<?php echo site_url("guest_x_events/event_disconfirm/".$t["invitado_x_evento_id"]); ?>" class="btn btn-danger btn-sm borrar">
+                                                                negar asistencia
+                                                            </a>
                                                     </td>
-                                                </tr>
+                                                    
                                             <?php } ?>
                                                     
                                             </tbody>

@@ -55,20 +55,28 @@ class guest_x_events extends CI_Controller {
 		}
 	}
 
-    public function event_x_guest_confirm($guest_x_event_id,$asist){// 0=no dijo nada 1=asiste 2=no asiste
-        $this->load_model("guest_x_event");
-        $guest_x_event_id=$this->input->post("guest_x_event_id");
-        $this->guest_x_event_model->update_asist_guest_x_event_confirm($guest_x_event_id);
-        redirect("home/index");
+    public function event_confirm($guest_x_event_id){// 0=no dijo nada 1=asiste 2=no asiste
+        $this->load->model("guest_x_event_model");
+        //$guest_x_event_id=$this->input->post("guest_x_event_id");
+        $this->guest_x_event_model->event_confirm($guest_x_event_id);
+        redirect("guest_x_events/get_by_guest/1");
     }
 
-    public function event_x_guest_disconfirm($guest_x_event_id,$asist){// 0=no dijo nada 1=asiste 2=no asiste
-        $this->load_model("guest_x_event");
-        $guest_x_event_id=$this->input->post("guest_x_event_id");
-        $this->guest_x_event_model->update_asist_guest_x_event_confirm($guest_x_event_id);
-        redirect("home/index");
+    public function event_disconfirm($guest_x_event_id){// 0=no dijo nada 1=asiste 2=no asiste
+        $this->load->model("guest_x_event_model");
+        //$guest_x_event_id=$this->input->post("guest_x_event_id");
+        $this->guest_x_event_model->event_disconfirm($guest_x_event_id);
+        redirect("guest_x_events/get_by_guest/1");
     }
 
+    public function delete_guest_x_event($guest_x_event_id=null){
+		$guest_x_event_id=intval($guest_x_event_id);
+		if($guest_x_event_id>0){
+			$this->load->model("guest_x_event_model");
+			$this->guest_x_event_model->delete_guest_x_event($guest_x_event_id);
+		}
+		redirect("guest_x_events/get_by_guest/1");
+	}
 
 }
 

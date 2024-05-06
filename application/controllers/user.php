@@ -64,7 +64,7 @@ class user extends CI_controller {
                 }else{
                 $datos=array();
                 $this->load->model("user_model"); 
-                $datos["users"]=$this->user_model->list_users();
+                $datos["users"]=$this->user_model->list_user();
                 $datos["total"]=count($datos["users"]);
 
                 redirect("home");

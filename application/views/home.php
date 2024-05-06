@@ -18,15 +18,6 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <?php if(!$invitado_id){ ?>
-
-            <div class="alert alert-success" role="alert">
-                No se econtro la variable
-            </div>
-
-          <?php } else { echo $invitado_id; ?>
-
-          <?php } ?>
             <br>
             <?php if(!$couple_id){ ?>
 
