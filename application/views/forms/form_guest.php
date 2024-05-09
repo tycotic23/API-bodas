@@ -17,15 +17,15 @@
 
               <div class="col">
 
-              <form action="<?php echo site_url("guest_x_events"); ?>" method="post">
+              <?php echo form_open ("guest_x_events/get_guest_by_email"); ?>
 
-                <label for="email_guest" >Email</label>
+                <label for="mail" >Email</label>
 
-                <input name="email_guest" id="email_guest" />
+                <input name="mail" id="mail" />
 
                 <button type="submit" class="btn btn-primary">Ingresar</button>
 
-              </form>
+                <?php echo form_close() ?>
 
               </div>
             </div>
