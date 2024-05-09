@@ -4,13 +4,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class guest_x_events extends CI_Controller {
 
 
-	/*public function __construct(){
+	/* public function __construct(){
 		parent::__construct();
 		if(!$this->session->userdata('usuario_id')){
 			$this->session->set_flashdata('OP','PROHIBIDO');
 			redirect('user/index');
 		}
-	}*/
+	} */
+
     public function index(){
     redirect("guest/load_view");
     }
@@ -55,7 +56,7 @@ class guest_x_events extends CI_Controller {
                     $this->load->view('guest_x_event',$datos);
                 }
             }else{
-                redirect("home");
+                redirect('guest/load_view');
             }
 	}
 
@@ -63,14 +64,16 @@ class guest_x_events extends CI_Controller {
         $this->load->model("guest_x_event_model");
         //$guest_x_event_id=$this->input->post("guest_x_event_id");
         $this->guest_x_event_model->event_confirm($guest_x_event_id);
-        redirect("guest_x_events/get_by_guest/1");
+        $this->session->set_flashdata('OP','APPROVED');
+        $this->get_by_guest($guest_x_event_id);
     }
 
     public function event_disconfirm($guest_x_event_id){// 0=no dijo nada 1=asiste 2=no asiste
         $this->load->model("guest_x_event_model");
         //$guest_x_event_id=$this->input->post("guest_x_event_id");
         $this->guest_x_event_model->event_disconfirm($guest_x_event_id);
-        redirect("guest_x_events/get_by_guest/1");
+        $this->session->set_flashdata('OP','APPROVED');
+        $this->get_by_guest($guest_x_event_id);
     }
 
     public function delete_guest_x_event($guest_x_event_id=null){
