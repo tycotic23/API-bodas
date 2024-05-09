@@ -36,7 +36,7 @@
             <?php echo $url; ?>
             <br>
             <a href="<?php echo site_url("event/get_by_couple/".$couple_id); ?>" class="btn btn-danger btn-sm borrar">ver evento</a>
-
+            guest_x_events/get_by_guest/1
             <br>
             
             <?php } ?>

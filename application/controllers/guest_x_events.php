@@ -19,40 +19,44 @@ class guest_x_events extends CI_Controller {
             $this->load->model('guest_model');
             $this->load->library('form_validation');
 
-            $this->form_validation->set_rules('mail', 'Mail', 'required|valid_email');
+            $this->form_validation->set_rules('email_guest', 'Mail', 'required|valid_email');
 
             if($this->form_validation->run()===false){
                 $this->session->set_flashdata("OP","INCORRECT");
-                $this->load->view('guest_events',$datos);
+                redirect("home");
                 
             }else{
-                $email=set_value("mail");
+                $email=set_value("email_guest");
                 if($this->guest_model->check_mail($email)){
-
                     $datos_guest=$this->guest_model->get_by_email($email);
-                    $this->session->set_userdata("mail",$datos_guest["invitado_id"]);
-                    $this->load->view('guest_events',$datos_guest);
+                    $this->session->set_userdata("guest_id",$datos_guest["invitado_id"]);
+                    redirect("guest_x_events/get_by_guest/".$datos_guest["invitado_id"]);
 
                 }else{
                     $this->session->set_flashdata("OP","INEXIST");
-                    $this->load->view('guest_events',$datos);
+                    $this->load->view('lists/list_event',$datos);
                 }
-                
             }
         }
     }
 
+    /*public function get_guest_by_email(){
+
+    } */
+
     public function get_by_guest($guest_id=false){
-		
-		if(!$guest_id){
-			redirect('home');
-		}else{
-            $datos=array();
-			$this->load->model("guest_x_event_model");
-			$datos["invitados_x_evento"]=$this->guest_x_event_model->get_by_guest($guest_id);
-            $datos["total"]=count($datos["invitados_x_evento"]);
-			$this->load->view('guest_x_event',$datos);
-		}
+		if(!$this->session->userdata('guest_id')){
+                if(!$guest_id){
+                    redirect(''); /* esta parte me tiene que llevar a un formulario */
+                }else{
+                    $datos=array();
+                    $this->load->model("guest_x_event_model");
+                    $datos["invitados_x_evento"]=$this->guest_x_event_model->get_by_guest($guest_id);
+                    $datos["total"]=count($datos["invitados_x_evento"]);
+                    $this->load->view('guest_x_event',$datos);
+                }
+            }
+            redirect("guest_x_events/index");
 	}
 
     public function event_confirm($guest_x_event_id){// 0=no dijo nada 1=asiste 2=no asiste

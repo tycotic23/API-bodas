@@ -25,6 +25,10 @@ class Guest extends CI_Controller {
 		}
 	}
 
+	public function load_view(){
+		$this->load->view("forms/form_guest");
+	}
+
 	public function create_guest(){
         $this->load->model('guest_model');
 		$name=$this->input->post("name");
