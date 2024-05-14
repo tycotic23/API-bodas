@@ -9,6 +9,16 @@ class Couple extends CI_Controller {
 			redirect('user/index');
 		}
 	}
+ /* mis datos, eventos creados e invitados asociados a estos eventos */
+	public function index(){
+		$this->load->model("couple_model");
+		$couple_id=$this->session->userdata("pareja_id");
+		$datos=array();
+		$datos["couple"]=$this->couple_model->get_by_id($couple_id);
+		$this->load->view("couple",$datos); 
+		
+
+	}
 
 	public function create_couple(){
         $this->load->model('couple_model');

@@ -16,6 +16,7 @@
         <div class="row">
 
               <div class="col">
+                <h1> aca soy el invitado y pongo mi mail para ver mis eventos </h1>
 
               <?php echo form_open ("guest_x_events/get_guest_by_email"); ?>
 

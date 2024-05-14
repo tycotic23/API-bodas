@@ -24,6 +24,7 @@ class user extends CI_controller {
                     if($u["estado"]==1){
                         $this->session->set_userdata("usuario",$u["usuario"]);
                         $this->session->set_userdata("usuario_id",$u["usuario_id"]);
+                        $this->session->set_userdata("pareja_id",$u["pareja_id"]);
                         redirect("user/admin");
                     }else{
                         $this->session->set_flashdata("OP","INACTIVO");
@@ -32,6 +33,7 @@ class user extends CI_controller {
                 }else{
                     $this->session->set_flashdata("OP","INEXISTENTE");
                     redirect("user/index");
+
                 }
             }
         }

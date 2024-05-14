@@ -18,6 +18,7 @@
     <div class="container">
       <div class="row">
         <div class="col">
+          <h1> esta es la invitacion que recibe el invitado (puedo entrar sin loguearme) </h1>
             <br>
             <?php if(!$couple_id){ ?>
 
@@ -34,10 +35,15 @@
             <?php echo $conyugue_2; ?>
             <br>
             <?php echo $url; ?>
+            <!-- <br>
+            <a href="<?php// echo site_url("event/get_by_couple/".$couple_id); ?>" class="btn btn-danger btn-sm borrar">ver evento</a>
+            <br> -->
+
             <br>
-            <a href="<?php echo site_url("event/get_by_couple/".$couple_id); ?>" class="btn btn-danger btn-sm borrar">ver evento</a>
-            guest_x_events/get_by_guest/1
-            <br>
+            <a href="<?php echo site_url("guest_x_events") ?>" class="btn btn-danger btn-sm borrar">ver eventos</a>
+            <br> 
+
+            
             
             <?php } ?>
 
