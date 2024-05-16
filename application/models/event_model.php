@@ -11,7 +11,7 @@ Class Event_model extends CI_Model {
     function get_by_id($id=null){
         $this->db->where($this->primary_key,$id);
         $this->db->limit(1);
-        return $this->db->get($this->database)->row_array();
+        return $this->db->get($this->database)->result_array();
     }
 
     function list_event (){

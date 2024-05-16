@@ -19,41 +19,42 @@
                         <div class="card">
                             <div class="card-body">
 
-                                        <?php if($couples){?>
+                                        <?php if($event){?>
                                             
                                         <ul class="list-group" id="lista" name="lista">
-                                        <li class="list-group-item">
-                                            <p> total de parejas: <b> <?php echo $total; ?> </b>
-                                          
-                                            </p>
-                                        </li>    
                                             <!-- comienzo del table -->
-
                                         <table class="table">
                                         
                                             <thead>
                                                 <tr>
+                                                <th scope="col">evento_id:</th>
                                                 <th scope="col">pareja_id:</th>
-                                                <th scope="col">usuario_id:</th>
-                                                <th scope="col">conyugue_1_id:</th>
-                                                <th scope="col">conyugue_2_id:</th>
-                                                <th scope="col">cvu_regalos:</th>
-                                                <th scope="col">url:</th>
+                                                <th scope="col">locacion:</th>
+                                                <th scope="col">direccion_calle:</th>
+                                                <th scope="col">direccion_numero:</th>
+                                                <th scope="col">localidad_id:</th>
+                                                <th scope="col">nombre:</th>
+                                                <th scope="col">horario:</th>
+                                                <th scope="col">estado:</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <?php foreach($couples as $t){ ?>
+                                            <?php foreach($event as $t){ ?>
 
                                                 <tr>
+                                                    <td><?php echo $t["evento_id"]; ?></td>
                                                     <td><?php echo $t["pareja_id"]; ?></td>
-                                                    <td><?php echo $t["usuario_id"]; ?></td>
-                                                    <td><?php echo $t["conyugue_1_id"]; ?></td>
-                                                    <td><?php echo $t["conyugue_2_id"]; ?></td>
-                                                    <td><?php echo $t["cvu_regalos"]; ?></td>
-                                                    <td><?php echo $t["url"]; ?></td>
+                                                    <td><?php echo $t["locacion"]; ?></td>
+                                                    <td><?php echo $t["direccion_calle"]; ?></td>
+                                                    <td><?php echo $t["direccion_numero"]; ?></td>
+                                                    <td><?php echo $t["localidad_id"]; ?></td>
+                                                    <td><?php echo $t["nombre"]; ?></td>
+                                                    <td><?php echo $t["horario"]; ?></td>
+                                                    <td><?php echo $t["estado"]; ?></td>
+
                                                     <td> &nbsp;</td>
                                                     <td>
-                                                        <a href="<?php echo site_url("couple/edit/".$t["pareja_id"]); ?>" class="btn btn-danger btn-sm borrar">
+                                                        <a href="<?php echo site_url("event/delete_event/".$t["evento_id"]); ?>" class="btn btn-danger btn-sm borrar">
                                                             <i class="bi bi-trash-fill"></i>
                                                         </a>
                                                     </td>
@@ -63,10 +64,22 @@
                                             </tbody>
                                         
                                         </table>
+                                        </ul>
+
+                                        <?php echo form_open ("event/update_event_location/".$t["evento_id"]); ?>
+
+
+                                            <label for="location" >Nueva locacion:</label>
+
+                                            <input name="location" id="location" />
+
+                                            <button type="submit" class="btn btn-primary">Editar</button>
+
+                                        <?php echo form_close() ?>
                                             <!-- fin del table -->
                                         <?php }else{?>
                                                 <div class="alert alert-success" role="alert">
-                                                    NO SE ENCONTRARON USUARIOS!
+                                                    NO HAY EVENTO!
                                                 </div>
                                         <?php }?>
                         </div>

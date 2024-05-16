@@ -41,6 +41,8 @@
                                                 <th scope="col">nombre:</th>
                                                 <th scope="col">horario:</th>
                                                 <th scope="col">estado:</th>
+                                                <th scope="col">&nbsp;</th>
+                                                <th scope="col">&nbsp;</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -56,11 +58,16 @@
                                                     <td><?php echo $t["nombre"]; ?></td>
                                                     <td><?php echo $t["horario"]; ?></td>
                                                     <td><?php echo $t["estado"]; ?></td>
+                                                    
+                                                    <td>
+                                                        <a href="<?php echo site_url("event/edit/".$t["evento_id"]); ?>" class="btn btn-warning btn-sm editar">
+                                                        <i class="bi bi-pencil-square"></i>
+                                                        </a>
+                                                    </td>
 
-                                                    <td> &nbsp;</td>
                                                     <td>
                                                         <a href="<?php echo site_url("event/delete_event/".$t["evento_id"]); ?>" class="btn btn-danger btn-sm borrar">
-                                                            <i class="bi bi-trash-fill"></i>
+                                                            <i class="bi bi-trash-fill"></i> 
                                                         </a>
                                                     </td>
                                                 </tr>

@@ -11,6 +11,18 @@ class Event extends CI_Controller {
 		}
 	}
 
+	public function edit($event_id){
+		if(!$event_id){
+			$this->session->set_flashdata('OP','PROHIBIDO');
+			redirect('couple');
+		}else{
+			$this->load->model("event_model");
+			$datos=array();
+			$datos["event"]=$this->event_model->get_by_id($event_id);
+			$this->load->view("edits/event",$datos);
+		}
+	}
+
 	public function list_event (){
 		if(!$this->session->userdata('usuario_id')){
 			$this->session->set_flashdata('OP','PROHIBIDO');
@@ -51,20 +63,25 @@ class Event extends CI_Controller {
 
 	
 
-	public function update_event_couple(){
+/* 	public function update_event_couple(){
         $this->load->model("event_model");
 		$event_id=$this->input->post("event_id");
 		$couple_id=$this->input->post("pareja_id");
 		$this->event_model->update_event_couple($event_id,$couple_id);
 		redirect("home/index");
-    }
+    } */
 
-	public function update_event_location(){
-        $this->load->model("events_model");
-		$event_id=$this->input->post("event_id");
-		$location=$this->input->post("location");
-		$this->event_model->update_event_location($event_id,$location);
-		redirect("home/index");
+	public function update_event_location($event_id=null){
+		if(!$event_id){
+			redirect("couple");
+		}else{
+			$this->load->model("event_model");
+			$location=$this->input->post("location");
+			$this->event_model->update_event_location($event_id,$location);
+			$datos=array();
+			$datos["event"]=$this->event_model->get_by_id($event_id);
+			$this->load->view("edits/event",$datos);
+		}
     }
 
 	public function update_event_direction_street(){
