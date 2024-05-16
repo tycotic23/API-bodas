@@ -56,6 +56,18 @@ class Guest extends CI_Controller {
     }
 }
 
+	public function get_by_couple($couple_id=false){
+			
+		if(!$couple_id){
+			redirect('home');
+		}else{
+			$this->load->model("guest_model");
+			$datos["guests"]=$this->guest_model->get_by_couple($couple_id);
+			$datos["total"]=count($datos["guests"]);
+			$this->load->view('lists/list_guest',$datos);
+		}
+	}
+
 	public function update_guest_name(){
         $this->load->model("guest_model");
 		$guest_id=$this->input->post("guest_id");

@@ -39,6 +39,8 @@
                                                 <th scope="col">conyugue_2:</th>
                                                 <th scope="col">cvu_regalos:</th>
                                                 <th scope="col">url:</th>
+                                                <th scope="col">&nbsp;</th>
+                                                <th scope="col">&nbsp;</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -51,11 +53,15 @@
                                                     <td><?php echo $t["conyugue_2_id"]; ?></td>
                                                     <td><?php echo $t["cvu_regalos"]; ?></td>
                                                     <td><?php echo $t["url"]; ?></td>
-                                                    <td> &nbsp;</td>
 
                                                     <td>
-                                                        <a href="" class="btn btn-danger btn-sm borrar">
-                                                            <i class="bi bi-trash-fill"></i>
+                                                        <a href="<?php echo site_url("event/get_by_couple/".$t["pareja_id"])?>" class="btn btn-danger btn-sm borrar">
+                                                            Eventos
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="<?php echo site_url("guest/get_by_couple/".$t["pareja_id"] )?>" class="btn btn-danger btn-sm borrar">
+                                                            Invitados
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -67,7 +73,7 @@
                                             <!-- fin del table -->
                                         <?php }else{?>
                                                 <div class="alert alert-success" role="alert">
-                                                    NO SE EVENTOS!
+                                                    No hay eventos!
                                                 </div>
                                         <?php }?>
                         </div>

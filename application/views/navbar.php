@@ -10,6 +10,9 @@
       <li class="nav-item active">
         <a class="nav-link" href="<?php echo site_url("home/index") ?>">Home <span class="sr-only">(current)</span></a>
       </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="<?php echo site_url("couple") ?>">Couple <span class="sr-only">(current)</span></a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="<?php echo site_url("guest_x_events") ?>">ver eventos de invitado</a>
       </li>

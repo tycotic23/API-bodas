@@ -20,7 +20,7 @@ Class Event_model extends CI_Model {
         return $res->result_array();
     }
 
-    function get_by_couple($couple_id){
+    function get_by_couple($couple_id=null){
         $this->db->order_by($this->primary_key);
         $this->db->where("pareja_id",$couple_id);
         $res=$this->db->get($this->database);
