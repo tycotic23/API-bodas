@@ -11,7 +11,8 @@ class Event extends CI_Controller {
 		}
 	}
 
-	public function edit($event_id){
+	/* redirect to edit_view */
+	public function edit_view($event_id){
 		if(!$event_id){
 			$this->session->set_flashdata('OP','PROHIBIDO');
 			redirect('couple');
@@ -61,9 +62,39 @@ class Event extends CI_Controller {
 		redirect("home");
 	}
 
-	
+	public function edit ($event_id){
+		$this->form_validation->set_rules('location', 'Location', 'trim|strtolower');
+        $this->form_validation->set_rules('direction_street', 'Direction_street', 'trim|strtolower');
+		$this->form_validation->set_rules('direction_number', 'Direction_number', '');
+		$this->form_validation->set_rules('location_id', 'Location_id', '');
+		$this->form_validation->set_rules('name_event', 'Name_event', 'trim');
+		$this->form_validation->set_rules('date_event', 'Date_event', '');
 
-/* 	public function update_event_couple(){
+		if($this->form_validation->run()===false){
+
+			$this->edit_view($event_id);
+			
+		}else{
+
+			$location=set_value("location");
+			$direction_street=set_value("direction_street");
+			$direction_number=set_value("direction_number");
+			$location_id=set_value("location_id");
+			$name_event=set_value("name_event");
+			$date_event=set_value("date_event");
+
+			if($location){
+				$this->session->set_flashdata('OP','PASS');
+				$this->update_event_location($event_id,$location);
+			}
+		redirect("event/edit_view/".$event_id);
+		}
+
+	}
+
+/* 	
+	edita la pareja a la que pertenece un evento
+	public function update_event_couple(){
         $this->load->model("event_model");
 		$event_id=$this->input->post("event_id");
 		$couple_id=$this->input->post("pareja_id");
@@ -71,12 +102,12 @@ class Event extends CI_Controller {
 		redirect("home/index");
     } */
 
-	public function update_event_location($event_id=null){
+	public function update_event_location($event_id=null,$location=null){
+
 		if(!$event_id){
 			redirect("couple");
 		}else{
 			$this->load->model("event_model");
-			$location=$this->input->post("location");
 			$this->event_model->update_event_location($event_id,$location);
 			$datos=array();
 			$datos["event"]=$this->event_model->get_by_id($event_id);

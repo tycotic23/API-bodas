@@ -60,7 +60,7 @@
                                                     <td><?php echo $t["estado"]; ?></td>
                                                     
                                                     <td>
-                                                        <a href="<?php echo site_url("event/edit/".$t["evento_id"]); ?>" class="btn btn-warning btn-sm editar">
+                                                        <a href="<?php echo site_url("event/edit_view/".$t["evento_id"]); ?>" class="btn btn-warning btn-sm editar">
                                                         <i class="bi bi-pencil-square"></i>
                                                         </a>
                                                     </td>

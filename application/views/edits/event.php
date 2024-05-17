@@ -36,6 +36,8 @@
                                                 <th scope="col">nombre:</th>
                                                 <th scope="col">horario:</th>
                                                 <th scope="col">estado:</th>
+                                                <td> &nbsp;</td>
+                                                <td> &nbsp;</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -52,39 +54,77 @@
                                                     <td><?php echo $t["horario"]; ?></td>
                                                     <td><?php echo $t["estado"]; ?></td>
 
-                                                    <td> &nbsp;</td>
+                                                    <td>
+                                                        <a href="<?php echo site_url("event/edit/".$t["evento_id"]); ?>" class="btn btn-warning btn-sm editar">
+                                                        <i class="bi bi-pencil-square"></i>
+                                                        </a>
+                                                    </td>
+
+                                                    
                                                     <td>
                                                         <a href="<?php echo site_url("event/delete_event/".$t["evento_id"]); ?>" class="btn btn-danger btn-sm borrar">
                                                             <i class="bi bi-trash-fill"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
+
                                             <?php } ?>
                                                     
                                             </tbody>
                                         
                                         </table>
                                         </ul>
-
-                                        <?php echo form_open ("event/update_event_location/".$t["evento_id"]); ?>
-
+                                        
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">                 
+                                        <?php echo form_open ("event/edit/".$t["evento_id"]); ?>
+                                                <!--     -->
 
                                             <label for="location" >Nueva locacion:</label>
-
                                             <input name="location" id="location" />
+                                            
+                                                <!--     -->
+                                                <br>
+                                            <label for="direction_street" >editar direccion calle:</label>
+                                            <input name="direction_street" id="direction_street" />
+                                            
+                                                <!--     -->
+                                                <br>
+                                            <label for="direction_number" >editar direccion numero:</label>
+                                            <input name="direction_number" id="direction_number" />
+                                            
+                                                <!--     -->
+                                                <br>
+                                            <label for="location_id" >editar localidad:</label>
+                                            <input name="location_id" id="location_id" />
+                                            
+                                                <!--     -->
+                                                <br>
+                                            <label for="name_event" >nombre del evento:</label>
+                                            <input name="name_event" id="name_event" />
+                                            
+                                                <!--     -->
+                                                <br>
+                                            <label for="date_event" >horario:</label>
+                                            <input name="date_event" id="date_event" />
+                                            
+                                            <br>
+                                            <br>
+                                    <button type="submit" class="btn btn-primary">Editar</button>
 
-                                            <button type="submit" class="btn btn-primary">Editar</button>
-
+                        </div>
+                    </div>
                                         <?php echo form_close() ?>
+                        </div>  
                                             <!-- fin del table -->
                                         <?php }else{?>
                                                 <div class="alert alert-success" role="alert">
                                                     NO HAY EVENTO!
                                                 </div>
-                                        <?php }?>
-                        </div>
-                    </div>
-                </div>
+                                        <?php }?>                
+                
             </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
