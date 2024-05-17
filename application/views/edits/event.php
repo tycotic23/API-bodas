@@ -37,7 +37,6 @@
                                                 <th scope="col">horario:</th>
                                                 <th scope="col">estado:</th>
                                                 <td> &nbsp;</td>
-                                                <td> &nbsp;</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -55,17 +54,11 @@
                                                     <td><?php echo $t["estado"]; ?></td>
 
                                                     <td>
-                                                        <a href="<?php echo site_url("event/edit/".$t["evento_id"]); ?>" class="btn btn-warning btn-sm editar">
-                                                        <i class="bi bi-pencil-square"></i>
-                                                        </a>
-                                                    </td>
-
-                                                    
-                                                    <td>
                                                         <a href="<?php echo site_url("event/delete_event/".$t["evento_id"]); ?>" class="btn btn-danger btn-sm borrar">
                                                             <i class="bi bi-trash-fill"></i>
                                                         </a>
                                                     </td>
+
                                                 </tr>
 
                                             <?php } ?>

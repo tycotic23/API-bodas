@@ -25,6 +25,19 @@ class Guest extends CI_Controller {
 		}
 	}
 
+	/* redirect to edit_view */
+	public function edit_view($guest_id){
+		if(!$guest_id){
+			$this->session->set_flashdata('OP','PROHIBIDO');
+			redirect('couple');
+		}else{
+			$this->load->model("guest_model");
+			$datos=array();
+			$datos["guest"]=$this->guest_model->get_by_id($guest_id);
+			$this->load->view("edits/guest",$datos);
+		}
+	}
+
 	public function load_view(){
 		$this->load->view("forms/form_guest");
 	}
@@ -68,36 +81,81 @@ class Guest extends CI_Controller {
 		}
 	}
 
-	public function update_guest_name(){
-        $this->load->model("guest_model");
-		$guest_id=$this->input->post("guest_id");
-		$name=$this->input->post("name");
-		$this->guest_model->update_name_guest($guest_id,$name);
-		redirect("home/index");
+	public function edit ($guest_id){
+		$this->form_validation->set_rules('name', 'Name', 'trim|strtolower');
+        $this->form_validation->set_rules('surname', 'Surname', 'trim|strtolower');
+		$this->form_validation->set_rules('phone_number', 'Phone', 'trim|is_natural');
+		$this->form_validation->set_rules('attached', 'Attached', 'trim|is_natural');
+
+		if($this->form_validation->run()===false){
+
+			$this->edit_view($guest_id);
+			
+		}else{
+
+			$name=set_value("name");
+			$surname=set_value("surname");
+			$phone_number=set_value("phone_number");
+			$attached=set_value("attached");
+
+			if($name){
+				$this->update_guest_name($guest_id,$name);
+			}
+
+			if($surname){
+				$this->update_guest_surname($guest_id,$surname);
+			}
+
+			if($phone_number){
+				$this->update_guest_phone_number($guest_id,$phone_number);
+			}
+
+			if($attached){
+				$this->update_guest_attached($guest_id,$location_id);
+			}
+
+				redirect("guest/edit_view/".$guest_id);
+		}
+	}
+
+	public function update_guest_name($guest_id,$name){
+		if(!$guest_id){
+			redirect("couple");
+		}else{
+			$this->load->model("guest_model");
+			$this->guest_model->update_guest_name($guest_id,$name);
+			$this->edit_view($guest_id);
+		}
     }
 
-	public function update_guest_surname(){
-        $this->load->model("guest_model");
-		$couple_id=$this->input->post("guest_id");
-		$surname=$this->input->post("surname");
-		$this->guest_model->update_surname_guest($guest_id,$surname);
-		redirect("home/index");
+	public function update_guest_surname($guest_id,$surname){
+        if(!$guest_id){
+			redirect("couple");
+		}else{
+			$this->load->model("guest_model");
+			$this->guest_model->update_guest_surname($guest_id,$surname);
+			$this->edit_view($guest_id);
+		}
     }
 
-	public function update_guest_phone_number(){
-        $this->load->model("guest_model");
-		$couple_id=$this->input->post("guest_id");
-		$phone_number=$this->input->post("phone_number");
-		$this->guest_model->update_phone_number_guest($guest_id,$phone_number);
-		redirect("home/index");
+	public function update_guest_phone_number($guest_id,$phone_number){
+        if(!$guest_id){
+			redirect("couple");
+		}else{
+			$this->load->model("guest_model");
+			$this->guest_model->update_guest_phone_number($guest_id,$phone_number);
+			$this->edit_view($guest_id);
+		}
     }
 
-	public function update_guest_attached(){
-        $this->load->model("guest_model");
-		$couple_id=$this->input->post("guest_id");
-		$attached=$this->input->post("attached");
-		$this->guest_model->update_attached_guest($guest_id,$attached);
-		redirect("home/index");
+	public function update_guest_attached($guest_id,$attached){
+        if(!$guest_id){
+			redirect("couple");
+		}else{
+			$this->load->model("guest_model");
+			$this->guest_model->update_guest_attached($guest_id,$attached);
+			$this->edit_view($guest_id);
+		}
     }
 
 	public function update_guest_couple_id(){

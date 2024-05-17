@@ -16,7 +16,7 @@ Class Guest_model extends CI_Model {
     function get_by_id($id=null){
         $this->db->where($this->primary_key,$id);
         $this->db->limit(1);
-        return $this->db->get($this->database)->row_array();
+        return $this->db->get($this->database)->result_array();
     }
 
     function get_by_email($email=null){
@@ -61,42 +61,42 @@ Class Guest_model extends CI_Model {
         $this->db->insert($this->database);
     }
 
-    public function update_name_guest($guest_id,$name){
+    public function update_guest_name($guest_id,$name){
         $this->db->set("nombre",$name);
         $this->db->where($this->primary_key,$guest_id);
         $this->db->update($this->database);
         return $this->db->affected_rows();
     }
 
-    public function update_surname_guest($guest_id,$surname){
+    public function update_guest_surname($guest_id,$surname){
         $this->db->set("apellido",$surname);
         $this->db->where($this->primary_key,$guest_id);
         $this->db->update($this->database);
         return $this->db->affected_rows();
     }
 
-    public function update_email_guest($guest_id,$email){
+    public function update_guest_mail($guest_id,$email){
         $this->db->set("mail",$email);
         $this->db->where($this->primary_key,$guest_id);
         $this->db->update($this->database);
         return $this->db->affected_rows();
     }
 
-    public function update_phone_number_guest($guest_id,$phone_number){
+    public function update_guest_phone_number($guest_id,$phone_number){
         $this->db->set("telefono",$phone_number);
         $this->db->where($this->primary_key,$guest_id);
         $this->db->update($this->database);
         return $this->db->affected_rows();
     }
 
-    public function update_attached_guest($guest_id,$attached){
+    public function update_guest_attached($guest_id,$attached){
         $this->db->set("extras",$attached);
         $this->db->where($this->primary_key,$guest_id);
         $this->db->update($this->database);
         return $this->db->affected_rows();
     }
 
-    public function update_couple_id_guest($guest_id,$couple_id){
+    public function update_guest_couple_id($guest_id,$couple_id){
         $this->db->set("pareja_id",$couple_id);
         $this->db->where($this->primary_key,$guest_id);
         $this->db->update($this->database);

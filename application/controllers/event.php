@@ -62,13 +62,35 @@ class Event extends CI_Controller {
 		redirect("home");
 	}
 
+	/*
+	$this->form_validation->set_rules('username', 'Nombre de usuario', 'required|alpha_numeric|min_length[5]|max_length[12]');
+	Esta regla establece que el campo "username" es obligatorio,
+	solo puede contener caracteres alfanuméricos,
+	debe tener al menos 5 caracteres y
+	no puede exceder los 12 caracteres.
+	*/
+
+	public function valid_datetime($str) {
+		// Define el formato de fecha y hora que estás esperando
+		$formato = 'Y-m-d H:i:s';
+		// Intenta analizar la fecha y hora utilizando el formato especificado
+		$fecha_hora = DateTime::createFromFormat($formato, $str);
+
+		// Verifica si la fecha y hora se analizó correctamente y coincide con el formato
+		if ($fecha_hora && $fecha_hora->format($formato) == $str) {
+			return true; // La fecha y hora es válida
+		} else {
+			return false; // La fecha y hora no es válida
+		}
+	}
+
 	public function edit ($event_id){
 		$this->form_validation->set_rules('location', 'Location', 'trim|strtolower');
         $this->form_validation->set_rules('direction_street', 'Direction_street', 'trim|strtolower');
-		$this->form_validation->set_rules('direction_number', 'Direction_number', '');
-		$this->form_validation->set_rules('location_id', 'Location_id', '');
+		$this->form_validation->set_rules('direction_number', 'Direction_number', 'is_natural');
+		$this->form_validation->set_rules('location_id', 'Location_id', 'is_natural');
 		$this->form_validation->set_rules('name_event', 'Name_event', 'trim');
-		$this->form_validation->set_rules('date_event', 'Date_event', '');
+		$this->form_validation->set_rules('date_event', 'Date_event', 'callback_valid_datetime');
 
 		if($this->form_validation->run()===false){
 
@@ -87,7 +109,29 @@ class Event extends CI_Controller {
 				$this->session->set_flashdata('OP','PASS');
 				$this->update_event_location($event_id,$location);
 			}
-		redirect("event/edit_view/".$event_id);
+
+			if($direction_street){
+				$this->session->set_flashdata('OP','PASS');
+				$this->update_event_direction_street($event_id,$direction_street);
+			}
+
+			if($direction_number){
+				$this->update_event_direction_number($event_id,$direction_number);
+			}
+
+			if($location_id){
+				$this->update_event_localities($event_id,$location_id);
+			}
+
+			if($name_event){
+				$this->update_event_name($event_id,$name_event);
+			}
+
+			if($date_event){
+				$this->update_event_date_time($event_id,$date_event);
+			}
+
+				redirect("event/edit_view/".$event_id);
 		}
 
 	}
@@ -115,44 +159,61 @@ class Event extends CI_Controller {
 		}
     }
 
-	public function update_event_direction_street(){
+	public function update_event_direction_street($event_id=null,$direction_street=null){
+
+		if(!$event_id){
+			redirect("couple");
+		}else{
+			$this->load->model("event_model");
+			$this->event_model->update_event_name_street($event_id,$direction_street);
+			$datos=array();
+			$datos["event"]=$this->event_model->get_by_id($event_id);
+			$this->load->view("edits/event",$datos);
+		}
+    }
+
+	public function update_event_direction_number($event_id=null,$direction_number=null){
+        if(!$event_id){
+			redirect("couple");
+		}else{
+			$this->load->model("event_model");
+			$this->event_model->update_event_number_street($event_id,$direction_number);
+			$datos=array();
+			$datos["event"]=$this->event_model->get_by_id($event_id);
+			$this->load->view("edits/event",$datos);
+		}
+    }
+
+	public function update_event_localities($event_id=null,$location_id=null){
         $this->load->model("event_model");
-		$event_id=$this->input->post("event_id");
-		$direction_street=$this->input->post("direction_street");
-		$this->event_model->update_event_direction_street($event_id,$direction_street);
-		redirect("home/index");
+		$this->event_model->update_event_localities($event_id,$location_id);
+		$datos=array();
+		$datos["event"]=$this->event_model->get_by_id($event_id);
+		$this->load->view("edits/event",$datos);
     }
 
-	public function update_event_direction_number(){
-        $this->load->model("events_model");
-		$event_id=$this->input->post("event_id");
-		$direction_number=$this->input->post("direction_number");
-		$this->event_model->update_event_direction_number($event_id,$direction_number);
-		redirect("home/index");
+	public function update_event_name($event_id=null,$name_event=null){
+		if(!$event_id){
+			redirect("couple");
+		}else{
+			$this->load->model("event_model");
+			$this->event_model->update_event_name($event_id=null,$name_event=null);
+			$datos=array();
+			$datos["event"]=$this->event_model->get_by_id($event_id);
+			$this->load->view("edits/event",$datos);
+		}
     }
 
-	public function update_event_localities(){
-        $this->load->model("events_model");
-		$event_id=$this->input->post("event_id");
-		$location_id=$this->input->post("location_id");
-		$this->event_model->update_event_location($event_id,$location_id);
-		redirect("home/index");
-    }
-
-	public function update_event_name(){
-        $this->load->model("even_model");
-		$event_id=$this->input->post("event_id");
-		$name=$this->input->post("name");
-		$this->event_model->update_event_location($event_id,$name);
-		redirect("home/index");
-    }
-
-	public function update_event_date_time(){
-        $this->load->model("event_model");
-		$event_id=$this->input->post("event_id");
-		$date_time=$this->input->post("date_time");
-		$this->event_model->update_event_location($event_id,$date_time);
-		redirect("home/index");
+	public function update_event_date_time($event_id=null,$date_event=null){
+		if(!$event_id){
+			redirect("couple");
+		}else{
+			$this->load->model("event_model");
+			$this->event_model->update_event_date_time($event_id,$date_event);
+			$datos=array();
+			$datos["event"]=$this->event_model->get_by_id($event_id);
+			$this->load->view("edits/event",$datos);
+		}
     }
 
 	public function delete_event($event_id=null){

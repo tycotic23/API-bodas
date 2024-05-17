@@ -63,7 +63,7 @@ Class Event_model extends CI_Model {
         $this->db->update($this->database);
         return $this->db->affected_rows();
     }
-    public function update_event_numer_street($event_id="",$direction_number=""){
+    public function update_event_number_street($event_id="",$direction_number=""){
         $this->db->set("direccion_numero",$direction_number);
         $this->db->where($this->primary_key,$event_id);
         $this->db->limit(1);
@@ -71,23 +71,24 @@ Class Event_model extends CI_Model {
         return $this->db->affected_rows();
     }
 
-    public function update_event_localities($event_id="",$location_id){
+    public function update_event_localities($event_id="",$location_id=""){
         $this->db->set("localidad_id",$location_id);
         $this->db->where($this->primary_key,$event_id);
         $this->db->limit(1);
         $this->db->update($this->database);
         return $this->db->affected_rows();
     }
-    public function update_event_name($event_id="",$event_name){
+
+    public function update_event_name($event_id="",$event_name=""){
         $this->db->set("nombre",$event_name);
         $this->db->where($this->primary_key,$event_id);
         $this->db->limit(1);
         $this->db->update($this->database);
         return $this->db->affected_rows();
-
     }
-    public function update_event_date_time($event_id="",$date_time){
-        $this->db->set("horario",$date_time);
+
+    public function update_event_date_time($event_id="",$date_time=""){
+        $this->db->set("horario","'$date_time'",false);
         $this->db->where($this->primary_key,$event_id);
         $this->db->limit(1);
         $this->db->update($this->database);
@@ -100,7 +101,6 @@ Class Event_model extends CI_Model {
         $this->db->delete($this->database);
         return $this->db->affected_rows();
     }
-
 
 
     public function ingresar_fecha($fecha) {
