@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <title>edit guest</title>
+    <title>edit spouse</title>
   </head>
 
   <body>
@@ -19,7 +19,7 @@
                         <div class="card">
                             <div class="card-body">
 
-                                        <?php if($guest){?>
+                                        <?php if($spouse){?>
                                             
                                         <ul class="list-group" id="lista" name="lista">    
                                             <!-- comienzo del table -->
@@ -28,35 +28,20 @@
                                         
                                             <thead>
                                                 <tr>
-                                                <th scope="col">invitado_id:</th>
+                                                <th scope="col">conyugue_id:</th>
                                                 <th scope="col">nombre:</th>
                                                 <th scope="col">apellido:</th>
-                                                <th scope="col">mail:</th>
-                                                <th scope="col">telefono:</th>
-                                                <th scope="col">extras:</th>
-                                                <th scope="col">pareja_id:</th>
+                                                <th scope="col">fecha nacimiento:</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <?php foreach($guest as $t){ ?>
+                                            <?php foreach($spouse as $t){ ?>
 
                                                 <tr>
-                                                    <td><?php echo $t["invitado_id"]; ?></td>
+                                                    <td><?php echo $t["conyugue_id"]; ?></td>
                                                     <td><?php echo $t["nombre"]; ?></td>
                                                     <td><?php echo $t["apellido"]; ?></td>
-                                                    <td><?php echo $t["mail"]; ?></td>
-                                                    <td><?php echo $t["telefono"]; ?></td>
-                                                    <td><?php echo $t["extras"]; ?></td>
-                                                    <td><?php echo $t["pareja_id"]; ?></td>
-                                                    <td> &nbsp;</td>
-
-                                                    
-
-                                                    <td>
-                                                        <a href="<?php echo site_url("guest/delete_guest/".$t["invitado_id"]); ?>" class="btn btn-danger btn-sm borrar">
-                                                            <i class="bi bi-trash-fill"></i>
-                                                        </a>
-                                                    </td>
+                                                    <td><?php echo $t["fecha_nacimiento"]; ?></td>
                                                 </tr>
                                             <?php } ?>
                                                     
@@ -68,28 +53,22 @@
                     </div>
                     <div class="card">
                         <div class="card-body">                 
-                                        <?php echo form_open ("guest/edit/".$t["invitado_id"]); ?>
+                                        <?php echo form_open ("spouse/edit/".$t["conyugue_id"]); ?>
                                                 <!--     -->
 
-                                            <label for="name" >Editar nombre:</label>
+                                            <label for="name" >editar nombre:</label>
                                             <input name="name" id="name" />
                                             
                                                 <!--     -->
                                                 <br>
                                             <label for="surname" >Editar apellido:</label>
                                             <input name="surname" id="surname" />
-                                            
+
                                                 <!--     -->
                                                 <br>
-                                            <label for="phone_number" >editar numero de telefono:</label>
-                                            <input name="phone_number" id="phone_number" />
-                                            
-                                                <!--     -->
-                                                <br>
-                                            <label for="attached" >editar invitados extras:</label>
-                                            <input name="attached" id="attached" />
-                                            
-                                                <!--     -->
+                                            <label for="birthdate" >fecha de nacimiento:</label>
+                                            <input name="birthdate" id="birthdate" />
+
                                             <br>
                                             <br>
                                     <button type="submit" class="btn btn-primary">Editar</button>

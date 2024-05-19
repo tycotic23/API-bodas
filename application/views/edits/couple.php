@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <title>list couples</title>
+    <title>edit couples</title>
   </head>
 
   <body>
@@ -47,12 +47,22 @@
                                                     <td><?php echo $t["cvu_regalos"]; ?></td>
                                                     <td><?php echo $t["url"]; ?></td>
                                                 </tr>
+                                                </table>
+                                    </ul>
+
+                                                <a href="<?php echo site_url("spouse/edit_view/".$t["conyugue_1_id"]); ?>" class="btn btn-warning btn-sm borrar">
+                                                    editar conyugue: <?php echo $t["conyugue_1_id"]; ?>
+                                                </a>
+                                                </br>
+                                                <a href="<?php echo site_url("spouse/edit_view/".$t["conyugue_2_id"]); ?>" class="btn btn-warning btn-sm borrar">
+                                                    editar conyugue: <?php echo $t["conyugue_2_id"]; ?>
+                                                </a>
+
                                             <?php } ?>
                                                     
                                             </tbody>
                                         
-                                        </table>
-                                    </ul>
+                                        
                                     </div>
                     </div>
                     <div class="card">
@@ -82,9 +92,9 @@
                                                     NO SE ENCONTRARON INVITADOS!
                                                 </div>
                                         <?php }?>
-                        
                 </div>
             </div>
+        </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 

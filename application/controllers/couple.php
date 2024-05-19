@@ -20,7 +20,7 @@ class Couple extends CI_Controller {
 
 	}
 
-public function edit_view($couple_id){
+	public function edit_view($couple_id){
 		if(!$couple_id){
 			$this->session->set_flashdata('OP','PROHIBIDO');
 			redirect('couple');
