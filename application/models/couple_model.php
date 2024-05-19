@@ -22,10 +22,10 @@ Class Couple_model extends CI_Model {
     function get_by_url($url=null){
         $this->db->where("url",$url);
         $this->db->limit(1);
-        return $this->db->get($this->database)->row_array();
+        return $this->db->get($this->database)->result_array();
     }
 
-    function check_url($url=""){
+    function check_couple_url($url=""){
         $this->db->select($this->primary_key);
         $this->db->where("url",$url);
         $this->db->limit(1);
@@ -70,7 +70,7 @@ Class Couple_model extends CI_Model {
     }
 
     public function update_couple_cvu_gift($couple_id,$cvu_gift){
-        $this->db->set("cvu_regalo",$cvu_gift);
+        $this->db->set("cvu_regalos ",$cvu_gift);
         $this->db->where($this->primary_key,$couple_id);
         $this->db->limit(1);
         $this->db->update($this->database);

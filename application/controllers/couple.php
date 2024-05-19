@@ -20,12 +20,37 @@ class Couple extends CI_Controller {
 
 	}
 
+public function edit_view($couple_id){
+		if(!$couple_id){
+			$this->session->set_flashdata('OP','PROHIBIDO');
+			redirect('couple');
+		}else{
+			$this->load->model("couple_model");
+			$datos=array();
+			$datos["couple"]=$this->couple_model->get_by_id($couple_id);
+			$this->load->view("edits/couple",$datos);
+		}
+	}
+
 	
 
 	public function view_couple_events(){
 		$couple_id=$this->session->userdata("pareja_id");
 		redirect("event/get_by_couple/".$couple_id);
 	}
+
+	public function list_couple (){
+		if(!$this->session->userdata('usuario_id')){
+			$this->session->set_flashdata('OP','PROHIBIDO');
+			redirect('user/index');
+			}else{
+			$this->load->model("couple_model"); 
+			$datos=array();
+			$datos["couples"]=$this->couple_model->list_couple();
+			$datos["total"]=count($datos["couples"]);
+			$this->load->view("lists/list_couples",$datos); 
+    }
+}
 
 	public function create_couple(){
         $this->load->model('couple_model');
@@ -40,18 +65,36 @@ class Couple extends CI_Controller {
 				redirect("home");
     }
 
-	public function list_couple (){
-		if(!$this->session->userdata('usuario_id')){
-			$this->session->set_flashdata('OP','PROHIBIDO');
-			redirect('user/index');
-			}else{
-			$this->load->model("couple_model"); 
-			$datos=array();
-			$datos["couples"]=$this->couple_model->list_couple();
-			$datos["total"]=count($datos["couples"]);
-			$this->load->view("lists/list_couples",$datos); 
-    }
-}
+	public function edit (){
+		
+		$this->form_validation->set_rules('cvu_gift', 'Cvu_gift', 'is_natural|trim');
+		$this->form_validation->set_rules('url', 'Url', 'alpha_numeric|trim|strtolower');
+
+		if($this->form_validation->run()===false){
+
+			redirect("couple");
+			
+		}else{
+			$couple_id=$this->session->userdata("pareja_id");
+			$cvu_gift=set_value("cvu_gift");
+			$url=set_value("url");
+
+			if($cvu_gift){
+				$this->session->set_flashdata('OP','PASS');
+				$this->update_couple_cvu_gift($couple_id,$cvu_gift);
+			}
+
+			if($url){
+				$this->session->set_flashdata('OP','PASS');
+				$this->update_couple_url($couple_id,$url);
+			}
+
+				redirect("couple");
+		}
+
+	}
+
+	
 
 	public function update_couple_user(){
         $this->load->model("couple_model");
@@ -79,22 +122,19 @@ class Couple extends CI_Controller {
 		redirect("home/index");
     }
 	
-	public function update_couple_cvu_gift(){
+	public function update_couple_cvu_gift($couple_id,$cvu_gift){
         $this->load->model("couple_model");
-		$couple_id=$this->input->post("couple_id");
-		$cvu_gift=$this->input->post("cvu_gift");
 		$this->couple_model->update_couple_cvu_gift($couple_id,$cvu_gift);
-		redirect("home/index");
+		redirect("couple");
     }
 	
-	public function update_couple_url(){
+	public function update_couple_url($couple_id,$url){
         $this->load->model("couple_model");
-		$couple_id=$this->input->post("couple_id");
-		$url=$this->input->post("url");
+
 		if(!($this->couple_model->check_couple_url($url))){
 			$this->couple_model->update_couple_url($couple_id,$url);
 		}
-		redirect("home/index");
+		redirect("couple");
     }
 
 	function check_couple_url($url=""){

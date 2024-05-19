@@ -12,35 +12,28 @@
   </head>
 
   <body>
+
    <div class="container">
         <div class="row">
                 <div class="col">
                         <div class="card">
                             <div class="card-body">
 
-                                        <?php if($couple) { ?>
+                                        <?php if($couple){?>
                                             
-                                        <ul class="list-group" id="lista" name="lista">
-                                        <li class="list-group-item">
-                                            <!--<p> total de eventos: <b> <?php// echo $total; ?> </b> 
-                                          
-                                            </p>-->
-                                        </li>    
+                                        <ul class="list-group" id="lista" name="lista">    
                                             <!-- comienzo del table -->
 
                                         <table class="table">
                                         
                                             <thead>
                                                 <tr>
-                                                
                                                 <th scope="col">pareja_id:</th>
                                                 <th scope="col">usuario_id:</th>
-                                                <th scope="col">conyugue_1:</th>
-                                                <th scope="col">conyugue_2:</th>
-                                                <th scope="col">cvu_regalos:</th>
+                                                <th scope="col">conyugue 1:</th>
+                                                <th scope="col">conyugue 2:</th>
+                                                <th scope="col">cvu regalos:</th>
                                                 <th scope="col">url:</th>
-                                                <th scope="col">&nbsp;</th>
-                                                <th scope="col">&nbsp;</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -53,37 +46,45 @@
                                                     <td><?php echo $t["conyugue_2_id"]; ?></td>
                                                     <td><?php echo $t["cvu_regalos"]; ?></td>
                                                     <td><?php echo $t["url"]; ?></td>
-
-                                                    <td>
-                                                        <a href="<?php echo site_url("event/get_by_couple/".$t["pareja_id"])?>" class="btn btn-danger btn-sm borrar">
-                                                            Eventos
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="<?php echo site_url("guest/get_by_couple/".$t["pareja_id"] )?>" class="btn btn-danger btn-sm borrar">
-                                                            Invitados
-                                                        </a>
-                                                    </td>
                                                 </tr>
                                             <?php } ?>
                                                     
                                             </tbody>
                                         
                                         </table>
+                                    </ul>
+                                    </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">                 
+                                        <?php echo form_open ("couple/edit"); ?>
+                                                <!--     -->
+
+                                            <label for="cvu_gift" >editar cvu regalos:</label>
+                                            <input name="cvu_gift" id="cvu_gift" />
+                                            
+                                                <!--     -->
+                                                <br>
+                                            <label for="url" >Editar url:</label>
+                                            <input name="url" id="url" />
+
+                                            <br>
+                                            <br>
+                                    <button type="submit" class="btn btn-primary">Editar</button>
+
+                        </div>
+                    </div>
+                                        <?php echo form_close() ?>
+
                                             <!-- fin del table -->
                                         <?php }else{?>
                                                 <div class="alert alert-success" role="alert">
-                                                    No hay eventos!
+                                                    NO SE ENCONTRARON INVITADOS!
                                                 </div>
                                         <?php }?>
-            </div>
-                                    <a href="<?php echo site_url("couple/edit_view/".$t["pareja_id"] )?>" class="btn btn-primary btn-sm borrar">
-                                                            editar datos de la pareja
-                                    </a>
-                    </div>
+                        
                 </div>
             </div>
-        </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
