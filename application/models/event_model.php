@@ -28,17 +28,14 @@ Class Event_model extends CI_Model {
     }
 
 
-    public function create_event ($couple_id="",$location="",$direction_street="",$direction_number="",$location_id="",$event_name="",$date_time=""){
-        $this->load->helper('date');
+    public function create_event ($couple_id=null,$location=null,$direction_street=null,$direction_number=null,$location_id=null,$event_name=null,$date_time=null){
         $this->db->set("pareja_id",$couple_id);
         $this->db->set("locacion",$location);
         $this->db->set("direccion_calle",$direction_street);
         $this->db->set("direccion_numero",$direction_number);
         $this->db->set("localidad_id",$location_id);
         $this->db->set("nombre",$event_name);
-        $date_time = date('Y-m-d', strtotime($date_time));
         $this->db->set("horario",$date_time);
-
         $this->db->insert($this->database);
     }
 

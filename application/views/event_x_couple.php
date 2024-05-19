@@ -32,7 +32,7 @@
                                         
                                             <thead>
                                                 <tr>
-                                                <th scope="col">evento_id:</th>
+                                                <!-- <th scope="col">evento_id:</th> -->
                                                 <th scope="col">pareja_id:</th>
                                                 <th scope="col">locacion:</th>
                                                 <th scope="col">direccion_calle:</th>
@@ -49,7 +49,7 @@
                                             <?php foreach($event_x_couple as $t){ ?>
 
                                                 <tr>
-                                                    <td><?php echo $t["evento_id"]; ?></td>
+                                                    <!-- <td><?php echo $t["evento_id"]; ?></td> -->
                                                     <td><?php echo $t["pareja_id"]; ?></td>
                                                     <td><?php echo $t["locacion"]; ?></td>
                                                     <td><?php echo $t["direccion_calle"]; ?></td>
@@ -82,6 +82,11 @@
                                                     NO SE EVENTOS!
                                                 </div>
                                         <?php }?>
+
+                                        <a href="<?php echo site_url("event/view_new_event"); ?>" class="btn btn-primary btn-sm borrar">
+                                                CREAR NUEVO EVENTO
+                                        </a>
+
                         </div>
                     </div>
                 </div>

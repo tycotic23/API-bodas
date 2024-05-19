@@ -107,9 +107,10 @@
                                             <br>
                                     <button type="submit" class="btn btn-primary">Editar</button>
 
-                        </div>
-                    </div>
+                        
                                         <?php echo form_close() ?>
+                                        </div>
+                            </div>
                         </div>  
                                             <!-- fin del table -->
                                         <?php }else{?>

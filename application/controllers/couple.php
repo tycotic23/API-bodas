@@ -20,6 +20,13 @@ class Couple extends CI_Controller {
 
 	}
 
+	
+
+	public function view_couple_events(){
+		$couple_id=$this->session->userdata("pareja_id");
+		redirect("event/get_by_couple/".$couple_id);
+	}
+
 	public function create_couple(){
         $this->load->model('couple_model');
 		$user_id=$this->input->post("user_id");

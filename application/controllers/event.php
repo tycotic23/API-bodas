@@ -11,6 +11,10 @@ class Event extends CI_Controller {
 		}
 	}
 
+	public function view_new_event(){
+		$this->load->view("forms/form_create_event");
+	}
+
 	/* redirect to edit_view */
 	public function edit_view($event_id){
 		if(!$event_id){
@@ -50,16 +54,32 @@ class Event extends CI_Controller {
 	
 
 	public function create_event(){
+
+
+		$this->form_validation->set_rules('location', 'Location', 'required|trim|strtolower');
+        $this->form_validation->set_rules('direction_street', 'Direction_street', 'required|trim|strtolower');
+		$this->form_validation->set_rules('direction_number', 'Direction_number', 'required|is_natural');
+		$this->form_validation->set_rules('location_id', 'Location_id', 'required|is_natural');
+		$this->form_validation->set_rules('name_event', 'Name_event', 'required|trim');
+		$this->form_validation->set_rules('date_event', 'Date_event', 'required|callback_valid_datetime');
+
+		if($this->form_validation->run()===false){
+			$this->session->set_flashdata('OP','PROHIBIDO');
+			redirect("couple/view_couple_events");
+			
+		}else{
+
 		$this->load->model('event_model');
-		$couple_id=$this->input->post("pareja_id");
+		$couple_id=$this->session->userdata("pareja_id");
 		$location=$this->input->post("location");
 		$direction_street=$this->input->post("direction_street");
 		$direction_number=$this->input->post("direction_number");
 		$location_id=$this->input->post("location_id");
-		$event_name=$this->input->post("event_name");
-		$date_time=$this->input->post("date_time");
-		$this->events_model->create_event($couple_id,$location,$direction_street,$direction_number,$location_id,$event_name,$date_time);
-		redirect("home");
+		$name_event=$this->input->post("name_event");
+		$date_time=$this->input->post("date_event");
+		$this->event_model->create_event($couple_id,$location,$direction_street,$direction_number,$location_id,$name_event,$date_time);
+		redirect("couple/view_couple_events");
+		}
 	}
 
 	/*
