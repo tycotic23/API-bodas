@@ -25,6 +25,16 @@ class Guest extends CI_Controller {
 		}
 	}
 
+	public function view_create_guest(){
+
+		if(!$this->session->userdata('usuario_id')){
+			$this->session->set_flashdata('OP','PROHIBIDO');
+			redirect('user/index');
+		}
+
+		$this->load->view("forms/form_create_guest");
+	}
+
 	/* redirect to edit_view */
 	public function edit_view($guest_id){
 		if(!$guest_id){
@@ -42,18 +52,45 @@ class Guest extends CI_Controller {
 		$this->load->view("forms/form_guest");
 	}
 
+
+
 	public function create_guest(){
-        $this->load->model('guest_model');
-		$name=$this->input->post("name");
-		$surname=$this->input->post("surname");
-		$email=$this->input->post("mail");
-		$phone_number=$this->input->post("phone_number");
-		$attached=$this->input->post("attached");
-		$couple_id=$this->input->post("couple_id");
-			if (!($this->guest_model->check_mail($email))) {
-			$this->guest_model->create_guest($name,$surname,$email,$phone_number,$attached,$couple_id);
+
+		if(!$this->session->userdata('usuario_id')){
+			$this->session->set_flashdata('OP','PROHIBIDO');
+			/* redirect('user/index'); */
+		}
+
+		$couple_id=$this->session->userdata("pareja_id");
+		$this->form_validation->set_rules('name', 'Name', 'required|trim|strtolower');
+        $this->form_validation->set_rules('surname', 'Surname', 'required|trim|strtolower');
+		$this->form_validation->set_rules('mail', 'Mail', 'required|valid_email');
+		$this->form_validation->set_rules('phone_number', 'Phone_number', 'required|is_natural');
+		$this->form_validation->set_rules('attached', 'Attached', 'required|is_natural');
+
+		if($this->form_validation->run()===false){
+			$this->session->set_flashdata('OP','PROHIBIDO');
+			$couple_id=$this->session->userdata("pareja_id");
+			redirect("home");
+			$this->get_by_couple($couple_id);
+			
+		}else{
+			$this->load->model('guest_model');
+			$name=$this->input->post("name");
+			$surname=$this->input->post("surname");
+			$email=$this->input->post("mail");
+			$phone_number=$this->input->post("phone_number");
+			$attached=$this->input->post("attached");
+			$couple_id=$this->session->userdata("pareja_id");
+				if (!($this->guest_model->check_mail($email))) {
+					$this->guest_model->create_guest($name,$surname,$email,$phone_number,$attached,$couple_id);
+					$this->get_by_couple($couple_id);
+				}else{
+					$this->session->set_flashdata("OP","ERROR");
+					$couple_id=$this->session->userdata("pareja_id");
+					$this->get_by_couple($couple_id);
+				}
 			}
-				redirect("home/index");
     }
 
 	public function list_guest (){
@@ -168,12 +205,16 @@ class Guest extends CI_Controller {
 
 
 	public function delete_guest($id=null){
+		if(!$this->session->userdata('usuario_id')){
+			$this->session->set_flashdata('OP','PROHIBIDO');
+			redirect('user/index');
+		}
 		$guest_id=intval($id);
 		if($guest_id>0){
 			$this->load->model("guest_model");
-			$this->couple_model->delete_guest($guest_id);
+			$this->guest_model->delete_guest($guest_id);
 		}
-		redirect("home/index");
+		$this->get_by_couple($couple_id);
 	}
 
 
