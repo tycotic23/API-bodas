@@ -64,6 +64,11 @@
                                                             Invitados
                                                         </a>
                                                     </td>
+                                                    <td>
+                                                        <a href="<?php echo site_url("mail/send_mail")?>" class="btn btn-primary btn-sm borrar">
+                                                            send mail
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                             <?php } ?>
                                                     
