@@ -13,6 +13,12 @@ Class Couple_model extends CI_Model {
         return $this->db->get($this->database)->result_array();
     }
 
+    function get_url_by_id($id=null){
+        $this->db->select("url");
+        $this->db->where($this->primary_key,$id);
+        $this->db->limit(1);
+        return $this->db->get($this->database)->row_array();
+    }
     function get_by_id($id=null){
         $this->db->where($this->primary_key,$id);
         $this->db->limit(1);

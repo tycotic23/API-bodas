@@ -25,6 +25,9 @@ class user extends CI_controller {
                         $this->session->set_userdata("usuario",$u["usuario"]);
                         $this->session->set_userdata("usuario_id",$u["usuario_id"]);
                         $this->session->set_userdata("pareja_id",$u["pareja_id"]);
+                        $this->load->model("couple_model");
+                        $url=$this->couple_model->get_url_by_id($u["pareja_id"]);
+                        $this->session->set_userdata("url",$url);
                         redirect("user/admin");
                     }else{
                         $this->session->set_flashdata("OP","INACTIVO");
