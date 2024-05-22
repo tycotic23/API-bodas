@@ -82,14 +82,6 @@ class Event extends CI_Controller {
 		}
 	}
 
-	/*
-	$this->form_validation->set_rules('username', 'Nombre de usuario', 'required|alpha_numeric|min_length[5]|max_length[12]');
-	Esta regla establece que el campo "username" es obligatorio,
-	solo puede contener caracteres alfanuméricos,
-	debe tener al menos 5 caracteres y
-	no puede exceder los 12 caracteres.
-	*/
-
 	public function valid_datetime($str) {
 		// Define el formato de fecha y hora que estás esperando
 		$formato = 'Y-m-d H:i:s';
@@ -157,7 +149,7 @@ class Event extends CI_Controller {
 	}
 
 /* 	
-	edita la pareja a la que pertenece un evento
+	edita la pareja a la que pertenece un evento (fue comentado por innecesario)
 	public function update_event_couple(){
         $this->load->model("event_model");
 		$event_id=$this->input->post("event_id");
@@ -242,8 +234,27 @@ class Event extends CI_Controller {
 			$this->load->model("event_model");
 			$this->event_model->delete_event($event_id);
 		}
-		redirect("home/index");
+		redirect("couple");
 	}
+
+	public function event_finish($event_id=null){
+		$event_id=intval($event_id,);
+		if($event_id>0){
+			$this->load->model("event_model");
+			$this->event_model->update_event_status($event_id, EVENTOS_FINALIZADO);
+		}
+		redirect("couple");
+	}
+
+	public function event_active($event_id=null){
+		$event_id=intval($event_id,);
+		if($event_id>0){
+			$this->load->model("event_model");
+			$this->event_model->update_event_status($event_id, EVENTOS_ACTIVO);
+		}
+		redirect("couple");
+	}
+
 
 }
 

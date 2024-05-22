@@ -55,8 +55,7 @@ Class Guest_x_event_model extends CI_Model {
         return $this->db->affected_rows();
     }
 
-    public function event_confirm($guest_x_event_id){
-        $asist="1";
+    public function update_status_guest_x_event($guest_x_event_id,$asist){
         $this->db->set("asistencia",$asist);
         $this->db->where($this->primary_key,$guest_x_event_id);
         $this->db->update($this->database);

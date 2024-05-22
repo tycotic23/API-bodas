@@ -92,21 +92,20 @@ Class Event_model extends CI_Model {
         return $this->db->affected_rows();
     }
 
+    public function update_event_status($event_id=null,$status){
+        $this->db->set("estado",$status);
+        $this->db->where($this->primary_key,$event_id);
+        $this->db->limit(1);
+        $this->db->update($this->database);
+        return $this->db->affected_rows();
+    }
+
     public function delete_event($event_id=""){
         $this->db->where($this->primary_key,$event_id);
         $this->db->limit(1);
         $this->db->delete($this->database);
         return $this->db->affected_rows();
     }
-
-
-    public function ingresar_fecha($fecha) {
-        // Convertir la fecha al formato de MySQL (Y-m-d)
-        $fecha_mysql = date('Y-m-d', strtotime($fecha));
-        // Insertar la fecha en la base de datos
-        $this->db->insert('mi_tabla', $data);
-    }
-
 
 }
 ?>
