@@ -48,6 +48,7 @@ class Event extends CI_Controller {
 		}else{
 			$this->load->model("event_model");
 			$datos["event_x_couple"]=$this->event_model->get_by_couple($couple_id);
+			$datos["couple_id"]=$this->session->userdata("pareja_id");
 			$this->load->view('event_x_couple',$datos);
 		}
 	}

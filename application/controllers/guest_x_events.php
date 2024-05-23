@@ -15,6 +15,24 @@ class guest_x_events extends CI_Controller {
     public function index(){
     redirect("guest/load_view");
     }
+
+    public function add_guest_to_event_view($couple_id=null){
+        if($couple_id){
+            $datos=array();
+            $this->load->model('guest_model');
+            $this->load->model('event_model');
+            $datos["guest"]=$this->guest_model->get_by_couple($couple_id);
+            $datos["event"]=$this->event_model->get_by_couple($couple_id);
+            $this->load->view("forms/form_add_guest_to_event",$datos);
+
+        }else{
+            redirect("couple");
+        }
+
+            
+
+    }
+
     public function get_guest_by_email(){
 
         {
@@ -33,20 +51,38 @@ class guest_x_events extends CI_Controller {
                 if($this->guest_model->check_mail($email)){
                     $datos_guest=$this->guest_model->get_by_email($email);
                     //$this->session->set_userdata('guest_id',$datos_guest["invitado_id"]);
-                    $this->session->set_flashdata('OP','APPROVED');
                     $this->get_by_guest($datos_guest["invitado_id"]);
 
                 }else{
-                    $this->session->set_flashdata("OP","INEXIST");
                     $this->load->view('lists/list_event',$datos);
                 }
             }
         }
     }
 
-    public function get_by_guest($guest_id=false){
-        if($this->session->flashdata("OP") === 'APPROVED'){
-                if($guest_id === false){
+    public function create_guest_x_events($event_id=null,$guest_id=null){
+            
+            $this->form_validation->set_rules('event_id', 'Event_id', 'required|trim|is_natural');
+            $this->form_validation->set_rules('guest_id', 'Guest_id', 'required|trim|is_natural');
+    
+            if($this->form_validation->run()===false){
+                $this->session->set_flashdata('OP','PROHIBIDO');
+                redirect("home");
+                
+            }else{
+                $event_id=$this->input->post("event_id");
+		        $guest_id=$this->input->post("guest_id");
+                $this->load->model("guest_x_event_model");
+                $this->guest_x_event_model->create_guest_x_event($event_id,$guest_id);
+                redirect("couple");
+            }
+    }
+
+
+
+    public function get_by_guest($guest_id=null){
+
+                if(!$guest_id){
                     redirect('guest/load_view');
                 }else{
                     $datos=array();
@@ -55,24 +91,19 @@ class guest_x_events extends CI_Controller {
                     $datos["total"]=count($datos["invitados_x_evento"]);
                     $this->load->view('guest_x_event',$datos);
                 }
-            }else{
-                redirect('guest/load_view');
             }
-	}
 
-    public function event_confirm($guest_x_event_id){// 0=no dijo nada 1=asiste 2=no asiste
+    public function event_confirm($guest_x_event_id=null){
         $this->load->model("guest_x_event_model");
         //$guest_x_event_id=$this->input->post("guest_x_event_id");
         $this->guest_x_event_model->update_status_guest_x_event($guest_x_event_id,CONFIRMAR_ASISTENCIA);
-        $this->session->set_flashdata('OP','APPROVED');
         $this->get_by_guest($guest_x_event_id);
     }
 
-    public function event_disconfirm($guest_x_event_id){// 0=no dijo nada 1=asiste 2=no asiste
+    public function event_disconfirm($guest_x_event_id=null){
         $this->load->model("guest_x_event_model");
         //$guest_x_event_id=$this->input->post("guest_x_event_id");
         $this->guest_x_event_model->update_status_guest_x_event($guest_x_event_id,DESCONFIRMAR_ASISTENCIA);
-        $this->session->set_flashdata('OP','APPROVED');
         $this->get_by_guest($guest_x_event_id);
     }
 
@@ -82,7 +113,7 @@ class guest_x_events extends CI_Controller {
 			$this->load->model("guest_x_event_model");
 			$this->guest_x_event_model->delete_guest_x_event($guest_x_event_id);
 		}
-		redirect("guest_x_events/get_by_guest/1");
+		redirect("couple");
 	}
 
 }

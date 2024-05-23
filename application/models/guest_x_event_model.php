@@ -32,12 +32,9 @@ Class Guest_x_event_model extends CI_Model {
         }
     }
 
-    public function create_guest_x_event ($event_id="",$guest_id="",$asist="",$coments=""){
-
-        $this->db->set("evento_id",$name);
+    public function create_guest_x_event ($event_id=null,$guest_id=null){
+        $this->db->set("evento_id",$event_id);
         $this->db->set("invitado_id",$guest_id);
-        $this->db->set("asistencia",$asist);
-        $this->db->set("comentario",$coments);
         $this->db->insert($this->database);
     }
 

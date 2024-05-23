@@ -55,8 +55,6 @@
                                             <br>
                                     <button type="submit" class="btn btn-primary">Crear nuevo evento</button>
 
-                        
-                                        <?php echo form_close() ?>
                                         </div>
                             </div>
 

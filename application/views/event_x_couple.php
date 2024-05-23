@@ -92,12 +92,16 @@
                                             <!-- fin del table -->
                                         <?php }else{?>
                                                 <div class="alert alert-success" role="alert">
-                                                    NO SE EVENTOS!
+                                                    NO HAY EVENTOS!
                                                 </div>
                                         <?php }?>
 
                                         <a href="<?php echo site_url("event/view_new_event"); ?>" class="btn btn-primary btn-sm borrar">
                                                 CREAR NUEVO EVENTO
+                                        </a>
+                                        <br>
+                                        <a href="<?php echo site_url("guest_x_events/add_guest_to_event_view/".$couple_id); ?>" class="btn btn-primary btn-sm borrar">
+                                                AGREGAR INVITADO A EVENTO
                                         </a>
 
                         </div>
