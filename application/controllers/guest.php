@@ -108,8 +108,10 @@ class Guest extends CI_Controller {
     }
 }
 
-	public function get_by_couple($couple_id=false){
-			
+	public function get_by_couple(){
+
+		$couple_id=$this->session->userdata("pareja_id");
+
 		if(!$couple_id){
 			redirect('home');
 		}else{
@@ -219,7 +221,7 @@ class Guest extends CI_Controller {
 		$this->get_by_couple($couple_id);
 	}
 
-	/* para enviar un mail */
+	/* PARA ENVIAR UN MAIL */
 
 	public function send_mail($guest_mail=null,$url=null) {
 		

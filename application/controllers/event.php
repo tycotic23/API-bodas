@@ -16,8 +16,8 @@ class Event extends CI_Controller {
 	}
 
 	/* redirect to edit_view */
-	public function edit_view($event_id){
-		if(!$event_id){
+	public function edit_view($event_id){ /* este controlador hay que actualizarlo para no poder acceder desde cualquier pareja a cualquier evento */
+		if(!$event_id){					/* basicamente un filtrado por pareja_id  */
 			$this->session->set_flashdata('OP','PROHIBIDO');
 			redirect('couple');
 		}else{
@@ -41,8 +41,9 @@ class Event extends CI_Controller {
     	}
 	}
 
-	public function get_by_couple($couple_id=false){
+	public function get_by_couple(){
 		
+		$couple_id=$this->session->userdata("pareja_id");
 		if(!$couple_id){
 			redirect('home');
 		}else{

@@ -55,12 +55,12 @@
                                                     <td><?php echo $t["url"]; ?></td>
 
                                                     <td>
-                                                        <a href="<?php echo site_url("event/get_by_couple/".$t["pareja_id"])?>" class="btn btn-danger btn-sm borrar">
+                                                        <a href="<?php echo site_url("event/get_by_couple")?>" class="btn btn-danger btn-sm borrar">
                                                             Eventos
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        <a href="<?php echo site_url("guest/get_by_couple/".$t["pareja_id"] )?>" class="btn btn-danger btn-sm borrar">
+                                                        <a href="<?php echo site_url("guest/get_by_couple" )?>" class="btn btn-danger btn-sm borrar">
                                                             Invitados
                                                         </a>
                                                     </td>
@@ -82,7 +82,7 @@
                                                 </div>
                                         <?php }?>
             </div>
-                                    <a href="<?php echo site_url("couple/edit_view/".$t["pareja_id"] )?>" class="btn btn-primary btn-sm borrar">
+                                    <a href="<?php echo site_url("couple/edit_view/")?>" class="btn btn-primary btn-sm borrar">
                                                             editar datos de la pareja
                                     </a>
                     </div>

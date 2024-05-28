@@ -16,7 +16,10 @@ class guest_x_events extends CI_Controller {
     redirect("guest/load_view");
     }
 
-    public function add_guest_to_event_view($couple_id=null){
+    public function add_guest_to_event_view(){
+
+        $couple_id=$this->session->userdata("pareja_id");
+        
         if($couple_id){
             $datos=array();
             $this->load->model('guest_model');
