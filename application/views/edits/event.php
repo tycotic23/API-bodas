@@ -101,7 +101,7 @@
                                                 <!--     -->
                                                 <br>
                                             <label for="date_event" >horario:</label>
-                                            <input name="date_event" id="date_event" />
+                                            <input name="date_event" id="date_event"/>
                                             
                                             <br>
                                             <br>

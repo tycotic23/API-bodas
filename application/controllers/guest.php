@@ -14,10 +14,10 @@ class Guest extends CI_Controller {
 		if(!$email){
 			redirect('home');
 		}else{
-			$this->load->model("guest_model");
-			if($this->guest_model->check_mail($email)){
+			$this->load->model("Guest_model");
+			if($this->Guest_model->check_mail($email)){
 				$datos=array();
-				$datos=$this->guest_model->get_id_by_email($email);
+				$datos=$this->Guest_model->get_id_by_email($email);
 				redirect("guest_x_events/get_by_guest/".$datos["invitado_id"]);
 			}else{
 				redirect('home');
@@ -41,9 +41,9 @@ class Guest extends CI_Controller {
 			$this->session->set_flashdata('OP','PROHIBIDO');
 			redirect('couple');
 		}else{
-			$this->load->model("guest_model");
+			$this->load->model("Guest_model");
 			$datos=array();
-			$datos["guest"]=$this->guest_model->get_by_id($guest_id);
+			$datos["guest"]=$this->Guest_model->get_by_id($guest_id);
 			$this->load->view("edits/guest",$datos);
 		}
 	}
@@ -75,15 +75,15 @@ class Guest extends CI_Controller {
 			$this->get_by_couple($couple_id);
 			
 		}else{
-			$this->load->model('guest_model');
+			$this->load->model('Guest_model');
 			$name=$this->input->post("name");
 			$surname=$this->input->post("surname");
 			$email=$this->input->post("mail");
 			$phone_number=$this->input->post("phone_number");
 			$attached=$this->input->post("attached");
 			$couple_id=$this->session->userdata("pareja_id");
-				if (!($this->guest_model->check_mail($email))) {
-					$this->guest_model->create_guest($name,$surname,$email,$phone_number,$attached,$couple_id);
+				if (!($this->Guest_model->check_mail($email))) {
+					$this->Guest_model->create_guest($name,$surname,$email,$phone_number,$attached,$couple_id);
 					$url=$this->session->userdata("url");
 					$this->send_mail($email,$url);
 					$this->get_by_couple($couple_id);
@@ -100,9 +100,9 @@ class Guest extends CI_Controller {
 			$this->session->set_flashdata('OP','PROHIBIDO');
 			redirect('user/index');
 			}else{
-			$this->load->model("guest_model"); 
+			$this->load->model("Guest_model"); 
 			$datos=array();
-			$datos["guests"]=$this->guest_model->list_guest();
+			$datos["guests"]=$this->Guest_model->list_guest();
 			$datos["total"]=count($datos["guests"]);
 			$this->load->view("lists/list_guest",$datos); 
     }
@@ -115,8 +115,8 @@ class Guest extends CI_Controller {
 		if(!$couple_id){
 			redirect('home');
 		}else{
-			$this->load->model("guest_model");
-			$datos["guests"]=$this->guest_model->get_by_couple($couple_id);
+			$this->load->model("Guest_model");
+			$datos["guests"]=$this->Guest_model->get_by_couple($couple_id);
 			$datos["total"]=count($datos["guests"]);
 			$this->load->view('lists/list_guest',$datos);
 		}
@@ -163,8 +163,8 @@ class Guest extends CI_Controller {
 		if(!$guest_id){
 			redirect("couple");
 		}else{
-			$this->load->model("guest_model");
-			$this->guest_model->update_guest_name($guest_id,$name);
+			$this->load->model("Guest_model");
+			$this->Guest_model->update_guest_name($guest_id,$name);
 			$this->edit_view($guest_id);
 		}
     }
@@ -173,8 +173,8 @@ class Guest extends CI_Controller {
         if(!$guest_id){
 			redirect("couple");
 		}else{
-			$this->load->model("guest_model");
-			$this->guest_model->update_guest_surname($guest_id,$surname);
+			$this->load->model("Guest_model");
+			$this->Guest_model->update_guest_surname($guest_id,$surname);
 			$this->edit_view($guest_id);
 		}
     }
@@ -183,8 +183,8 @@ class Guest extends CI_Controller {
         if(!$guest_id){
 			redirect("couple");
 		}else{
-			$this->load->model("guest_model");
-			$this->guest_model->update_guest_phone_number($guest_id,$phone_number);
+			$this->load->model("Guest_model");
+			$this->Guest_model->update_guest_phone_number($guest_id,$phone_number);
 			$this->edit_view($guest_id);
 		}
     }
@@ -193,17 +193,17 @@ class Guest extends CI_Controller {
         if(!$guest_id){
 			redirect("couple");
 		}else{
-			$this->load->model("guest_model");
-			$this->guest_model->update_guest_attached($guest_id,$attached);
+			$this->load->model("Guest_model");
+			$this->Guest_model->update_guest_attached($guest_id,$attached);
 			$this->edit_view($guest_id);
 		}
     }
 
 	public function update_guest_couple_id(){
-        $this->load->model("guest_model");
+        $this->load->model("Guest_model");
 		$couple_id=$this->input->post("guest_id");
 		$couple_id=$this->input->post("couple_id");
-		$this->guest_model->update_phone_number_guest($guest_id,$couple_id);
+		$this->Guest_model->update_phone_number_guest($guest_id,$couple_id);
 		redirect("home/index");
     }
 
@@ -215,8 +215,8 @@ class Guest extends CI_Controller {
 		}
 		$guest_id=intval($id);
 		if($guest_id>0){
-			$this->load->model("guest_model");
-			$this->guest_model->delete_guest($guest_id);
+			$this->load->model("Guest_model");
+			$this->Guest_model->delete_guest($guest_id);
 		}
 		$this->get_by_couple($couple_id);
 	}

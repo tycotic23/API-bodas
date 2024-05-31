@@ -1,5 +1,5 @@
 <?php 
-Class localities_model extends CI_Model {
+Class Localities_model extends CI_Model {
 
     protected $database="localidades";
     protected $primary_key="localidad_id";

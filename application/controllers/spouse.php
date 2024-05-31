@@ -16,9 +16,9 @@ class Spouse extends CI_Controller {
 			$this->session->set_flashdata('OP','PROHIBIDO');
 			redirect('couple');
 		}else{
-			$this->load->model("spouse_model");
+			$this->load->model("Spouse_model");
 			$datos=array();
-			$datos["spouse"]=$this->spouse_model->get_by_id($spouse_id);
+			$datos["spouse"]=$this->Spouse_model->get_by_id($spouse_id);
 			$this->load->view("edits/spouse",$datos);
 		}
 	}
@@ -27,8 +27,8 @@ class Spouse extends CI_Controller {
 		$name=$this->input->post("name");
 		$surname=$this->input->post("surname");
 		$birthdate=$this->input->post("birthdate");
-		$this->load->model('spouse_model');
-        $this->spouse_model->create_spouse($name,$surname,$birthdate);
+		$this->load->model('Spouse_model');
+        $this->Spouse_model->create_spouse($name,$surname,$birthdate);
         redirect("home/index");
 	}
 
@@ -37,9 +37,9 @@ class Spouse extends CI_Controller {
 			$this->session->set_flashdata('OP','PROHIBIDO');
 			redirect('user/index');
 			}else{
-			$this->load->model("spouse_model"); 
+			$this->load->model("Spouse_model"); 
 			$datos=array();
-			$datos["spouse"]=$this->spouse_model->list_spouse();
+			$datos["spouse"]=$this->Spouse_model->list_spouse();
 			$datos["total"]=count($datos["spouse"]);
 			$this->load->view("lists/list_spouse",$datos); 
     }
@@ -98,28 +98,28 @@ class Spouse extends CI_Controller {
 	}
 
 	public function update_spouse_name($spouse_id,$name){
-        $this->load->model("spouse_model");
-		$this->spouse_model->update_spouse_name($spouse_id,$name);
+        $this->load->model("Spouse_model");
+		$this->Spouse_model->update_spouse_name($spouse_id,$name);
 		redirect("couple");
     }
 
 	public function update_spouse_surname($spouse_id,$surname){
-		$this->load->model("spouse_model");
-		$this->spouse_model->update_spouse_surname($spouse_id,$surname);
+		$this->load->model("Spouse_model");
+		$this->Spouse_model->update_spouse_surname($spouse_id,$surname);
 		redirect("couple");
 	}        
 
 	public function update_spouse_birthdate($spouse_id,$birthdate){
-        $this->load->model("spouse_model");
-		$this->spouse_model->update_spouse_birthdate($spouse_id,$birthdate);
+        $this->load->model("Spouse_model");
+		$this->Spouse_model->update_spouse_birthdate($spouse_id,$birthdate);
 		redirect("couple");
     }
 
 	public function delete_spouse($spouse_id=null){
 		$spouse_id=intval($id);
 		if($spouse_id>0){
-			$this->load->model("spouse_model");
-			$this->spouse_model->delete_spouse($spouse_id);
+			$this->load->model("Spouse_model");
+			$this->Spouse_model->delete_spouse($spouse_id);
 		}
 		redirect("home/index");
 	}

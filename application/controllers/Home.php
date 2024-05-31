@@ -11,8 +11,8 @@ class Home extends CI_Controller {
 	}
 	/*public function __construct(){
 		parent::__construct();
-		$this->load->model('couple_model');
-		$u=$this->couple_model->get_by_id($id);
+		$this->load->model('Couple_model');
+		$u=$this->Couple_model->get_by_id($id);
 		if(!$this->session->userdata('usuario_id')){
 			$this->session->set_flashdata('OP','PROHIBIDO');
 			redirect('user/index');
@@ -28,8 +28,8 @@ class Home extends CI_Controller {
 			$this->load->view('home',$this->datos);
 		}
 		else{
-				$this->load->model('couple_model');
-				$u=$this->couple_model->get_by_url($url);
+				$this->load->model('Couple_model');
+				$u=$this->Couple_model->get_by_url($url);
 				if(!$u){
 					redirect("home/index");
 				}
@@ -58,13 +58,13 @@ class Home extends CI_Controller {
 			$this->load->view('home',$this->datos);
 		}
 		else{
-				$this->load->model('couple_model');
-				if(!$this->couple_model->check_url($url)){
+				$this->load->model('Couple_model');
+				if(!$this->Couple_model->check_url($url)){
 					$this->session->set_flashdata("OP","INEXISTENTE");
 					$this->load->view("home");
 
 				}
-				$u=$this->couple_model->get_by_url($url);
+				$u=$this->Couple_model->get_by_url($url);
 				//esto sucede cuando no encuentra la url de esa pareja
 				if(!$u){
 					redirect("home/index");

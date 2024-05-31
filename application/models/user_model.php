@@ -1,5 +1,5 @@
 <?php 
-Class user_model extends CI_Model {
+Class User_model extends CI_Model {
     
     protected $database="usuarios";
     protected $primary_key="usuario_id";

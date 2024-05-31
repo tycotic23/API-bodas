@@ -11,10 +11,10 @@ class Localities extends CI_Controller {
 	}
 
 	public function create_localitie(){
-		$this->load->model('localities_model');
+		$this->load->model('Localities_model');
 		$localitie=$this->input->post("localitie");
 		$postal_code=$this->input->post("postal_code");
-			if(!($this->localities_model->check_postal_code($postal_code))){
+			if(!($this->Localities_model->check_postal_code($postal_code))){
 			$this->localitie_model->create_localitie($localitie,$postal_code);
 			}
 				redirect("home");
@@ -25,9 +25,9 @@ class Localities extends CI_Controller {
 			$this->session->set_flashdata('OP','PROHIBIDO');
 			redirect('user/index');
 			}else{
-			$this->load->model("localities_model"); 
+			$this->load->model("Localities_model"); 
 			$datos=array();
-			$datos["localities"]=$this->localities_model->list_localities();
+			$datos["localities"]=$this->Localities_model->list_localities();
 			$datos["total"]=count($datos["localities"]);
 			$this->load->view("lists/list_localities",$datos); 
     }
@@ -52,8 +52,8 @@ class Localities extends CI_Controller {
 	public function delete_localitie($localitie_id=null){
 		$localitie_id=intval($localitie_id);
 		if($localitie_id>0){
-			$this->load->model("localities_model");
-			$this->localities_model->delete_localitie($localitie_id);
+			$this->load->model("Localities_model");
+			$this->Localities_model->delete_localitie($localitie_id);
 		}
 		redirect("home/index");
 	}

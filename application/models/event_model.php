@@ -47,12 +47,13 @@ Class Event_model extends CI_Model {
         return $this->db->affected_rows();
     }
     public function update_event_location($event_id="",$location=""){
-        $this->db->set("locacion",$location);
+        $this->db->set("nombre",$location);
         $this->db->where($this->primary_key,$event_id);
         $this->db->limit(1);
         $this->db->update($this->database);
         return $this->db->affected_rows();
     }
+
     public function update_event_name_street($event_id="",$direction_street){
         $this->db->set("direccion_calle",$direction_street);
         $this->db->where($this->primary_key,$event_id);
@@ -76,8 +77,8 @@ Class Event_model extends CI_Model {
         return $this->db->affected_rows();
     }
 
-    public function update_event_name($event_id="",$event_name=""){
-        $this->db->set("nombre",$event_name);
+    public function update_event_name($event_id="",$name_event=""){
+        $this->db->set("nombre",$name_event);
         $this->db->where($this->primary_key,$event_id);
         $this->db->limit(1);
         $this->db->update($this->database);

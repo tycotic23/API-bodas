@@ -91,7 +91,7 @@ class Event extends CI_Controller {
 		$fecha_hora = DateTime::createFromFormat($formato, $str);
 
 		// Verifica si la fecha y hora se analizó correctamente y coincide con el formato
-		if ($fecha_hora && $fecha_hora->format($formato) == $str) {
+		if (($fecha_hora && $fecha_hora->format($formato) == $str) || $str==null) {
 			return true; // La fecha y hora es válida
 		} else {
 			return false; // La fecha y hora no es válida
@@ -103,12 +103,13 @@ class Event extends CI_Controller {
         $this->form_validation->set_rules('direction_street', 'Direction_street', 'trim|strtolower');
 		$this->form_validation->set_rules('direction_number', 'Direction_number', 'is_natural');
 		$this->form_validation->set_rules('location_id', 'Location_id', 'is_natural');
-		$this->form_validation->set_rules('name_event', 'Name_event', 'trim');
-		$this->form_validation->set_rules('date_event', 'Date_event', 'callback_valid_datetime');
+		$this->form_validation->set_rules('name_event', 'Name_event', 'trim|strtolower');
+		$this->form_validation->set_rules('date_event', 'Date_event', 'callback_valid_datetime'); /* hay que arreglar que no puede recibir nulo */
 
 		if($this->form_validation->run()===false){
 
-			$this->edit_view($event_id);
+			redirect("home");
+			/* $this->edit_view($event_id); */
 			
 		}else{
 
@@ -211,7 +212,7 @@ class Event extends CI_Controller {
 			redirect("couple");
 		}else{
 			$this->load->model("event_model");
-			$this->event_model->update_event_name($event_id=null,$name_event=null);
+			$this->event_model->update_event_name($event_id,$name_event);
 			$datos=array();
 			$datos["event"]=$this->event_model->get_by_id($event_id);
 			$this->load->view("edits/event",$datos);
