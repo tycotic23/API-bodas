@@ -21,9 +21,9 @@ class Event extends CI_Controller {
 			$this->session->set_flashdata('OP','PROHIBIDO');
 			redirect('couple');
 		}else{
-			$this->load->model("event_model");
+			$this->load->model("Event_model");
 			$datos=array();
-			$datos["event"]=$this->event_model->get_by_id($event_id);
+			$datos["event"]=$this->Event_model->get_by_id($event_id);
 			$this->load->view("edits/event",$datos);
 		}
 	}
@@ -33,9 +33,9 @@ class Event extends CI_Controller {
 			$this->session->set_flashdata('OP','PROHIBIDO');
 			redirect('user/index');
 			}else{
-			$this->load->model("event_model"); 
+			$this->load->model("Event_model"); 
 			$datos=array();
-			$datos["events"]=$this->event_model->list_event();
+			$datos["events"]=$this->Event_model->list_event();
 			$datos["total"]=count($datos["events"]);
 			$this->load->view("lists/list_event",$datos); 
     	}
@@ -47,8 +47,8 @@ class Event extends CI_Controller {
 		if(!$couple_id){
 			redirect('home');
 		}else{
-			$this->load->model("event_model");
-			$datos["event_x_couple"]=$this->event_model->get_by_couple($couple_id);
+			$this->load->model("Event_model");
+			$datos["event_x_couple"]=$this->Event_model->get_by_couple($couple_id);
 			$datos["couple_id"]=$this->session->userdata("pareja_id");
 			$this->load->view('event_x_couple',$datos);
 		}
@@ -71,7 +71,7 @@ class Event extends CI_Controller {
 			
 		}else{
 
-		$this->load->model('event_model');
+		$this->load->model('Event_model');
 		$couple_id=$this->session->userdata("pareja_id");
 		$location=$this->input->post("location");
 		$direction_street=$this->input->post("direction_street");
@@ -79,7 +79,7 @@ class Event extends CI_Controller {
 		$location_id=$this->input->post("location_id");
 		$name_event=$this->input->post("name_event");
 		$date_time=$this->input->post("date_event");
-		$this->event_model->create_event($couple_id,$location,$direction_street,$direction_number,$location_id,$name_event,$date_time);
+		$this->Event_model->create_event($couple_id,$location,$direction_street,$direction_number,$location_id,$name_event,$date_time);
 		redirect("couple/view_couple_events");
 		}
 	}
@@ -154,10 +154,10 @@ class Event extends CI_Controller {
 /* 	
 	edita la pareja a la que pertenece un evento (fue comentado por innecesario)
 	public function update_event_couple(){
-        $this->load->model("event_model");
+        $this->load->model("Event_model");
 		$event_id=$this->input->post("event_id");
 		$couple_id=$this->input->post("pareja_id");
-		$this->event_model->update_event_couple($event_id,$couple_id);
+		$this->Event_model->update_event_couple($event_id,$couple_id);
 		redirect("home/index");
     } */
 
@@ -166,10 +166,10 @@ class Event extends CI_Controller {
 		if(!$event_id){
 			redirect("couple");
 		}else{
-			$this->load->model("event_model");
-			$this->event_model->update_event_location($event_id,$location);
+			$this->load->model("Event_model");
+			$this->Event_model->update_event_location($event_id,$location);
 			$datos=array();
-			$datos["event"]=$this->event_model->get_by_id($event_id);
+			$datos["event"]=$this->Event_model->get_by_id($event_id);
 			$this->load->view("edits/event",$datos);
 		}
     }
@@ -179,10 +179,10 @@ class Event extends CI_Controller {
 		if(!$event_id){
 			redirect("couple");
 		}else{
-			$this->load->model("event_model");
-			$this->event_model->update_event_name_street($event_id,$direction_street);
+			$this->load->model("Event_model");
+			$this->Event_model->update_event_name_street($event_id,$direction_street);
 			$datos=array();
-			$datos["event"]=$this->event_model->get_by_id($event_id);
+			$datos["event"]=$this->Event_model->get_by_id($event_id);
 			$this->load->view("edits/event",$datos);
 		}
     }
@@ -191,19 +191,19 @@ class Event extends CI_Controller {
         if(!$event_id){
 			redirect("couple");
 		}else{
-			$this->load->model("event_model");
-			$this->event_model->update_event_number_street($event_id,$direction_number);
+			$this->load->model("Event_model");
+			$this->Event_model->update_event_number_street($event_id,$direction_number);
 			$datos=array();
-			$datos["event"]=$this->event_model->get_by_id($event_id);
+			$datos["event"]=$this->Event_model->get_by_id($event_id);
 			$this->load->view("edits/event",$datos);
 		}
     }
 
 	public function update_event_localities($event_id=null,$location_id=null){
-        $this->load->model("event_model");
-		$this->event_model->update_event_localities($event_id,$location_id);
+        $this->load->model("Event_model");
+		$this->Event_model->update_event_localities($event_id,$location_id);
 		$datos=array();
-		$datos["event"]=$this->event_model->get_by_id($event_id);
+		$datos["event"]=$this->Event_model->get_by_id($event_id);
 		$this->load->view("edits/event",$datos);
     }
 
@@ -211,10 +211,10 @@ class Event extends CI_Controller {
 		if(!$event_id){
 			redirect("couple");
 		}else{
-			$this->load->model("event_model");
-			$this->event_model->update_event_name($event_id,$name_event);
+			$this->load->model("Event_model");
+			$this->Event_model->update_event_name($event_id,$name_event);
 			$datos=array();
-			$datos["event"]=$this->event_model->get_by_id($event_id);
+			$datos["event"]=$this->Event_model->get_by_id($event_id);
 			$this->load->view("edits/event",$datos);
 		}
     }
@@ -223,10 +223,10 @@ class Event extends CI_Controller {
 		if(!$event_id){
 			redirect("couple");
 		}else{
-			$this->load->model("event_model");
-			$this->event_model->update_event_date_time($event_id,$date_event);
+			$this->load->model("Event_model");
+			$this->Event_model->update_event_date_time($event_id,$date_event);
 			$datos=array();
-			$datos["event"]=$this->event_model->get_by_id($event_id);
+			$datos["event"]=$this->Event_model->get_by_id($event_id);
 			$this->load->view("edits/event",$datos);
 		}
     }
@@ -234,8 +234,8 @@ class Event extends CI_Controller {
 	public function delete_event($event_id=null){
 		$event_id=intval($event_id);
 		if($event_id>0){
-			$this->load->model("event_model");
-			$this->event_model->delete_event($event_id);
+			$this->load->model("Event_model");
+			$this->Event_model->delete_event($event_id);
 		}
 		redirect("couple");
 	}
@@ -243,8 +243,8 @@ class Event extends CI_Controller {
 	public function event_finish($event_id=null){
 		$event_id=intval($event_id,);
 		if($event_id>0){
-			$this->load->model("event_model");
-			$this->event_model->update_event_status($event_id, EVENTOS_FINALIZADO);
+			$this->load->model("Event_model");
+			$this->Event_model->update_event_status($event_id, EVENTOS_FINALIZADO);
 		}
 		redirect("couple");
 	}
@@ -252,8 +252,8 @@ class Event extends CI_Controller {
 	public function event_active($event_id=null){
 		$event_id=intval($event_id,);
 		if($event_id>0){
-			$this->load->model("event_model");
-			$this->event_model->update_event_status($event_id, EVENTOS_ACTIVO);
+			$this->load->model("Event_model");
+			$this->Event_model->update_event_status($event_id, EVENTOS_ACTIVO);
 		}
 		redirect("couple");
 	}

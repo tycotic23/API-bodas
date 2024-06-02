@@ -18,36 +18,75 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <h1> esta es la invitacion que recibe el invitado (puedo entrar sin loguearme) </h1>
-            <br>
-            <?php if(!$couple_id){ ?>
+          <div class="card">
+            <div class="card-body">  
+              <h1> esta es la invitacion que recibe el invitado (puedo entrar sin loguearme) </h1>
+                <br>
+                <?php if(!isset($couple)){ ?>
 
-              <div class="alert alert-success" role="alert">
-                NO SE ENCONTRO PAREJA!
+                  <div class="alert alert-success" role="alert">
+                    NO SE ENCONTRO PAREJA!
+                </div>
+                    <?php }if(!isset($events)){ ?>
+
+                      <div class="alert alert-success" role="alert">
+                          NO SE ENCONTRARON EVENTOS!
+                      </div>
+
+                    <?php }else{ ?>
+                      
+                      <ul class="list-group" id="lista" name="lista">
+                        <li class="list-group-item">
+                          <p> total de eventos: <b> <?php echo $total; ?> </b>
+                          </p>
+                        </li>
+                                <!-- comienzo del table -->
+
+                  <table class="table">
+                                            
+                        <thead>
+                          <tr>
+                            <th scope="col">evento_id:</th>
+                            <th scope="col">pareja_id:</th>
+                            <th scope="col">locacion:</th>
+                            <th scope="col">direccion_calle:</th>
+                            <th scope="col">direccion_numero:</th>
+                            <th scope="col">localidad_id:</th>
+                            <th scope="col">nombre:</th>
+                            <th scope="col">horario:</th>
+                            <th scope="col">estado:</th>
+                            <th scope="col">&nbsp;</th>
+                          </tr>
+                        </thead>
+                    <tbody>
+                      <?php foreach ($events as $t){ ?>
+
+                        <tr>
+                          <td><?php echo $t["evento_id"]; ?></td>
+                          <td><?php echo $t["pareja_id"]; ?></td>
+                          <td><?php echo $t["locacion"]; ?></td>
+                          <td><?php echo $t["direccion_calle"]; ?></td>
+                          <td><?php echo $t["direccion_numero"]; ?></td>
+                          <td><?php echo $t["localidad_id"]; ?></td>
+                          <td><?php echo $t["nombre"]; ?></td>
+                          <td><?php echo $t["horario"]; ?></td>
+                          <td><?php echo $t["estado"]; ?></td>
+                          <td>
+                            <a href="<?php echo site_url("guest/load_view"); ?>" class="btn btn-danger btn-sm">
+                                confirmar asistencia!
+                            </a>
+                          </td>
+                        </tr>
+
+                      <?php }  ?>
+
+                    </tbody>
+                    
+                  </table>
+                    <!-- fin del table -->
+                <?php } ?>
+                </div>
             </div>
-            
-              <?php }else{ ?>
-
-                <?php echo $cvu_regalos; ?>
-            <br>
-            <?php echo $conyugue_1; ?>
-            <br>
-            <?php echo $conyugue_2; ?>
-            <br>
-            <?php echo $url; ?>
-            <!-- <br>
-            <a href="<?php// echo site_url("event/get_by_couple/".$couple_id); ?>" class="btn btn-danger btn-sm borrar">ver evento</a>
-            <br> -->
-
-            <br>
-            <a href="<?php echo site_url("guest_x_events") ?>" class="btn btn-danger btn-sm borrar">ver eventos</a>
-            <br> 
-
-            
-            
-            <?php } ?>
-
-
         </div>
       </div>
     </div>

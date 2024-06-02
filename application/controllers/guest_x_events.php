@@ -75,8 +75,8 @@ class guest_x_events extends CI_Controller {
             }else{
                 $event_id=$this->input->post("event_id");
 		        $guest_id=$this->input->post("guest_id");
-                $this->load->model("guest_x_event_model");
-                $this->guest_x_event_model->create_guest_x_event($event_id,$guest_id);
+                $this->load->model("Guest_x_event_model");
+                $this->Guest_x_event_model->create_guest_x_event($event_id,$guest_id);
                 redirect("couple");
             }
     }
@@ -89,32 +89,32 @@ class guest_x_events extends CI_Controller {
                     redirect('guest/load_view');
                 }else{
                     $datos=array();
-                    $this->load->model("guest_x_event_model");
-                    $datos["invitados_x_evento"]=$this->guest_x_event_model->get_by_guest($guest_id);
+                    $this->load->model("Guest_x_event_model");
+                    $datos["invitados_x_evento"]=$this->Guest_x_event_model->get_by_guest($guest_id);
                     $datos["total"]=count($datos["invitados_x_evento"]);
                     $this->load->view('guest_x_event',$datos);
                 }
             }
 
     public function event_confirm($guest_x_event_id=null){
-        $this->load->model("guest_x_event_model");
+        $this->load->model("Guest_x_event_model");
         //$guest_x_event_id=$this->input->post("guest_x_event_id");
-        $this->guest_x_event_model->update_status_guest_x_event($guest_x_event_id,CONFIRMAR_ASISTENCIA);
+        $this->Guest_x_event_model->update_status_guest_x_event($guest_x_event_id,CONFIRMAR_ASISTENCIA);
         $this->get_by_guest($guest_x_event_id);
     }
 
     public function event_disconfirm($guest_x_event_id=null){
-        $this->load->model("guest_x_event_model");
+        $this->load->model("Guest_x_event_model");
         //$guest_x_event_id=$this->input->post("guest_x_event_id");
-        $this->guest_x_event_model->update_status_guest_x_event($guest_x_event_id,DESCONFIRMAR_ASISTENCIA);
+        $this->Guest_x_event_model->update_status_guest_x_event($guest_x_event_id,DESCONFIRMAR_ASISTENCIA);
         $this->get_by_guest($guest_x_event_id);
     }
 
     public function delete_guest_x_event($guest_x_event_id=null){
 		$guest_x_event_id=intval($guest_x_event_id);
 		if($guest_x_event_id>0){
-			$this->load->model("guest_x_event_model");
-			$this->guest_x_event_model->delete_guest_x_event($guest_x_event_id);
+			$this->load->model("Guest_x_event_model");
+			$this->Guest_x_event_model->delete_guest_x_event($guest_x_event_id);
 		}
 		redirect("couple");
 	}

@@ -19,6 +19,14 @@ Class Couple_model extends CI_Model {
         $this->db->limit(1);
         return $this->db->get($this->database)->row_array();
     }
+
+    function get_id_by_url($url=null){
+        $this->db->select("pareja_id");
+        $this->db->where("url",$url);
+        $this->db->limit(1);
+        return $this->db->get($this->database)->row_array();
+    }
+
     function get_by_id($id=null){
         $this->db->where($this->primary_key,$id);
         $this->db->limit(1);
