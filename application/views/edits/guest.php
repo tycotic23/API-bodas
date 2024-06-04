@@ -33,7 +33,6 @@
                                                 <th scope="col">apellido:</th>
                                                 <th scope="col">mail:</th>
                                                 <th scope="col">telefono:</th>
-                                                <th scope="col">extras:</th>
                                                 <th scope="col">pareja_id:</th>
                                                 </tr>
                                             </thead>
@@ -46,7 +45,6 @@
                                                     <td><?php echo $t["apellido"]; ?></td>
                                                     <td><?php echo $t["mail"]; ?></td>
                                                     <td><?php echo $t["telefono"]; ?></td>
-                                                    <td><?php echo $t["extras"]; ?></td>
                                                     <td><?php echo $t["pareja_id"]; ?></td>
                                                     <td> &nbsp;</td>
 
@@ -84,12 +82,6 @@
                                             <label for="phone_number" >editar numero de telefono:</label>
                                             <input name="phone_number" id="phone_number" />
                                             
-                                                <!--     -->
-                                                <br>
-                                            <label for="attached" >editar invitados extras:</label>
-                                            <input name="attached" id="attached" />
-                                            
-                                                <!--     -->
                                             <br>
                                             <br>
                                     <button type="submit" class="btn btn-primary">Editar</button>

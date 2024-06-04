@@ -38,7 +38,6 @@
                                                 <th scope="col">apellido:</th>
                                                 <th scope="col">mail:</th>
                                                 <th scope="col">telefono:</th>
-                                                <th scope="col">extras:</th>
                                                 <th scope="col">pareja_id:</th>
                                                 <th scope="col">&nbsp;</th>
                                                 </tr>
@@ -52,7 +51,6 @@
                                                     <td><?php echo $t["apellido"]; ?></td>
                                                     <td><?php echo $t["mail"]; ?></td>
                                                     <td><?php echo $t["telefono"]; ?></td>
-                                                    <td><?php echo $t["extras"]; ?></td>
                                                     <td><?php echo $t["pareja_id"]; ?></td>
 
                                                     <td>

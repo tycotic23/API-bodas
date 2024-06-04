@@ -48,27 +48,12 @@ class Home extends CI_Controller {
 		}
 	}
 
-	 public function get_by_couple($couple_id){
-		
-		$couple_id=$this->session->userdata("pareja_id");
-		if(!$couple_id){
-			redirect('home');
-		}else{
-			$this->load->model("Event_model");
-			$datos["event_x_couple"]=$this->Event_model->get_by_couple($couple_id);
-			$datos["couple_id"]=$this->session->userdata("pareja_id");
-			$this->load->view('event_x_couple',$datos);
-		}
-	} 
-
-
 	public function couple_by_url ($url=false){
 
 		//esto sucede cuando la variable url esta vacia
 		if(!$url){
 			
-			$this->datos["couple_id"]=FALSE;
-			$this->load->view('home',$this->datos);
+			redirect("home/index");
 		}
 		else{
 		//esto sucede cuando la variable url contiene algo
@@ -78,20 +63,18 @@ class Home extends CI_Controller {
 					$this->load->view("home");
 
 				}
-				$u=$this->Couple_model->get_id_by_url($url);
+				$id=$this->Couple_model->get_id_by_url($url);
+				$u=$this->Couple_model->get_by_url($url);
 				//esto sucede cuando no encuentra la url de esa pareja
-				if(!$u){
+				if(!$id){
 					redirect("home/index");
 				}
 				else{
 					$this->load->model("Event_model");
 					$this->datos["couple"]=$u;
-					$this->datos["events"]=$this->Event_model->get_by_couple($u["pareja_id"]);
+					$this->datos["events"]=$this->Event_model->get_by_couple($id["pareja_id"]);
 					$this->datos["total"]=count($this->datos["events"]);
 					$this->load->view('home',$this->datos);
-
-					
-					
 			}
 		}
 	}

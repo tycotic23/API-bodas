@@ -57,7 +57,7 @@ class guest_x_events extends CI_Controller {
                     $this->get_by_guest($datos_guest["invitado_id"]);
 
                 }else{
-                    $this->load->view('lists/list_event',$datos);
+                    redirect("guest/load_view");
                 }
             }
         }
@@ -96,16 +96,39 @@ class guest_x_events extends CI_Controller {
                 }
             }
 
-    public function event_confirm($guest_x_event_id=null){
+    public function load_view_guest_confirm ($guest_x_event_id=null){
         $this->load->model("Guest_x_event_model");
-        //$guest_x_event_id=$this->input->post("guest_x_event_id");
-        $this->Guest_x_event_model->update_status_guest_x_event($guest_x_event_id,CONFIRMAR_ASISTENCIA);
+        $datos=array();
+        $datos["guest_x_event"]=$this->Guest_x_event_model->get_by_id($guest_x_event_id);
+        $this->load->view("edits/guest_x_event",$datos);
+        }
+
+    public function event_confirm($guest_x_event_id=null){
+
+        $this->form_validation->set_rules('coments', 'Coments', 'trim|strtolower|required');
+        $this->form_validation->set_rules('attached', 'Attached', 'is_natural|required');
+
+        if($this->form_validation->run()===false){
+
+			$this->load_view_guest_confirm($guest_x_event_id);
+			
+		}else{
+            $this->load->model("Guest_x_event_model");
+            $coments=set_value("coments");
+			$attached=set_value("attached");
+            $this->Guest_x_event_model->update_coments_guest_x_event($guest_x_event_id,$coments);
+            $this->Guest_x_event_model->update_attached_guest_x_event($guest_x_event_id,$attached);    
+            $this->Guest_x_event_model->update_status_guest_x_event($guest_x_event_id,CONFIRMAR_ASISTENCIA);
+
+
         $this->get_by_guest($guest_x_event_id);
+
+        }
+        
     }
 
     public function event_disconfirm($guest_x_event_id=null){
         $this->load->model("Guest_x_event_model");
-        //$guest_x_event_id=$this->input->post("guest_x_event_id");
         $this->Guest_x_event_model->update_status_guest_x_event($guest_x_event_id,DESCONFIRMAR_ASISTENCIA);
         $this->get_by_guest($guest_x_event_id);
     }

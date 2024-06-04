@@ -16,18 +16,71 @@
   <?php $this->load->view("navbar"); ?>
   
     <div class="container">
+    <h1> esta es la invitacion que recibe el invitado (puedo entrar sin loguearme) </h1>
+    <br>
+    <br>
+    <br>
+
+    <div class="row">
+      <div class="col">
+      <div class="card">
+        <div class="card-body">
+
+              <h1> PAREJAS</h1>
+          <?php if(isset($couple)){?>
+
+            <!-- comienzo del table -->
+
+              <table class="table">
+
+              <thead>
+                  <tr>
+                    <th scope="col">pareja_id:</th>
+                    <th scope="col">usuario_id:</th>
+                    <th scope="col">conyugue_1_id:</th>
+                    <th scope="col">conyugue_2_id:</th>
+                    <th scope="col">cvu_regalos:</th>
+                    <th scope="col">url:</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                    <?php foreach($couple as $t){ ?>
+
+                  <tr>
+                    <td><?php echo $t["pareja_id"]; ?></td>
+                    <td><?php echo $t["usuario_id"]; ?></td>
+                    <td><?php echo $t["conyugue_1_id"]; ?></td>
+                    <td><?php echo $t["conyugue_2_id"]; ?></td>
+                    <td><?php echo $t["cvu_regalos"]; ?></td>
+                    <td><?php echo $t["url"]; ?></td>
+                  </tr>
+                      <?php } ?>
+                    </tbody>
+              </table>
+                    <!-- fin del table -->
+                    <?php }else{?>
+                    <div class="alert alert-success" role="alert">
+                    NO SE ENCONTRARON PAREJAS!
+                    </div>
+                    <?php }?>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      </div>
+    </div>
+    
       <div class="row">
         <div class="col">
           <div class="card">
             <div class="card-body">  
-              <h1> esta es la invitacion que recibe el invitado (puedo entrar sin loguearme) </h1>
+              
                 <br>
-                <?php if(!isset($couple)){ ?>
+                <h1> EVENTOS</h1>
 
-                  <div class="alert alert-success" role="alert">
-                    NO SE ENCONTRO PAREJA!
-                </div>
-                    <?php }if(!isset($events)){ ?>
+                    <?php if(!isset($events)){ ?>
 
                       <div class="alert alert-success" role="alert">
                           NO SE ENCONTRARON EVENTOS!

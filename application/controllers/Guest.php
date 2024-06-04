@@ -80,10 +80,9 @@ class Guest extends CI_Controller {
 			$surname=$this->input->post("surname");
 			$email=$this->input->post("mail");
 			$phone_number=$this->input->post("phone_number");
-			$attached=$this->input->post("attached");
 			$couple_id=$this->session->userdata("pareja_id");
 				if (!($this->Guest_model->check_mail($email))) {
-					$this->Guest_model->create_guest($name,$surname,$email,$phone_number,$attached,$couple_id);
+					$this->Guest_model->create_guest($name,$surname,$email,$phone_number,$couple_id);
 					$url=$this->session->userdata("url");
 					$this->send_mail($email,$url);
 					$this->get_by_couple($couple_id);
@@ -126,7 +125,6 @@ class Guest extends CI_Controller {
 		$this->form_validation->set_rules('name', 'Name', 'trim|strtolower');
         $this->form_validation->set_rules('surname', 'Surname', 'trim|strtolower');
 		$this->form_validation->set_rules('phone_number', 'Phone', 'trim|is_natural');
-		$this->form_validation->set_rules('attached', 'Attached', 'trim|is_natural');
 
 		if($this->form_validation->run()===false){
 
@@ -149,10 +147,6 @@ class Guest extends CI_Controller {
 
 			if($phone_number){
 				$this->update_guest_phone_number($guest_id,$phone_number);
-			}
-
-			if($attached){
-				$this->update_guest_attached($guest_id,$location_id);
 			}
 
 				redirect("guest/edit_view/".$guest_id);
@@ -185,16 +179,6 @@ class Guest extends CI_Controller {
 		}else{
 			$this->load->model("Guest_model");
 			$this->Guest_model->update_guest_phone_number($guest_id,$phone_number);
-			$this->edit_view($guest_id);
-		}
-    }
-
-	public function update_guest_attached($guest_id,$attached){
-        if(!$guest_id){
-			redirect("couple");
-		}else{
-			$this->load->model("Guest_model");
-			$this->Guest_model->update_guest_attached($guest_id,$attached);
 			$this->edit_view($guest_id);
 		}
     }

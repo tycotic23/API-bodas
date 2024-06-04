@@ -16,7 +16,7 @@ Class Guest_x_event_model extends CI_Model {
     function get_by_id($id=null){
         $this->db->where($this->primary_key,$id);
         $this->db->limit(1);
-        return $this->db->get($this->database)->row_array();
+        return $this->db->get($this->database)->result_array();
     }
 
     function get_by_guest($guest_id=null) {
@@ -68,11 +68,19 @@ Class Guest_x_event_model extends CI_Model {
     }
 
     public function update_coments_guest_x_event($guest_x_event_id,$coments){
-        $this->db->set("coments",$coments);
+        $this->db->set("comentario",$coments);
         $this->db->where($this->primary_key,$guest_x_event_id);
         $this->db->update($this->database);
         return $this->db->affected_rows();
     }
+
+    public function update_attached_guest_x_event($guest_x_event_id,$attached){
+        $this->db->set("extras",$attached);
+        $this->db->where($this->primary_key,$guest_x_event_id);
+        $this->db->update($this->database);
+        return $this->db->affected_rows();
+    }
+
 
     public function delete_guest_x_event($guest_x_event_id=false){
         $this->db->where($this->primary_key,$guest_x_event_id);

@@ -49,13 +49,12 @@ Class Guest_model extends CI_Model {
         }
     }
 
-    public function create_guest ($name="",$surname="",$email="",$phone_number="",$attached="",$couple_id=""){
+    public function create_guest ($name="",$surname="",$email="",$phone_number="",$couple_id=""){
 
         $this->db->set("nombre",$name);
         $this->db->set("apellido",$surname);
         $this->db->set("mail",$email);
         $this->db->set("telefono",$phone_number);
-        $this->db->set("extras",$attached);
         $this->db->set("pareja_id",$couple_id);
         $this->db->insert($this->database);
     }
@@ -83,13 +82,6 @@ Class Guest_model extends CI_Model {
 
     public function update_guest_phone_number($guest_id,$phone_number){
         $this->db->set("telefono",$phone_number);
-        $this->db->where($this->primary_key,$guest_id);
-        $this->db->update($this->database);
-        return $this->db->affected_rows();
-    }
-
-    public function update_guest_attached($guest_id,$attached){
-        $this->db->set("extras",$attached);
         $this->db->where($this->primary_key,$guest_id);
         $this->db->update($this->database);
         return $this->db->affected_rows();

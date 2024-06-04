@@ -121,7 +121,6 @@ class Event extends CI_Controller {
 			$date_event=set_value("date_event");
 
 			if($location){
-				$this->session->set_flashdata('OP','PASS');
 				$this->update_event_location($event_id,$location);
 			}
 
@@ -142,7 +141,7 @@ class Event extends CI_Controller {
 				$this->update_event_name($event_id,$name_event);
 			}
 
-			if($date_event){
+			if($date_event != null ){
 				$this->update_event_date_time($event_id,$date_event);
 			}
 
@@ -224,10 +223,11 @@ class Event extends CI_Controller {
 			redirect("couple");
 		}else{
 			$this->load->model("Event_model");
-			$this->Event_model->update_event_date_time($event_id,$date_event);
-			$datos=array();
-			$datos["event"]=$this->Event_model->get_by_id($event_id);
-			$this->load->view("edits/event",$datos);
+			
+				$this->Event_model->update_event_date_time($event_id,$date_event);
+				$datos=array();
+				$datos["event"]=$this->Event_model->get_by_id($event_id);
+				$this->load->view("edits/event",$datos);
 		}
     }
 
