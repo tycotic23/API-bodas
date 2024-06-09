@@ -54,10 +54,13 @@ Class User_model extends CI_Model {
         }
     }
 
-    public function create_user ($usuario="",$password=""){
+    public function create_user ($usuario="",$password="",$couple_id=""){
         $this->db->set("usuario",$usuario);
         $this->db->set("password",$password);
+        $this->db->set("pareja_id",$couple_id);
         $this->db->insert($this->database);
+        $id = $this->db->insert_id();
+        return $id;
     }
 
     public function delete_user ($id=""){

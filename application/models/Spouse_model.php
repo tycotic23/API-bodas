@@ -24,6 +24,8 @@ Class Spouse_model extends CI_Model {
         $this->db->set("apellido",$surname);
         $this->db->set("fecha_nacimiento",$birthday);
         $this->db->insert($this->database);
+        $id = $this->db->insert_id();
+        return $id;
     }
 
     public function update_spouse_name($spouse_id,$name){

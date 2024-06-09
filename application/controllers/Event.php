@@ -67,7 +67,7 @@ class Event extends CI_Controller {
 
 		if($this->form_validation->run()===false){
 			$this->session->set_flashdata('OP','PROHIBIDO');
-			redirect("couple/view_couple_events");
+			redirect("home");
 			
 		}else{
 
@@ -104,7 +104,7 @@ class Event extends CI_Controller {
 		$this->form_validation->set_rules('direction_number', 'Direction_number', 'is_natural');
 		$this->form_validation->set_rules('location_id', 'Location_id', 'is_natural');
 		$this->form_validation->set_rules('name_event', 'Name_event', 'trim|strtolower');
-		$this->form_validation->set_rules('date_event', 'Date_event', 'callback_valid_datetime'); /* hay que arreglar que no puede recibir nulo */
+		$this->form_validation->set_rules('date_event', 'Date_event', 'callback_valid_datetime'); 
 
 		if($this->form_validation->run()===false){
 

@@ -63,10 +63,10 @@ class Guest extends CI_Controller {
 
 		$couple_id=$this->session->userdata("pareja_id");
 		$this->form_validation->set_rules('name', 'Name', 'required|trim|strtolower');
-        $this->form_validation->set_rules('surname', 'Surname', 'required|trim|strtolower');
+        $this->form_validation->set_rules('surname', 'Surname', '|trim|strtolower');
 		$this->form_validation->set_rules('mail', 'Mail', 'required|valid_email');
-		$this->form_validation->set_rules('phone_number', 'Phone_number', 'required|is_natural');
-		$this->form_validation->set_rules('attached', 'Attached', 'required|is_natural');
+		$this->form_validation->set_rules('phone_number', 'Phone_number', '|is_natural');
+		$this->form_validation->set_rules('attached', 'Attached', '|is_natural');
 
 		if($this->form_validation->run()===false){
 			$this->session->set_flashdata('OP','PROHIBIDO');
@@ -202,6 +202,7 @@ class Guest extends CI_Controller {
 			$this->load->model("Guest_model");
 			$this->Guest_model->delete_guest($guest_id);
 		}
+		$couple_id=$this->session->userdata('usuario_id');
 		$this->get_by_couple($couple_id);
 	}
 

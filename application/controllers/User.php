@@ -20,6 +20,7 @@ class user extends CI_controller {
                 $pass=set_value("password");
                 $id=$this->User_model->check_login($user,$pass);
                 if($id){
+                    /* check roll to future */
                     $u=$this->User_model->get_by_id($id);
                     if($u["estado"]==1){
                         $this->session->set_userdata("usuario",$u["usuario"]);
@@ -57,10 +58,9 @@ class user extends CI_controller {
     public function ingresar(){
         $this->load->view("list_users");
     }
-
-    /*public function Registrarse(){
-        $this->load->view("new_usser");
-    }*/
+    public function create_user_view(){
+        $this->load->view("forms/form_create_user");
+    }
 
     public function admin (){
             if(!$this->session->userdata('usuario_id')){
@@ -76,15 +76,66 @@ class user extends CI_controller {
         }
     }
 
-    public function create_user(){
-        $this->load->model('User_model');
-        $usuario=$this->input->post("usuario");
-        $password=$this->input->post("password");
+    public function valid_datetime($str) {
+		// Define el formato de fecha y hora que estás esperando
+		$formato = 'Y-m-d';
+		// Intenta analizar la fecha y hora utilizando el formato especificado
+		$fecha_hora = DateTime::createFromFormat($formato, $str);
 
-        if(!($this->User_model->check_user($usuario))){
-        $this->User_model->create_user($usuario,$password);
+		// Verifica si la fecha y hora se analizó correctamente y coincide con el formato
+		if (($fecha_hora && $fecha_hora->format($formato) == $str) || $str==null) {
+			return true; // La fecha y hora es válida
+		} else {
+			return false; // La fecha y hora no es válida
+		}
+	}
+
+    public function create_user(){ /* este controlador tiene que crear usuario, pareja y conyugues. */
+        $this->load->model('User_model');
+        $this->load->model('Spouse_model');
+        $this->load->model('Couple_model');
+
+        $this->form_validation->set_rules('user', 'User', 'required|trim|strtolower');
+        $this->form_validation->set_rules('password', 'Password', 'required|trim|strtolower');
+		$this->form_validation->set_rules('mail', 'Mail', 'required|valid_email');
+		$this->form_validation->set_rules('url', 'Url', 'required|trim');
+		$this->form_validation->set_rules('name_spouse_1', 'Name_spouse_1', 'required|trim|strtolower');
+		$this->form_validation->set_rules('surname_spouse_1', 'Surname_spouse_1', 'required|trim|strtolower');
+        $this->form_validation->set_rules('birthday_spouse_1', 'Birthday_spouse_1', 'required|callback_valid_datetime');
+		$this->form_validation->set_rules('name_spouse_2', 'Name_spouse_2', 'required|trim|strtolower');
+		$this->form_validation->set_rules('surname_spouse_2', 'Surname_spouse_2', 'required|trim|strtolower');
+		$this->form_validation->set_rules('birthday_spouse_2', 'Birthday_spouse_2', 'required|callback_valid_datetime');
+
+        if($this->form_validation->run()===false){
+
+			redirect("home");
+			
+		}else{
+
+            $user=$this->input->post("user");
+            $password=$this->input->post("password");
+            $mail=$this->input->post("mail");
+            $url=$this->input->post("url");
+            $name_spouse_1=$this->input->post("name_spouse_1");
+            $surname_spouse_1=$this->input->post("surname_spouse_1");
+            $birthday_spouse_1=$this->input->post("birthday_spouse_1");
+            $name_spouse_2=$this->input->post("name_spouse_2");
+            $surname_spouse_2=$this->input->post("surname_spouse_2");
+            $birthday_spouse_2=$this->input->post("birthday_spouse_2");
+
+            if($this->User_model->check_user($user)){
+                $this->session->set_flashdata('OP','YA_EXISTE');
+                redirect("home");
+            }
+            
+            $id_spouse_1=$this->Spouse_model->create_spouse($name_spouse_1,$surname_spouse_1,$birthday_spouse_1);
+            $id_spouse_2=$this->Spouse_model->create_spouse($name_spouse_2,$surname_spouse_2,$birthday_spouse_2);
+            $couple_id=$this->Couple_model->create_couple($id_spouse_1,$id_spouse_2,$cvu="");
+            $this->User_model->create_user($usuario,$password,$couple_id);
+            $this->session->set_flashdata('OP','EXITO');
+            redirect("home");
         }
-        redirect("user/registrarse");
+
     }
 
     public function change_password(){
