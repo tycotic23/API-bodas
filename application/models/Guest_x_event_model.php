@@ -19,6 +19,11 @@ Class Guest_x_event_model extends CI_Model {
         return $this->db->get($this->database)->result_array();
     }
 
+    function get_by_event($event_id=null){
+        $this->db->where("evento_id",$event_id);
+        return $this->db->get($this->database)->result_array();
+    }
+
     function get_by_guest($guest_id=null) {
         if ($guest_id != null) {
             

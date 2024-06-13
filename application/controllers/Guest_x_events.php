@@ -32,8 +32,14 @@ class guest_x_events extends CI_Controller {
             redirect("couple");
         }
 
-            
+    }
 
+    public function get_guest_by_event($event_id=null){
+        $this->load->model("Guest_x_event_model");
+        $datos=array();
+        $datos["invitados_x_evento"]=$this->Guest_x_event_model->get_by_event($event_id);
+        $datos["total"]=count($datos["invitados_x_evento"]);
+        $this->load->view("guests_in_event",$datos);
     }
 
     public function get_guest_by_email(){

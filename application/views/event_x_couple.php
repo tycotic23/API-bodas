@@ -33,7 +33,6 @@
                                             <thead>
                                                 <tr>
                                                 <!-- <th scope="col">evento_id:</th> -->
-                                                <th scope="col">pareja_id:</th>
                                                 <th scope="col">locacion:</th>
                                                 <th scope="col">direccion_calle:</th>
                                                 <th scope="col">direccion_numero:</th>
@@ -50,8 +49,6 @@
                                             <?php foreach($event_x_couple as $t){ ?>
 
                                                 <tr>
-                                                    <!-- <td><?php echo $t["evento_id"]; ?></td> -->
-                                                    <td><?php echo $t["pareja_id"]; ?></td>
                                                     <td><?php echo $t["locacion"]; ?></td>
                                                     <td><?php echo $t["direccion_calle"]; ?></td>
                                                     <td><?php echo $t["direccion_numero"]; ?></td>
@@ -73,6 +70,11 @@
                                                     </td>
 
                                                     <td>
+                                                        <a href="<?php echo site_url("Guest_x_events/get_guest_by_event/".$t["evento_id"]); ?>" class="btn btn-primary btn-sm borrar">
+                                                        <i class="bi bi-file-person-fill"></i>
+                                                    </td>
+
+                                                    <td>
                                                         <a href="<?php echo site_url("event/edit_view/".$t["evento_id"]); ?>" class="btn btn-warning btn-sm editar">
                                                         <i class="bi bi-pencil-square"></i>
                                                         </a>
@@ -83,6 +85,8 @@
                                                             <i class="bi bi-trash-fill"></i> 
                                                         </a>
                                                     </td>
+
+                                                    
                                                 </tr>
                                             <?php } ?>
                                                     

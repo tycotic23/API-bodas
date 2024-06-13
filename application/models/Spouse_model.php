@@ -19,7 +19,7 @@ Class Spouse_model extends CI_Model {
         return $this->db->get($this->database)->result_array();
     }
 
-    public function create_spouse ($name="",$surname="",$birthdate=""){
+    public function create_spouse ($name="",$surname="",$birthday=""){
         $this->db->set("nombre",$name);
         $this->db->set("apellido",$surname);
         $this->db->set("fecha_nacimiento",$birthday);
