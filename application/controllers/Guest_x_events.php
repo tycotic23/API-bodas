@@ -125,9 +125,9 @@ class guest_x_events extends CI_Controller {
             $this->Guest_x_event_model->update_coments_guest_x_event($guest_x_event_id,$coments);
             $this->Guest_x_event_model->update_attached_guest_x_event($guest_x_event_id,$attached);    
             $this->Guest_x_event_model->update_status_guest_x_event($guest_x_event_id,CONFIRMAR_ASISTENCIA);
+            $this->session->set_flashdata('OP','CONFIRM');
 
-
-        $this->get_by_guest($guest_x_event_id);
+            $this->get_by_guest($guest_x_event_id);
 
         }
         
@@ -136,6 +136,8 @@ class guest_x_events extends CI_Controller {
     public function event_disconfirm($guest_x_event_id=null){
         $this->load->model("Guest_x_event_model");
         $this->Guest_x_event_model->update_status_guest_x_event($guest_x_event_id,DESCONFIRMAR_ASISTENCIA);
+        $this->session->set_flashdata('OP','DISCONFIRM');
+
         $this->get_by_guest($guest_x_event_id);
     }
 

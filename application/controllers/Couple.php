@@ -62,6 +62,7 @@ class Couple extends CI_Controller {
 		$url=$this->input->post("url");
 			if(!($this->Couple_model->check_couple_url($url))){
 			$this->Couple_model->create_couple($user_id,$spouse_1_id,$spouse_2_id,$cvu_gift,$url);
+			$this->session->set_flashdata('OP','SUCCESFULLY');
 			}
 				redirect("home");
     }
