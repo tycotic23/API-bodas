@@ -54,17 +54,32 @@ class Couple extends CI_Controller {
 }
 
 	public function create_couple(){
-        $this->load->model('Couple_model');
-		$user_id=$this->input->post("user_id");
-		$spouse_1_id=$this->input->post("spouse_1_id");
-		$spouse_2_id=$this->input->post("spouse_2_id");
-		$cvu_gift=$this->input->post("cvu_gift");
-		$url=$this->input->post("url");
-			if(!($this->Couple_model->check_couple_url($url))){
-			$this->Couple_model->create_couple($user_id,$spouse_1_id,$spouse_2_id,$cvu_gift,$url);
-			$this->session->set_flashdata('OP','SUCCESFULLY');
-			}
-				redirect("home");
+
+			$this->form_validation->set_rules('user_id', 'User_id', 'required|trim|is_natural');
+            $this->form_validation->set_rules('spouse_1_id', 'Spouse_1_id', 'required|trim|is_natural');
+			$this->form_validation->set_rules('spouse_2_id', 'Spouse_2_id', 'required|trim|is_natural');
+			$this->form_validation->set_rules('cvu_gift', 'Cvu_gift', 'required|trim|is_natural');
+			$this->form_validation->set_rules('url', 'Url', 'required|trim');
+
+			if($this->form_validation->run()===false){
+                $this->session->set_flashdata('OP','PROHIBIDO');
+                redirect("home");
+                
+            }else{
+                $this->load->model('Couple_model');
+				$user_id=$this->input->post("user_id");
+				$spouse_1_id=$this->input->post("spouse_1_id");
+				$spouse_2_id=$this->input->post("spouse_2_id");
+				$cvu_gift=$this->input->post("cvu_gift");
+				$url=$this->input->post("url");
+					if(!($this->Couple_model->check_couple_url($url))){
+					$this->Couple_model->create_couple($user_id,$spouse_1_id,$spouse_2_id,$cvu_gift,$url);
+					$this->session->set_flashdata('OP','SUCCESFULLY');
+					}
+						redirect("home");
+            }
+
+        
     }
 
 	public function edit (){
