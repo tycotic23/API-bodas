@@ -244,7 +244,7 @@ class Event extends CI_Controller {
 		$event_id=intval($event_id,);
 		if($event_id>0){
 			$this->load->model("Event_model");
-			$this->Event_model->update_event_status($event_id, EVENTOS_FINALIZADO);
+			$this->Event_model->update_event_status($event_id, FINALIZADO);
 		}
 		redirect("couple");
 	}
@@ -253,7 +253,7 @@ class Event extends CI_Controller {
 		$event_id=intval($event_id,);
 		if($event_id>0){
 			$this->load->model("Event_model");
-			$this->Event_model->update_event_status($event_id, EVENTOS_ACTIVO);
+			$this->Event_model->update_event_status($event_id, ACTIVO);
 		}
 		redirect("couple");
 	}

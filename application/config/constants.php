@@ -86,9 +86,13 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 /* parametros para la app "bodas" modificados */
 
-/* eventos */
-defined('EVENTOS_ACTIVO')      OR define ('EVENTOS_ACTIVO',1);
-defined('EVENTOS_FINALIZADO')              OR define('EVENTOS_FINALIZADO',20);
-/* invitados */
+/* ESTADO */
+defined('ACTIVO')      OR define ('ACTIVO',1);
+defined('INACTIVO')      OR define ('INACTIVO',1);
+defined('FINALIZADO')              OR define('FINALIZADO',20);
+/* INVITADOS */
 defined('CONFIRMAR_ASISTENCIA')              OR define('CONFIRMAR_ASISTENCIA',1);
 defined('DESCONFIRMAR_ASISTENCIA')              OR define('DESCONFIRMAR_ASISTENCIA',20);
+/* ROLL */
+defined('ADMIN')              OR define('ADMIN',1);
+defined('USER')              OR define('USER',2);
