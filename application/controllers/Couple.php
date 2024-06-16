@@ -172,7 +172,13 @@ class Couple extends CI_Controller {
 			$this->load->model("Couple_model");
 			$this->Couple_model->delete_couple($couple_id);
 		}
+		$this->log_out();
 		redirect("home/index");
+	}
+
+	public function log_out(){
+		$this->session->sess_destroy();
+		redirect("user/index");
 	}
 
 }

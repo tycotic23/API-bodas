@@ -2,7 +2,7 @@
 defined ('BASEPATH') OR exit('No direct script access allowed');
 
 class user extends CI_controller {
-
+/* el login de la pagina */
     public function index(){
         
         {
@@ -22,14 +22,14 @@ class user extends CI_controller {
                 if($id){
                     /* check roll to future */
                     $u=$this->User_model->get_by_id($id);
-                    if($u["estado"]==1){
+                    if($u["estado"]=="1"){
                         $this->session->set_userdata("usuario",$u["usuario"]);
                         $this->session->set_userdata("usuario_id",$u["usuario_id"]);
                         $this->session->set_userdata("pareja_id",$u["pareja_id"]);
                         $this->load->model("couple_model");
                         $url=$this->couple_model->get_url_by_id($u["pareja_id"]);
                         $this->session->set_userdata("url",$url);
-                        redirect("user/admin");
+                        redirect("Home/couple_by_url/".$url["url"]);
                     }else{
                         $this->session->set_flashdata("OP","INACTIVO");
                         redirect("user/index");
@@ -62,7 +62,10 @@ class user extends CI_controller {
         $this->load->view("forms/form_create_user");
     }
 
-    public function admin (){
+    /* 
+    esta funcion es para los administradores, carga todos los usuarios
+    */
+    public function admin (){ 
             if(!$this->session->userdata('usuario_id')){
                 $this->session->set_flashdata('OP','PROHIBIDO');
                 redirect('user/index');
@@ -74,7 +77,7 @@ class user extends CI_controller {
 
                 redirect("home");
         }
-    }
+    } 
 
     public function valid_datetime($str) {
 		// Define el formato de fecha y hora que estás esperando
@@ -156,18 +159,21 @@ class user extends CI_controller {
     public function delete_user($id=null){
 		$usuario_id=intval($id);
 		if($usuario_id>0){
-			$this->load->model('User_model'); 
-            $this->User_model->delete_user($usuario_id);
+			$this->load->model('User_model');
+            $user=$this->User_model->get_by_id($id);
+            $this->load->model('Couple_model');
+        /* nuestra base de datos cuando borra la pareja borra el usuario */
+            $this->Couple_model->delete_couple($user["pareja_id"]);
 		}
+        $this->log_out();
 		redirect("user/index");
 	}
-
 
     public function log_out(){
 		$this->session->sess_destroy();
 		redirect("user/index");
 	}
     
-    
 }
+
 ?>
