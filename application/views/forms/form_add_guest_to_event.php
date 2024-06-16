@@ -19,25 +19,8 @@
                             <div class="card-body">
 
                             
-                            <?php echo form_open ("guest_x_events/create_guest_x_events"); ?>
+                            <?php echo form_open ("guest_x_events/add_all_guest_to_event"); ?>
 
-                                                <!--     -->
-
-                                <div class="form-group">
-                                    <label for="guest_id">invitado:</label>
-                                    <select class="form-control" id="guest_id" name=guest_id>
-
-                                    <?php foreach($guest as $t){ ?>
-                                        <option value="<?php echo $t["invitado_id"]; ?>">
-                                            <?php echo $t["nombre"]." ".$t["apellido"]; ?>
-                                        </option>
-
-                                    <?php } ?>
-
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
 
                                     <label for="event_id">evento:</label>
 

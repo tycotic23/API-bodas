@@ -22,9 +22,7 @@ class guest_x_events extends CI_Controller {
         
         if($couple_id){
             $datos=array();
-            $this->load->model('guest_model');
             $this->load->model('event_model');
-            $datos["guest"]=$this->guest_model->get_by_couple($couple_id);
             $datos["event"]=$this->event_model->get_by_couple($couple_id);
             $this->load->view("forms/form_add_guest_to_event",$datos);
 
@@ -66,6 +64,32 @@ class guest_x_events extends CI_Controller {
                     redirect("guest/load_view");
                 }
             }
+        }
+    }
+
+    public function add_all_guest_to_event($event_id=null){
+
+        $this->form_validation->set_rules('event_id', 'Event_id', 'required|trim|is_natural');
+
+        if($this->form_validation->run()===false){
+            $this->session->set_flashdata('OP','PROHIBIDO');
+            redirect("home");
+            
+        }else{
+            $this->load->model("Guest_x_event_model");
+            $this->load->model("Guest_model");
+            $event_id=$this->input->post("event_id");
+            $guests=$this->Guest_model->get_by_couple($this->session->userdata('usuario_id'));
+
+            foreach ($guests as $guest){
+
+                $guest_id=$guest["invitado_id"];
+
+                if(!$this->Guest_x_event_model->check_guest_to_event($event_id,$guest_id)){
+                    $this->Guest_x_event_model->create_guest_x_event($event_id,$guest_id);
+                }
+            } 
+            redirect("Event/get_by_couple");
         }
     }
 

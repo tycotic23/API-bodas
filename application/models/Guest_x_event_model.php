@@ -43,6 +43,20 @@ Class Guest_x_event_model extends CI_Model {
         $this->db->insert($this->database);
     }
 
+    public function check_guest_to_event($event_id=null,$guest_id=null){
+            $this->db->select($this->primary_key);
+            // Consulta para verificar si existe el registro específico
+            $this->db->where('evento_id', $event_id);
+            $this->db->where('invitado_id', $guest_id);
+            $query = $this->db->get($this->database);
+            // Verifica si se encontró algún registro
+            if ($query->num_rows() > 0) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+    }
+
     public function update_event_guest_x_event($guest_x_event_id,$event_id){
         $this->db->set("evento_id",$event_id);
         $this->db->where($this->primary_key,$guest_x_event_id);

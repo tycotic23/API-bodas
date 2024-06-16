@@ -105,7 +105,7 @@
                                         </a>
                                         <br>
                                         <a href="<?php echo site_url("guest_x_events/add_guest_to_event_view/".$couple_id); ?>" class="btn btn-primary btn-sm borrar">
-                                                AGREGAR INVITADO A EVENTO
+                                                AGREGAR INVITADOS A EVENTO
                                         </a>
 
                         </div>
