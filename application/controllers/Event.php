@@ -79,10 +79,28 @@ class Event extends CI_Controller {
 		$location_id=$this->input->post("location_id");
 		$name_event=$this->input->post("name_event");
 		$date_time=$this->input->post("date_event");
-		$this->Event_model->create_event($couple_id,$location,$direction_street,$direction_number,$location_id,$name_event,$date_time);
+		$event_id=$this->Event_model->create_event($couple_id,$location,$direction_street,$direction_number,$location_id,$name_event,$date_time);
+		$this->add_all_guest_to_event($event_id);
+		$this->
 		redirect("couple/view_couple_events");
 		}
 	}
+
+	public function add_all_guest_to_event($event_id=null){
+
+            $this->load->model("Guest_x_event_model");
+            $this->load->model("Guest_model");
+            $guests=$this->Guest_model->get_by_couple($this->session->userdata('usuario_id'));
+
+            foreach ($guests as $guest){
+
+                $guest_id=$guest["invitado_id"];
+
+                if(!$this->Guest_x_event_model->check_guest_to_event($event_id,$guest_id)){
+                    $this->Guest_x_event_model->create_guest_x_event($event_id,$guest_id);
+                }
+            }
+        }
 
 	public function valid_datetime($str) {
 		// Define el formato de fecha y hora que estás esperando

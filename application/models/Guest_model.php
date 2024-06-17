@@ -57,6 +57,8 @@ Class Guest_model extends CI_Model {
         $this->db->set("telefono",$phone_number);
         $this->db->set("pareja_id",$couple_id);
         $this->db->insert($this->database);
+        $insert_id = $this->db->insert_id();
+        return $insert_id;
     }
 
     public function update_guest_name($guest_id,$name){

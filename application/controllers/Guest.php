@@ -82,10 +82,12 @@ class Guest extends CI_Controller {
 			$phone_number=$this->input->post("phone_number");
 			$couple_id=$this->session->userdata("pareja_id");
 				if (!($this->Guest_model->check_mail($email))) {
-					$this->Guest_model->create_guest($name,$surname,$email,$phone_number,$couple_id);
+					$guest_id=$this->Guest_model->create_guest($name,$surname,$email,$phone_number,$couple_id);
 					$url=$this->session->userdata("url");
-					$this->send_mail($email,$url);
+					/* $this->send_mail($email,$url); */
+					$this->add_guest_to_all_events($guest_id);
 					$this->get_by_couple($couple_id);
+
 				}else{
 					$this->session->set_flashdata("OP","ERROR");
 					$couple_id=$this->session->userdata("pareja_id");
@@ -93,6 +95,22 @@ class Guest extends CI_Controller {
 				}
 			}
     }
+
+	public function add_guest_to_all_events($guest_id=null){
+
+		$this->load->model("Guest_x_event_model");
+		$this->load->model("Event_model");
+		$events=$this->Event_model->get_by_couple($this->session->userdata('usuario_id'));
+
+		foreach ($events as $event){
+
+			$event_id=$event["evento_id"];
+
+			if(!$this->Guest_x_event_model->check_guest_to_event($event_id,$guest_id)){
+				$this->Guest_x_event_model->create_guest_x_event($event_id,$guest_id);
+			}
+		}
+	}
 
 	public function list_guest (){
 		if(!$this->session->userdata('usuario_id')){
@@ -104,8 +122,8 @@ class Guest extends CI_Controller {
 			$datos["guests"]=$this->Guest_model->list_guest();
 			$datos["total"]=count($datos["guests"]);
 			$this->load->view("lists/list_guest",$datos); 
-    }
-}
+	    }
+	}
 
 	public function get_by_couple(){
 
@@ -239,7 +257,6 @@ class Guest extends CI_Controller {
         } else {
             show_error($this->email->print_debugger());
         }
-        redirect("couple");
     }
 }
 

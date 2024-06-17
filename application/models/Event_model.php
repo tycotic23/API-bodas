@@ -37,6 +37,9 @@ Class Event_model extends CI_Model {
         $this->db->set("nombre",$event_name);
         $this->db->set("horario",$date_time);
         $this->db->insert($this->database);
+        $insert_id = $this->db->insert_id();
+        return $insert_id;
+        
     }
 
     public function update_event_couple($event_id="",$couple_id=""){
