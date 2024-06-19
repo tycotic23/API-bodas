@@ -81,7 +81,6 @@ class Event extends CI_Controller {
 		$date_time=$this->input->post("date_event");
 		$event_id=$this->Event_model->create_event($couple_id,$location,$direction_street,$direction_number,$location_id,$name_event,$date_time);
 		$this->add_all_guest_to_event($event_id);
-		$this->
 		redirect("couple/view_couple_events");
 		}
 	}

@@ -26,10 +26,17 @@ class user extends CI_controller {
                         $this->session->set_userdata("usuario",$u["usuario"]);
                         $this->session->set_userdata("usuario_id",$u["usuario_id"]);
                         $this->session->set_userdata("pareja_id",$u["pareja_id"]);
-                        $this->load->model("couple_model");
-                        $url=$this->couple_model->get_url_by_id($u["pareja_id"]);
-                        $this->session->set_userdata("url",$url);
-                        redirect("Home/couple_by_url/".$url["url"]);
+                        $this->session->set_userdata("rol_id",$u["rol_id"]);
+
+                            if(!$this->check_rol()){
+                                $this->load->model("couple_model");
+                                $url=$this->couple_model->get_url_by_id($u["pareja_id"]);
+                                $this->session->set_userdata("url",$url);
+                                redirect("Home/couple_by_url/".$url["url"]);
+                            }else{
+                                $this->admin();
+                            }
+                        
                     }else{
                         $this->session->set_flashdata("OP","INACTIVO");
                         redirect("user/index");
@@ -41,6 +48,11 @@ class user extends CI_controller {
                 }
             }
         }
+    }
+
+    public function check_rol(){
+        $this->load->model("User_model");
+        return $this->User_model->check_rol($this->session->userdata('usuario_id'));
     }
 
     public function list_user (){
@@ -70,12 +82,21 @@ class user extends CI_controller {
                 $this->session->set_flashdata('OP','PROHIBIDO');
                 redirect('user/index');
                 }else{
+                    if(!$this->check_rol()){
+                        redirect("User/index");
+                    }
                 $datos=array();
-                $this->load->model("User_model"); 
+                $this->load->model("User_model");
+                $this->load->model("Couple_model"); 
                 $datos["users"]=$this->User_model->list_user();
-                $datos["total"]=count($datos["users"]);
+                $datos["couples"]=$this->Couple_model->list_couple();
+                $datos["total_users"]=count($datos["users"]);
+                $datos["total_couples"]=count($datos["couples"]);
+                $tmp["usuario_id"]=$this->session->userdata('usuario_id');
+				$tmp["usuario"]=$this->session->userdata('usuario');
+				$this->datos["navbar"] =$this->load->view("navbar", $tmp, TRUE);
 
-                redirect("home");
+                $this->load->view("home_admin",$datos);
         }
     } 
 

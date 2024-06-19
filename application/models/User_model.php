@@ -70,12 +70,12 @@ Class User_model extends CI_Model {
         return $this->db->affected_rows(); 
     }
         
-    public function check_rol($usuario_id=""){
+    public function check_rol($user_id=""){
         $this->db->select("rol_id");
-        $this->db->where($this->primary_key,$usuario_id);
+        $this->db->where($this->primary_key,$user_id);
             $this->db->limit(1);
             $res=$this->db->get($this->database)->row_array();
-            if($res["rol_id"]=="1"){
+            if( $res["rol_id"] == ADMIN){
                 return true;
             }else{
                 return false;
