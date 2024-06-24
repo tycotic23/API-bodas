@@ -125,7 +125,7 @@
                           <td><?php echo $t["horario"]; ?></td>
                           <td><?php echo $t["estado"]; ?></td>
                           <td>
-                            <a href="<?php echo site_url("guest/load_view"); ?>" class="btn btn-danger btn-sm">
+                            <a href="<?php echo site_url("Guest/view_event_info/".$t["evento_id"]); ?>" class="btn btn-danger btn-sm">
                                 confirmar asistencia!
                             </a>
                           </td>

@@ -151,7 +151,11 @@ class guest_x_events extends CI_Controller {
             $this->Guest_x_event_model->update_status_guest_x_event($guest_x_event_id,CONFIRMAR_ASISTENCIA);
             $this->session->set_flashdata('OP','CONFIRM');
 
-            $this->get_by_guest($guest_x_event_id);
+            $datos=$this->Guest_x_event_model->get_by_id($guest_x_event_id);
+            foreach( $datos as $t ){
+                $this->get_by_guest($t["evento_id"]);
+            }
+            
 
         }
         
@@ -162,7 +166,10 @@ class guest_x_events extends CI_Controller {
         $this->Guest_x_event_model->update_status_guest_x_event($guest_x_event_id,DESCONFIRMAR_ASISTENCIA);
         $this->session->set_flashdata('OP','DISCONFIRM');
 
-        $this->get_by_guest($guest_x_event_id);
+        $datos=$this->Guest_x_event_model->get_by_id($guest_x_event_id);
+        foreach( $datos as $t ){
+            $this->get_by_guest($t["evento_id"]);
+        }
     }
 
     public function delete_guest_x_event($guest_x_event_id=null){

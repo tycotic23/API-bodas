@@ -25,6 +25,18 @@ class Guest extends CI_Controller {
 		}
 	}
 
+	public function view_event_info($event_id=null){
+		$this->load->model("Event_model");
+		$datos=array();
+		$datos["events"]=$this->Event_model->get_by_id($event_id);
+		$datos["total"]=count($datos["events"]);
+		$this->load->view("event_info",$datos);
+	}
+
+	public function view_new_event(){
+		$this->load->view("forms/form_create_event");
+	}
+
 	public function view_create_guest(){
 
 		if(!$this->session->userdata('usuario_id')){

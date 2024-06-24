@@ -11,10 +11,6 @@ class Event extends CI_Controller {
 		}
 	}
 
-	public function view_new_event(){
-		$this->load->view("forms/form_create_event");
-	}
-
 	/* redirect to edit_view */
 	public function edit_view($event_id){ /* este controlador hay que actualizarlo para no poder acceder desde cualquier pareja a cualquier evento */
 		if(!$event_id){					/* basicamente un filtrado por pareja_id  */
