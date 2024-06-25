@@ -65,6 +65,10 @@
       <?php }else{ ?>
       
         <li class="nav-item">
+          <a class="nav-link" href="<?php echo site_url ("Guest/load_view"); ?>"><i class="bi bi-box-arrow-in-right"></i> INVITADO</a>
+        </li>
+
+        <li class="nav-item">
           <a class="nav-link" href="<?php echo site_url ("user"); ?>"><i class="bi bi-box-arrow-in-right"></i> Ingresar</a>
         </li>
       
