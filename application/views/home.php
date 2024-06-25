@@ -15,6 +15,48 @@
   <body>
 
   <?php $this->load->view("navbar"); ?>
+
+    <header>
+        <img class="bk-head" src="/assets/img/pareja-foto-head.jpg" alt="">
+        <div class="header__content">
+          <h1>Malena y Agustín</h1>
+          <h2>¡NOS CASAMOS!</h2>
+          <!-- contador -->
+        </div>
+    </header>
+    <main>
+
+    <?php if(!isset($events)){ ?>
+
+      <div class="alert alert-success" role="alert">
+          NO SE ENCONTRARON EVENTOS!
+      </div>
+
+      <?php }else{ ?>
+
+<ul class="events-list">
+<?php foreach ($events as $t){ ?>
+  <li class="events-list__card">
+            <a href="" class="button button--paper">Ver</a>
+            <div class="events-list__card__content">
+              <h4><?php echo $t["nombre"]; ?></h4>
+              <p><?php echo $t["horario"]; ?>hs</p>
+              <p><?php echo $t["locacion"]; ?></p>
+              <p><?php echo $t["direccion_calle"]; ?> <?php echo $t["direccion_numero"]; ?></p>
+            </div>
+          </li>
+
+<?php }  ?>
+</ul>
+<?php }  ?> 
+      <div class="postit">
+          <h3 class="postit__title">Estás invitado!</h3>
+          <p class="postit__text">Confirmá tu asistencia más abajo</p>
+      </div>
+    </main>
+    <!-- <footer>
+
+    </footer> -->
   
     <div class="container">
     <h1> esta es la invitacion que recibe el invitado (puedo entrar sin loguearme) </h1>

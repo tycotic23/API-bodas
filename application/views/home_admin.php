@@ -14,6 +14,10 @@
   <body>
 
   <?php $this->load->view("navbar"); ?>
+
+   
+
+    </div>
   
     <div class="container">
     <h1> esta es la invitacion que recibe el invitado (puedo entrar sin loguearme) </h1>
