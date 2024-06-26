@@ -14,6 +14,7 @@ html{
   display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: var(--cream);
 }
 
 body{
@@ -33,6 +34,7 @@ body{
 nav{
   background-color: var(--white)!important;
   font-weight: 600;
+  z-index: 100;
 }
 
 .navbar-nav{
@@ -72,10 +74,14 @@ header{
   position: absolute;
   top:0;
   left:0;
-  z-index: -1;
+  
   min-width: 100%;
   object-fit: cover;
   filter: brightness(0.7);
+}
+
+.header__content{
+  z-index: 1;
 }
 
 main{
@@ -86,11 +92,14 @@ main{
 .postit{
   text-align: center;
   background-color: #f9f1a5;
+  padding: 6rem 2rem;
+  color:black;
+}
+
+.postit--absolute{
   position: absolute;
   top:3rem;
   right: 3rem;
-  padding: 6rem 2rem;
-  color:black;
 }
 
 .events-list{
@@ -107,11 +116,111 @@ main{
 .events-list__card{
   background-color: var(--cream);
   color:black;
-  border-radius: 25px;
-  width: 500px;
+  border-radius: 15px;
+  width: 65%;
   transform: translateX(20px);
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 10px 10px -10px rgba(0, 0, 0, 0.8);
+  padding: 2rem;
+  padding-left: 5rem;
+  position: relative;
+}
+
+.events-list__button{
+  position: absolute;
+  top:50%;
+  left: 0;
+  transform: translate(-50%,-50%);
+}
+
+.button--paper{
+  background-color: white;
+  padding: 1rem 2rem;
+  display: block;
 }
 
 ul{
   list-style: none;
+}
+
+.separator{
+  width: 100%;
+  height: 10vh;
+}
+
+.separator--brown{
+  background-color: var(--ocre);
+}
+
+.galery{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+}
+
+.img-column{
+  display: flex;
+  gap:1rem;
+  padding: 1rem;
+}
+
+.img-column div{
+  flex-basis: 50%;
+}
+
+.history{
+  padding: 4rem;
+}
+
+.history h2{
+    text-align: center;
+}
+
+.paper-section{
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap:3rem;
+  padding: 2rem;
+}
+
+.paper-section__text{
+  display: flex;
+  flex-direction: column;
+  gap:0.5rem;
+  color:black;
+  text-align: center;
+}
+
+.white-section{
+  background-color: var(--white);
+  color:black;
+  padding: 2rem;
+}
+
+.column-text{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+span{
+  color: var(--ocre);
+}
+
+.postit-center{
+  width: 200px;
+}
+
+.section-contacts{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  gap:4rem;
+
 }

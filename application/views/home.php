@@ -37,7 +37,7 @@
 <ul class="events-list">
 <?php foreach ($events as $t){ ?>
   <li class="events-list__card">
-            <a href="" class="button button--paper">Ver</a>
+            <a href="<?php echo site_url("guest/load_view"); ?>" class="button button--paper events-list__button">Ver</a>
             <div class="events-list__card__content">
               <h4><?php echo $t["nombre"]; ?></h4>
               <p><?php echo $t["horario"]; ?>hs</p>
@@ -49,16 +49,72 @@
 <?php }  ?>
 </ul>
 <?php }  ?> 
-      <div class="postit">
+      <div class="postit postit--absolute">
           <h3 class="postit__title">Estás invitado!</h3>
           <p class="postit__text">Confirmá tu asistencia más abajo</p>
+      </div>
+
+      <div class="galery">
+          <a href="" class="button button--paper">Ver Galería</a>
+      </div>
+      
+      <div class="separator separator--brown"></div>
+      <div class="history">
+        <h2>Nuestra historia de amor</h2>
+        <div class="img-column">
+          <div>
+          <img src="/assets/img/pareja-foto-head.jpg" alt="">
+          </div>
+          <div>
+          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate </p>
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="paper-section">
+        <div class="paper-section__text">
+          <h2>Regalo</h2>
+          <p>Tu regalo es nuestra luna de miel</p>
+          <a href="" class="button paper-section__button"></a>
+        </div>
+        <div class="paper-section__text">
+          <img src="" alt="icono">
+          <h2>Dress Code</h2>
+          <p>Vestimenta formal, elegante</p>
+        </div>
+      </div>
+
+      <div class="section-contacts">
+        <div class="column-text">
+          <img src="" alt="instagram">
+          <p><span>Nuestro instagram compartido @maleyagusinlove</span></p>
+          <p>Etiquetanos en las fotos que subas para no perdernos momentos importantes</p>
+        </div>
+
+        <div class="column-text">
+            <a href="" class="postit postit-center">
+                <!-- <img src="" alt="spotify"> -->
+                <p>¡Sugerinos canciones para la fiesta!</p>
+            </a>
+        </div>
+      </div>
+      
+
+      <div class="column-text white-section">
+        <p>¡Gracias por acompañarnos en este momento tan importante!
+            Te esperamos en nuestra boda.
+        </p>
+        <h4>Male y agus</h4>
       </div>
     </main>
     <!-- <footer>
 
     </footer> -->
   
-    <div class="container">
+    <!-- <div class="container">
     <h1> esta es la invitacion que recibe el invitado (puedo entrar sin loguearme) </h1>
     <br>
     <br>
@@ -71,8 +127,6 @@
 
               <h1> PAREJAS</h1>
           <?php if(isset($couple)){?>
-
-            <!-- comienzo del table -->
 
               <table class="table">
 
@@ -101,7 +155,6 @@
                       <?php } ?>
                     </tbody>
               </table>
-                    <!-- fin del table -->
                     <?php }else{?>
                     <div class="alert alert-success" role="alert">
                     NO SE ENCONTRARON PAREJAS!
@@ -136,7 +189,6 @@
                           <p> total de eventos: <b> <?php echo $total; ?> </b>
                           </p>
                         </li>
-                                <!-- comienzo del table -->
 
                   <table class="table">
                                             
@@ -179,14 +231,13 @@
                     </tbody>
                     
                   </table>
-                    <!-- fin del table -->
                 <?php } ?>
                 </div>
             </div>
         </div>
       </div>
     </div>
-
+ -->
 
   
 
