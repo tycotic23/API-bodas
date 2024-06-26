@@ -60,6 +60,7 @@
       
       <div class="separator separator--brown"></div>
       <div class="history">
+        <img width="100px" src="/assets/img/book-heart-love.svg" alt="icono">
         <h2>Nuestra historia de amor</h2>
         <div class="img-column">
           <div>
@@ -76,12 +77,13 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 
       <div class="paper-section">
         <div class="paper-section__text">
+          <img width="100px" src="/assets/img/gift-box.svg" alt="icono">
           <h2>Regalo</h2>
           <p>Tu regalo es nuestra luna de miel</p>
           <a href="" class="button paper-section__button"></a>
         </div>
         <div class="paper-section__text">
-          <img src="" alt="icono">
+          <img width="100px" src="/assets/img/dress-code-icon.svg" alt="icono">
           <h2>Dress Code</h2>
           <p>Vestimenta formal, elegante</p>
         </div>
@@ -89,14 +91,14 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 
       <div class="section-contacts">
         <div class="column-text">
-          <img src="" alt="instagram">
+          <img width="70px" src="/assets/img/instagram-ocre.svg" alt="instagram">
           <p><span>Nuestro instagram compartido @maleyagusinlove</span></p>
           <p>Etiquetanos en las fotos que subas para no perdernos momentos importantes</p>
         </div>
 
         <div class="column-text">
             <a href="" class="postit postit-center">
-                <!-- <img src="" alt="spotify"> -->
+                <img width="70px" src="/assets/img/spotify.svg" alt="spotify">
                 <p>¡Sugerinos canciones para la fiesta!</p>
             </a>
         </div>
@@ -104,6 +106,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
       
 
       <div class="column-text white-section">
+      <img width="100px" src="/assets/img/bird-love-heart.svg" alt="icono">
         <p>¡Gracias por acompañarnos en este momento tan importante!
             Te esperamos en nuestra boda.
         </p>
