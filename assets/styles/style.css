@@ -17,6 +17,17 @@ html{
     background-color: var(--cream);
 }
 
+h1{
+  font-size: clamp(2rem,6vw,6rem);
+  text-shadow: -3px 3px 10px rgba(0, 0, 0, 0.694);
+}
+
+.main-h2{
+  text-shadow: -3px 3px 10px rgba(0, 0, 0, 0.694);
+  font-size: clamp(1.5rem,3vw,4rem);
+  letter-spacing: 5px;
+}
+
 body{
     font-family: "Zilla Slab", serif;
     background-color: var(--dark-wood);
@@ -24,7 +35,9 @@ body{
     font-style: italic;
     /* para pc */
     max-width: 1200px;
-    
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
   }
 
   img{
@@ -35,11 +48,23 @@ nav{
   background-color: var(--white)!important;
   font-weight: 600;
   z-index: 100;
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
 }
 
 .navbar-nav{
   gap:1rem;
+  display: flex;
+  align-items: flex-start;
 }
+
+/* .navbar{
+  position:unset;
+} */
 
 .nav-item{
   background-color: white;
@@ -58,17 +83,21 @@ nav{
   transform: rotateZ(-5deg);
 }
 
+a:hover{
+  text-decoration: none;
+  color:black;
+}
 
 header{
   position: relative;
   overflow: hidden;
-  height: 500px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   text-align: center;
-  padding-bottom: 2rem;
+  padding-bottom: 5rem;
 }
 .bk-head{
   position: absolute;
@@ -91,15 +120,17 @@ main{
 
 .postit{
   text-align: center;
-  background-color: #f9f1a5;
-  padding: 2rem;
+  padding: 3rem;
   color:black;
-  height: 250px;
-  width:250px;
+  height: 280px;
+  width:300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-image: url(/assets/img/postit.webp);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .postit--absolute{
@@ -131,6 +162,17 @@ main{
   padding: 2rem;
   padding-left: 5rem;
   position: relative;
+  transition: transform 0.3s ease-out;
+}
+
+.events-list__li{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.events-list__card:hover{
+  transform: translateX(40px);
 }
 
 .events-list__button{
@@ -142,8 +184,43 @@ main{
 
 .button--paper{
   background-color: white;
-  padding: 1rem 2rem;
+  padding: 1rem 2.5rem;
   display: block;
+
+  mask-image: url(/assets/img/boton-papel.png);
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  mask-position: center;
+
+
+  font-weight: 600;
+  
+}
+
+.paper-bottom{
+  mask-image: url(/assets/img/borde-papel-bottom.png);
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+
+.paper-double{
+  mask-image: url(/assets/img/borde-papel-doble.png);
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+
+
+.button--paper__shadow{
+  filter: drop-shadow(-2px 2px 5px rgba(90, 90, 90, 0.418));
+}
+
+.button{
+  font-size: clamp(1.5rem, 1vw, 3rem);
+  color:black;
+}
+
+.button:hover{
+  transform: scale(1.1);
 }
 
 ul{
@@ -192,7 +269,7 @@ ul{
   display: flex;
   flex-direction: column;
   gap:3rem;
-  padding: 2rem;
+  padding: 8rem 2rem;
 }
 
 .paper-section__text{
@@ -234,3 +311,4 @@ span{
   gap:4rem;
 
 }
+
