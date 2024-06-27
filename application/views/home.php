@@ -16,11 +16,11 @@
 
   <?php $this->load->view("navbar"); ?>
 
-    <header>
+    <header class="paper-bottom">
         <img class="bk-head" src="/assets/img/pareja-foto-head.jpg" alt="">
         <div class="header__content">
           <h1>Malena y Agustín</h1>
-          <h2>¡NOS CASAMOS!</h2>
+          <h2 class="main-h2">¡NOS CASAMOS!</h2>
           <!-- contador -->
         </div>
     </header>
@@ -36,15 +36,19 @@
 
 <ul class="events-list">
 <?php foreach ($events as $t){ ?>
-  <li class="events-list__card">
-            <a href="<?php echo site_url("guest/load_view"); ?>" class="button button--paper events-list__button">Ver</a>
-            <div class="events-list__card__content">
-              <h4><?php echo $t["nombre"]; ?></h4>
-              <p><?php echo $t["horario"]; ?>hs</p>
-              <p><?php echo $t["locacion"]; ?></p>
-              <p><?php echo $t["direccion_calle"]; ?> <?php echo $t["direccion_numero"]; ?></p>
-            </div>
-          </li>
+  <li class="events-list__li">
+    <a class="events-list__card" href="<?php echo site_url("guest/load_view"); ?>">
+      <div class="button--paper__shadow events-list__button">
+        <p class="button button--paper ">Ver</p>
+      </div>
+      <div class="events-list__card__content">
+        <h4><?php echo $t["nombre"]; ?></h4>
+        <p><?php echo $t["horario"]; ?>hs</p>
+        <p><?php echo $t["locacion"]; ?></p>
+        <p><?php echo $t["direccion_calle"]; ?> <?php echo $t["direccion_numero"]; ?></p>
+      </div>
+    </a>
+  </li>
 
 <?php }  ?>
 </ul>
@@ -53,8 +57,7 @@
           <h3 class="postit__title">Estás invitado!</h3>
           <p class="postit__text">Confirmá tu asistencia más abajo</p>
       </div>
-
-      <div class="galery">
+      <div class="galery button--paper__shadow">
           <a href="" class="button button--paper">Ver Galería</a>
       </div>
       
@@ -64,7 +67,7 @@
         <h2>Nuestra historia de amor</h2>
         <div class="img-column">
           <div>
-          <img src="/assets/img/pareja-foto-head.jpg" alt="">
+          <img class="paper-bottom" src="/assets/img/pareja-foto-head.jpg" alt="">
           </div>
           <div>
           <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
@@ -75,7 +78,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
         </div>
       </div>
 
-      <div class="paper-section">
+      <div class="paper-section paper-double">
         <div class="paper-section__text">
           <img width="100px" src="/assets/img/gift-box.svg" alt="icono">
           <h2>Regalo</h2>
