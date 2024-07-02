@@ -39,7 +39,10 @@
   <li class="events-list__li">
     <a class="events-list__card" href="<?php echo site_url("guest/load_view"); ?>">
       <div class="button--paper__shadow events-list__button">
-        <p class="button button--paper ">Ver</p>
+        <div class="button button--paper button--icon">
+          <img class="button--icon__img" src="/assets/img/buddy.svg" alt="">
+          <p >Ver</p>
+        </div>
       </div>
       <div class="events-list__card__content">
         <h4><?php echo $t["nombre"]; ?></h4>
@@ -54,12 +57,17 @@
 </ul>
 <?php }  ?> 
       <div class="postit postit--absolute">
+        <img class="postit__icon" src="/assets/img/love-letter.svg" alt="">
           <h3 class="postit__title">Estás invitado!</h3>
           <p class="postit__text">Confirmá tu asistencia más abajo</p>
       </div>
-      <div class="galery button--paper__shadow">
+      <div class="galery">
+        <img class="galery__img" src="/assets/img/galery.png" alt="">
+        <div class="galery__button button--paper__shadow">
           <a href="" class="button button--paper">Ver Galería</a>
+        </div>
       </div>
+      
       
       <div class="separator separator--brown"></div>
       <div class="history">
@@ -82,38 +90,40 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
         <div class="paper-section__text">
           <img width="100px" src="/assets/img/gift-box.svg" alt="icono">
           <h2>Regalo</h2>
-          <p>Tu regalo es nuestra luna de miel</p>
-          <a href="" class="button paper-section__button"></a>
+          <p class="p1">Tu regalo es nuestra luna de miel</p>
+          <a href="" class="button paper-section__button">Ver datos bancarios</a>
         </div>
         <div class="paper-section__text">
           <img width="100px" src="/assets/img/dress-code-icon.svg" alt="icono">
           <h2>Dress Code</h2>
-          <p>Vestimenta formal, elegante</p>
+          <p class="p1">Vestimenta formal, elegante</p>
         </div>
       </div>
 
       <div class="section-contacts">
-        <div class="column-text">
-          <img width="70px" src="/assets/img/instagram-ocre.svg" alt="instagram">
-          <p><span>Nuestro instagram compartido @maleyagusinlove</span></p>
-          <p>Etiquetanos en las fotos que subas para no perdernos momentos importantes</p>
+        <div class="column-text column-text--hgap">
+          <img class="column-text__icon" src="/assets/img/instagram-ocre.svg" alt="instagram">
+          <p class="p1"><span>Nuestro instagram compartido @maleyagusinlove</span></p>
+          <p class="p1">Etiquetanos en las fotos que subas para no perdernos momentos importantes</p>
         </div>
 
         <div class="column-text">
             <a href="" class="postit postit-center">
-                <img width="70px" src="/assets/img/spotify.svg" alt="spotify">
-                <p>¡Sugerinos canciones para la fiesta!</p>
+                <img class="postit__icon" src="/assets/img/spotify.svg" alt="spotify">
+                <h4 class="postit__title">¡Sugerinos canciones para la fiesta!</h4>
             </a>
         </div>
       </div>
       
 
       <div class="column-text white-section">
-      <img width="100px" src="/assets/img/bird-love-heart.svg" alt="icono">
-        <p>¡Gracias por acompañarnos en este momento tan importante!
+      <p><br><br><br></p>
+      
+        <p class="p2">¡Gracias por acompañarnos en este momento tan importante! <br>
             Te esperamos en nuestra boda.
         </p>
-        <h4>Male y agus</h4>
+        <img width="150px" src="/assets/img/bird-love-heart.svg" alt="icono">
+        <h2><b>Male y agus</b></h2>
       </div>
     </main>
     <!-- <footer>
